@@ -41,17 +41,35 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 485a6220a81b1b34b8a6c19bc2e9d752, type: 3}
   - {fileID: 21300000, guid: cabe42816f106bd46be05178ec609df0, type: 3}
   - {fileID: 21300000, guid: 63f19723f02114b44983b5745e89ab81, type: 3}
+  - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
+  - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
   - {fileID: 21300000, guid: 5a75d825c7794fa49a41d77e93aeb70d, type: 3}
+  - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
   - {fileID: 21300000, guid: 1a01077cb220fc148b06233ec627fd17, type: 3}
   - {fileID: 21300000, guid: a9b1939d8da33244080eb137e1e08bfd, type: 3}
+  - {fileID: 21300000, guid: cf04bcedb8c08ce40be84af1032d40b6, type: 3}
+  - {fileID: 21300000, guid: 860fa07ea9fbee64d99d86e374c02cfa, type: 3}
+  - {fileID: 21300000, guid: 5b7cf19e6aaf4454baf6ca63df513c38, type: 3}
+  - {fileID: 21300000, guid: 364072be05a9012448c7b65b55e68ff1, type: 3}
+  - {fileID: 21300000, guid: 95eca16f04eed0748943b89a6e77095b, type: 3}
+  - {fileID: 21300000, guid: ea9c2d9fdff84e442b202df996d71244, type: 3}
   - {fileID: 21300000, guid: 333397ef39ec46a4fbc5f40355287a23, type: 3}
   m_PackedSpriteNamesToIndex:
   - Oval Red Ad Pressed
   - Oval Cyan
   - Game
+  - Rect Cyan Pressed
+  - Rect Blue
   - Oval Red Ad
+  - Rect Blue Pressed
   - Menu
   - Logo Tile
+  - Rect Blue Inactive
+  - Rect Yellow
+  - Rect Cyan Inactive
+  - Rect Yellow Inactive
+  - Rect Yellow Pressed
+  - Rect Cyan
   - Oval Cyan Pressed
   m_RenderDataMap: {}
   m_Tag: Lobby
