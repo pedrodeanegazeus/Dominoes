@@ -33,6 +33,10 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     - Locale-es
+  - m_GUID: 16086e4d624bac043930c9d90f9d3197
+    m_Address: Assets/Localization/Tables/Lobby Strings Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b616b53e8a0aff74ba628774fcd82c05, type: 2}
   m_SchemaSet:
