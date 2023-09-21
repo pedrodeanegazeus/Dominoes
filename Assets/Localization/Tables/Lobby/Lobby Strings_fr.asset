@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: Tous les modes de jeu
     m_Metadata:
       m_Items: []
+  - m_Id: 1234628421492736
+    m_Localized: "Acc\xE8s premium\r"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -16,19 +16,23 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 16086e4d624bac043930c9d90f9d3197
   m_Entries:
   - m_Id: 722279501824
-    m_Key: single-player
+    m_Key: single-player-button
     m_Metadata:
       m_Items: []
   - m_Id: 1539854209024
-    m_Key: multiplayer
+    m_Key: multiplayer-button
     m_Metadata:
       m_Items: []
   - m_Id: 2915917271040
-    m_Key: play-with-friends
+    m_Key: play-with-friends-button
     m_Metadata:
       m_Items: []
   - m_Id: 3569654075392
     m_Key: all-game-modes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1234628421492736
+    m_Key: vip-button
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: 'Todos os modos de jogo '
     m_Metadata:
       m_Items: []
+  - m_Id: 1234628421492736
+    m_Localized: Acesso Premium
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
