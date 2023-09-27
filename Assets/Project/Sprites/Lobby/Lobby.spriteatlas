@@ -27,7 +27,7 @@ SpriteAtlas:
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -43,6 +43,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 63f19723f02114b44983b5745e89ab81, type: 3}
   - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
   - {fileID: 21300000, guid: 76f8f5c3f9d0fe34fa3b68bb8c067527, type: 3}
+  - {fileID: 21300000, guid: 3d016bc3745dfc148ac08f323c65a4cb, type: 3}
   - {fileID: 21300000, guid: fa0c0ae393085614084e4033c66cd70f, type: 3}
   - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
   - {fileID: 21300000, guid: c3cda6b40ed5633468e69ef2da763530, type: 3}
@@ -50,6 +51,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
   - {fileID: 21300000, guid: 81c80156bf57053498ffcf730ee687d7, type: 3}
   - {fileID: 21300000, guid: d8c320d8066687843a511682ebfcb615, type: 3}
+  - {fileID: 21300000, guid: 8597a719068906f488b39dd938c10500, type: 3}
   - {fileID: 21300000, guid: 4528f8792a8159645ab459aed1280d17, type: 3}
   - {fileID: 21300000, guid: 819d53d9f3c43f64aa23e7a2632d4080, type: 3}
   - {fileID: 21300000, guid: 22038c9ab35b9924e86e330ca2a227fc, type: 3}
@@ -69,6 +71,7 @@ SpriteAtlas:
   - Game
   - Rect Cyan Pressed
   - Default Avatar
+  - Avatar White Border
   - VIP Badge
   - Rect Blue
   - Background Bottom Right
@@ -76,6 +79,7 @@ SpriteAtlas:
   - Rect Blue Pressed
   - Shine
   - Rect Orange
+  - Avatar VIP Border
   - Profile Background
   - Background Bottom Left
   - Jogatina Logo

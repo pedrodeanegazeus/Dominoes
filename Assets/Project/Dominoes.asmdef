@@ -1,0 +1,16 @@
+{
+    "name": "Dominoes",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6aaeb9377b06c412f829fcb560111e67"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

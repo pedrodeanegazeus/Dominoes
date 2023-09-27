@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dominoes.Controllers
 {
-    public class AnimationController : MonoBehaviour
+    internal class AnimationController : MonoBehaviour
     {
         public event Action<string> EventFired;
 

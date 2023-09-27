@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Dominoes.Controllers
 {
-    public class StartController : MonoBehaviour
+    internal class StartController : MonoBehaviour
     {
         [SerializeField] private AnimationController _animationController;
 
