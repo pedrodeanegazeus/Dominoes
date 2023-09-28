@@ -7,25 +7,25 @@ namespace Dominoes.Components
 {
     public class ServiceProvider : UIBehaviour
     {
-        public IGzServiceProvider GzServiceProvider { get; private set; }
+        private GzServiceCollection _serviceCollection;
 
-        private GzServiceCollection ServiceCollection { get; set; }
+        public IGzServiceProvider GzServiceProvider { get; private set; }
 
         public void AddSingleton<TService, TImplementation>()
             where TImplementation : class, TService
         {
-            ServiceCollection.AddSingleton<TService, TImplementation>();
+            _serviceCollection.AddSingleton<TService, TImplementation>();
         }
 
         public void AddTransient<TService, TImplementation>()
             where TImplementation : class, TService
         {
-            ServiceCollection.AddTransient<TService, TImplementation>();
+            _serviceCollection.AddTransient<TService, TImplementation>();
         }
 
         public void Build()
         {
-            GzServiceProvider = ServiceCollection.BuildServiceProvider();
+            GzServiceProvider = _serviceCollection.BuildServiceProvider();
         }
 
         public TService GetRequiredService<TService>()
@@ -37,7 +37,7 @@ namespace Dominoes.Components
 
         public void Initialize()
         {
-            ServiceCollection = new GzServiceCollection();
+            _serviceCollection = new GzServiceCollection();
         }
     }
 }

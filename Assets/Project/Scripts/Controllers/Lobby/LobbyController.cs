@@ -12,10 +12,12 @@ namespace Dominoes.Controllers
 
         private IVipService VipService => _serviceProvider.GetRequiredService<IVipService>();
 
+        #region Localize Prefab Event
         public void OnUpdateAsset()
         {
             Destroy(_defaultLogoPrefab);
         }
+        #endregion
 
         #region Unity
         private void Start()
