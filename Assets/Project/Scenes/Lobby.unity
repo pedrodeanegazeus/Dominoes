@@ -1261,8 +1261,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ACESSO PREMIUM
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a984b7dc47ebb274599c2fcb70aac2f6, type: 2}
-  m_sharedMaterial: {fileID: -1645633088452707024, guid: a984b7dc47ebb274599c2fcb70aac2f6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d832937eb1b25c74f8287e17b2dd899b, type: 2}
+  m_sharedMaterial: {fileID: -641891565078365899, guid: d832937eb1b25c74f8287e17b2dd899b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2707,8 +2707,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'TODOS OS MODOS DE JOGO '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
-  m_sharedMaterial: {fileID: -1645633088452707024, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
+  m_sharedMaterial: {fileID: 212277928298785859, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2950,8 +2950,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: JOGAR COM AMIGOS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
-  m_sharedMaterial: {fileID: -1645633088452707024, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
+  m_sharedMaterial: {fileID: 212277928298785859, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3126,8 +3126,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jogar Agora
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
-  m_sharedMaterial: {fileID: -1645633088452707024, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
+  m_sharedMaterial: {fileID: 212277928298785859, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3360,8 +3360,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jogar com Pessoas
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
-  m_sharedMaterial: {fileID: -1645633088452707024, guid: f39bb885365a0b24595cdf66d25bd5aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
+  m_sharedMaterial: {fileID: 212277928298785859, guid: 1c6b7f89dfee5014f888f53a0544f784, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
