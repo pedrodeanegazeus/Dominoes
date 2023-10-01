@@ -10,12 +10,12 @@ namespace Dominoes.Animations
         [SerializeField] private float _durationMin;
         [SerializeField] private float _durationMax;
 
-        private RectTransform _transform;
+        private RectTransform RectTransform { get; set; }
 
         #region Unity
         private void Awake()
         {
-            _transform = GetComponent<RectTransform>();
+            RectTransform = GetComponent<RectTransform>();
         }
 
         private void Start()
@@ -27,8 +27,8 @@ namespace Dominoes.Animations
         private void Rotate()
         {
             float duration = Random.Range(_durationMin, _durationMax);
-            _transform
-                .DORotate(new Vector3(0, 0, _transform.rotation.eulerAngles.z - 180), duration)
+            RectTransform
+                .DORotate(new Vector3(0, 0, RectTransform.rotation.eulerAngles.z - 180), duration)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
                 .OnComplete(Rotate);

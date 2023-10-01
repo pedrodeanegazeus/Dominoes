@@ -8,15 +8,27 @@ namespace Dominoes.Controllers.HUD
     {
         [SerializeField] private GameObject _noVipBorder;
         [SerializeField] private GameObject _vipBorder;
-        [SerializeField] private ServiceProvider _serviceProvider;
 
-        private IVipService VipService => _serviceProvider.GetRequiredService<IVipService>();
+        [Space]
+        [SerializeField] private DominoesServiceProvider _serviceProvider;
 
-        #region Unity
-        private void Start()
+        private IVipService VipService { get; set; }
+
+        public void UpdateView()
         {
             _noVipBorder.SetActive(!VipService.IsVip);
             _vipBorder.SetActive(VipService.IsVip);
+        }
+
+        #region Unity
+        private void Awake()
+        {
+            VipService = _serviceProvider.GetRequiredService<IVipService>();
+        }
+
+        private void Start()
+        {
+            UpdateView();
         }
         #endregion
     }
