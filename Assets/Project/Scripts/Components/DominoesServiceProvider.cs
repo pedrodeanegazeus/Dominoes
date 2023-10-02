@@ -1,4 +1,3 @@
-using System;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
@@ -10,9 +9,9 @@ namespace Dominoes.Components
     public class DominoesServiceProvider : UIBehaviour
     {
         public static IGzServiceProvider GzServiceProvider { get; private set; }
+        public static bool IsBuilt { get; private set; }
 
         private GzServiceCollection ServiceCollection { get; set; }
-        private static bool IsBuilt { get; set; }
         private static bool IsInitialized { get; set; }
 
         public void AddSingleton<TService, TImplementation>()
