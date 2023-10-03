@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Dominoes.Core.Enums;
+﻿using Dominoes.Core.Enums;
 using Dominoes.ScriptableObjects;
 using UnityEngine;
 
@@ -14,8 +13,7 @@ namespace Assets.Project.Scripts.Managers
         {
             if (audio != Audio.None)
             {
-                AudioEntry audioEntry = _theme.AudioEntries.SingleOrDefault(audioEntry => audioEntry.Audio == audio);
-                _source.clip = audioEntry?.AudioClip;
+                _source.clip = _theme.Audios[audio];
                 _source.Play();
             }
         }

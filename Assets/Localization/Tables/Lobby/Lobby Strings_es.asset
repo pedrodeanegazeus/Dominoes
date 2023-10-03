@@ -38,6 +38,18 @@ MonoBehaviour:
     m_Localized: "Acceso pr\xE9mium"
     m_Metadata:
       m_Items: []
+  - m_Id: 6003297333542912
+    m_Localized: Jugar con Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6003612560654336
+    m_Localized: Jugar con Amigos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6003581690576896
+    m_Localized: Jugar con Personas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

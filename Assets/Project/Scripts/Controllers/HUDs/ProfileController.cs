@@ -14,12 +14,6 @@ namespace Dominoes.Controllers.HUD
 
         private IVipService VipService { get; set; }
 
-        public void UpdateView()
-        {
-            _noVipBorder.SetActive(!VipService.IsVip);
-            _vipBorder.SetActive(VipService.IsVip);
-        }
-
         #region Unity
         private void Awake()
         {
@@ -28,8 +22,14 @@ namespace Dominoes.Controllers.HUD
 
         private void Start()
         {
-            UpdateView();
+            SetVip();
         }
         #endregion
+
+        private void SetVip()
+        {
+            _noVipBorder.SetActive(!VipService.IsVip);
+            _vipBorder.SetActive(VipService.IsVip);
+        }
     }
 }

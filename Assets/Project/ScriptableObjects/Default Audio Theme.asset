@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4230aabe75c170f4e977ccd41fb2ab87, type: 3}
   m_Name: Default Audio Theme
   m_EditorClassIdentifier: 
-  _audioEntries:
-  - AudioClip: {fileID: 8300000, guid: a02d8b0c6703496468505882f876c0a8, type: 3}
-    Audio: 1
+  _buttonClick: {fileID: 8300000, guid: a02d8b0c6703496468505882f876c0a8, type: 3}

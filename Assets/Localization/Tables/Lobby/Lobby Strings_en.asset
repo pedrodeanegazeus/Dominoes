@@ -38,6 +38,18 @@ MonoBehaviour:
     m_Localized: Premium Access
     m_Metadata:
       m_Items: []
+  - m_Id: 6003297333542912
+    m_Localized: Play with Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6003612560654336
+    m_Localized: Play with Friends
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6003581690576896
+    m_Localized: Multiplayer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,39 +1,16 @@
 using Dominoes.Components;
+using Dominoes.Controllers.Lobby;
 using Dominoes.Core.Enums;
-using Dominoes.Core.Interfaces.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Dominoes.Controllers
 {
     internal class LobbyController : MonoBehaviour
     {
-        [Header("Canvas")]
-        [SerializeField] private Canvas _lobbyCanvas;
-        [SerializeField] private Canvas _gameTypeCanvas;
-
-        [Header("Lobby")]
-        [SerializeField] private Button _singlePlayerButton;
-        [SerializeField] private Button _multiplayerButton;
-        [SerializeField] private Button _playWithFriendsButton;
-        [SerializeField] private GameObject _defaultLogoPrefab;
-        [SerializeField] private GameObject _vipButton;
-
-        [Header("Game Type Lobby")]
-        [SerializeField] private Button _backButton;
-
-        [Space]
-        [SerializeField] private DominoesServiceProvider _serviceProvider;
-
-        private IVipService VipService { get; set; }
-
-        #region Localize Prefab Event
-        public void OnUpdateAsset()
-        {
-            Destroy(_defaultLogoPrefab);
-        }
-        #endregion
+        [Header("Canvas controllers")]
+        [SerializeField] private LobbyCanvasController _lobbyCanvasController;
+        [SerializeField] private GameTypeCanvasController _gameTypeCanvasController;
 
         #region Unity
         private void Awake()
@@ -45,27 +22,39 @@ namespace Dominoes.Controllers
                 return;
             }
 
-            _backButton.onClick.AddListener(BackButtonClicked);
-            _singlePlayerButton.onClick.AddListener(SinglePlayerButtonClicked);
-            VipService = _serviceProvider.GetRequiredService<IVipService>();
+            _lobbyCanvasController.GameTypeSelected += LobbyCanvasController_SelectedGameType;
+            _gameTypeCanvasController.BackButtonClicked += GameTypeCanvasController_BackButtonClicked;
         }
 
         private void Start()
         {
-            _vipButton.SetActive(!VipService.IsVip);
+            GoToLobby();
         }
         #endregion
 
-        private void BackButtonClicked()
+        #region Events
+        private void GameTypeCanvasController_BackButtonClicked()
         {
-            _lobbyCanvas.gameObject.SetActive(true);
-            _gameTypeCanvas.gameObject.SetActive(false);
+            GoToLobby();
         }
 
-        private void SinglePlayerButtonClicked()
+        private void LobbyCanvasController_SelectedGameType(GameType gameType)
         {
-            _lobbyCanvas.gameObject.SetActive(false);
-            _gameTypeCanvas.gameObject.SetActive(true);
+            GoToGameTypeLobby(gameType);
+        }
+        #endregion
+
+        private void GoToLobby()
+        {
+            _lobbyCanvasController.gameObject.SetActive(true);
+            _gameTypeCanvasController.gameObject.SetActive(false);
+        }
+
+        private void GoToGameTypeLobby(GameType gameType)
+        {
+            _lobbyCanvasController.gameObject.SetActive(false);
+            _gameTypeCanvasController.gameObject.SetActive(true);
+            _gameTypeCanvasController.SetGameType(gameType);
         }
     }
 }

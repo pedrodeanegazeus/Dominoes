@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Dominoes.Core.Enums;
 using UnityEngine;
 
@@ -8,15 +7,18 @@ namespace Dominoes.ScriptableObjects
     [CreateAssetMenu(fileName = "AudioTheme", menuName = "Dominoes/AudioTheme")]
     internal class AudioTheme : ScriptableObject
     {
-        [SerializeField] private List<AudioEntry> _audioEntries;
+        [SerializeField] private AudioClip _buttonClick;
 
-        internal List<AudioEntry> AudioEntries => _audioEntries;
-    }
+        public Dictionary<Audio, AudioClip> Audios { get; private set; }
 
-    [Serializable]
-    internal class AudioEntry
-    {
-        public AudioClip AudioClip;
-        public Audio Audio;
+        #region Unity
+        private void OnValidate()
+        {
+            Audios = new Dictionary<Audio, AudioClip>()
+            {
+                { Audio.ButtonClick, _buttonClick },
+            };
+        }
+        #endregion
     }
 }
