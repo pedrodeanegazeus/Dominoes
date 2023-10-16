@@ -38,18 +38,6 @@ MonoBehaviour:
     m_Localized: "Acc\xE8s premium\r"
     m_Metadata:
       m_Items: []
-  - m_Id: 6003297333542912
-    m_Localized: Jouer avec des Bots
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003612560654336
-    m_Localized: Jouer avec des Amis
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003581690576896
-    m_Localized: Multijoueur
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

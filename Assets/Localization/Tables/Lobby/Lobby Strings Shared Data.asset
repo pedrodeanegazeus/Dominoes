@@ -35,18 +35,6 @@ MonoBehaviour:
     m_Key: vip-button
     m_Metadata:
       m_Items: []
-  - m_Id: 6003297333542912
-    m_Key: single-player-title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003581690576896
-    m_Key: multiplayer-title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003612560654336
-    m_Key: play-with-friends-title
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

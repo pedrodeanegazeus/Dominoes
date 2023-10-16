@@ -38,18 +38,6 @@ MonoBehaviour:
     m_Localized: Acesso Premium
     m_Metadata:
       m_Items: []
-  - m_Id: 6003297333542912
-    m_Localized: "Jogar com Rob\xF4s"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003612560654336
-    m_Localized: Jogar com Amigos
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6003581690576896
-    m_Localized: Jogar com Pessoas
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

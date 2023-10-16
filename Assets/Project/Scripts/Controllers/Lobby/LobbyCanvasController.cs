@@ -12,18 +12,18 @@ namespace Dominoes.Controllers.Lobby
         public event Action<GameType> GameTypeSelected;
 
         [SerializeField] private GameObject _jogatinaLogo;
+        [SerializeField] private GameObject _defaultLogoPrefab;
 
-        [Space]
+        [Header("Buttons")]
         [SerializeField] private Button _singlePlayerButton;
         [SerializeField] private Button _multiplayerButton;
         [SerializeField] private Button _playWithFriendsButton;
-        [SerializeField] private GameObject _defaultLogoPrefab;
         [SerializeField] private GameObject _vipButton;
 
-        [Space]
+        [Header("Provider")]
         [SerializeField] private DominoesServiceProvider _serviceProvider;
 
-        private IVipService VipService { get; set; }
+        private IVipService _vipService;
 
         #region Localize Prefab Event
         public void OnUpdateAsset()
@@ -38,12 +38,12 @@ namespace Dominoes.Controllers.Lobby
             _singlePlayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.SinglePlayer));
             _multiplayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.Multiplayer));
             _playWithFriendsButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.PlayWithFriends));
-            VipService = _serviceProvider.GetRequiredService<IVipService>();
+            _vipService = _serviceProvider.GetRequiredService<IVipService>();
         }
 
         private void Start()
         {
-            SetVip(VipService.IsVip);
+            SetVip(_vipService.IsVip);
         }
         #endregion
 

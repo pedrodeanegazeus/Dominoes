@@ -12,13 +12,13 @@ namespace Dominoes.Animations
         [SerializeField] private float _pulseMin;
         [SerializeField] private float _pulseMax;
 
-        private RectTransform RectTransform { get; set; }
+        private RectTransform _rectTransform;
 
         #region Unity
         private void Awake()
         {
-            RectTransform = GetComponent<RectTransform>();
-            RectTransform.transform.localScale = Vector3.zero;
+            _rectTransform = GetComponent<RectTransform>();
+            _rectTransform.transform.localScale = Vector3.zero;
         }
 
         private void Start()
@@ -30,7 +30,7 @@ namespace Dominoes.Animations
         private void PulseIn()
         {
             float duration = Random.Range(_durationMin, _durationMax);
-            RectTransform
+            _rectTransform
                 .DOScale(Vector3.zero, duration)
                 .OnComplete(PulseOut);
         }
@@ -39,7 +39,7 @@ namespace Dominoes.Animations
         {
             float duration = Random.Range(_durationMin, _durationMax);
             float pulse = Random.Range(_pulseMin, _pulseMax);
-            RectTransform
+            _rectTransform
                 .DOScale(new Vector3(1, 1, 1) * pulse, duration)
                 .SetEase(Ease.OutBack)
                 .SetDelay(2)

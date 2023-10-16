@@ -40,6 +40,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 485a6220a81b1b34b8a6c19bc2e9d752, type: 3}
   - {fileID: 21300000, guid: cabe42816f106bd46be05178ec609df0, type: 3}
+  - {fileID: 21300000, guid: 4686a0b19834b2d418b1a66a59f2a9db, type: 3}
   - {fileID: 21300000, guid: 63f19723f02114b44983b5745e89ab81, type: 3}
   - {fileID: 21300000, guid: b4b4c1637fb725542a721fee750ccd74, type: 3}
   - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
@@ -50,6 +51,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c3cda6b40ed5633468e69ef2da763530, type: 3}
   - {fileID: 21300000, guid: 5a75d825c7794fa49a41d77e93aeb70d, type: 3}
   - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
+  - {fileID: 21300000, guid: f62f6d262c2a2b94682fe3c6683f8dd8, type: 3}
   - {fileID: 21300000, guid: 81c80156bf57053498ffcf730ee687d7, type: 3}
   - {fileID: 21300000, guid: d8c320d8066687843a511682ebfcb615, type: 3}
   - {fileID: 21300000, guid: 8597a719068906f488b39dd938c10500, type: 3}
@@ -63,12 +65,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 860fa07ea9fbee64d99d86e374c02cfa, type: 3}
   - {fileID: 21300000, guid: 5b7cf19e6aaf4454baf6ca63df513c38, type: 3}
   - {fileID: 21300000, guid: 364072be05a9012448c7b65b55e68ff1, type: 3}
+  - {fileID: 21300000, guid: 4104aabe2b94cdc468fb3a918ead3978, type: 3}
   - {fileID: 21300000, guid: 95eca16f04eed0748943b89a6e77095b, type: 3}
   - {fileID: 21300000, guid: ea9c2d9fdff84e442b202df996d71244, type: 3}
   - {fileID: 21300000, guid: 333397ef39ec46a4fbc5f40355287a23, type: 3}
   m_PackedSpriteNamesToIndex:
   - Oval Red Ad Pressed
   - Oval Cyan
+  - Ad Tag
   - Game
   - Back
   - Rect Cyan Pressed
@@ -79,6 +83,7 @@ SpriteAtlas:
   - Background Bottom Right
   - Oval Red Ad
   - Rect Blue Pressed
+  - Rect Cyan Cross Promotion
   - Shine
   - Rect Orange
   - Avatar VIP Border
@@ -92,6 +97,7 @@ SpriteAtlas:
   - Rect Yellow
   - Rect Cyan Inactive
   - Rect Yellow Inactive
+  - Ribbon
   - Rect Yellow Pressed
   - Rect Cyan
   - Oval Cyan Pressed

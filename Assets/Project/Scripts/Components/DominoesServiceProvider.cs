@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 namespace Dominoes.Components
 {
-    public class DominoesServiceProvider : UIBehaviour
+    internal class DominoesServiceProvider : UIBehaviour
     {
+        private GzServiceCollection _serviceCollection;
+        private static bool _isInitialized;
+
         public static IGzServiceProvider GzServiceProvider { get; private set; }
         public static bool IsBuilt { get; private set; }
-
-        private GzServiceCollection ServiceCollection { get; set; }
-        private static bool IsInitialized { get; set; }
 
         public void AddSingleton<TService, TImplementation>()
             where TImplementation : class, TService
@@ -21,7 +21,7 @@ namespace Dominoes.Components
             {
                 Debug.LogWarning("Service provider is already built, you are probably doing something wrong");
             }
-            ServiceCollection.AddSingleton<TService, TImplementation>();
+            _serviceCollection.AddSingleton<TService, TImplementation>();
         }
 
         public void AddTransient<TService, TImplementation>()
@@ -31,7 +31,7 @@ namespace Dominoes.Components
             {
                 Debug.LogWarning("Service provider is already built, you are probably doing something wrong");
             }
-            ServiceCollection.AddTransient<TService, TImplementation>();
+            _serviceCollection.AddTransient<TService, TImplementation>();
         }
 
         public void Build()
@@ -40,7 +40,7 @@ namespace Dominoes.Components
             {
                 Debug.LogWarning("Service provider is already built, you are probably doing something wrong");
             }
-            GzServiceProvider = ServiceCollection.BuildServiceProvider();
+            GzServiceProvider = _serviceCollection.BuildServiceProvider();
             IsBuilt = true;
         }
 
@@ -53,12 +53,12 @@ namespace Dominoes.Components
 
         public void Initialize()
         {
-            if (IsInitialized)
+            if (_isInitialized)
             {
                 Debug.LogWarning("Service provider is already initialized, you are probably doing something wrong");
             }
-            ServiceCollection = new GzServiceCollection();
-            IsInitialized = true;
+            _serviceCollection = new GzServiceCollection();
+            _isInitialized = true;
         }
     }
 }

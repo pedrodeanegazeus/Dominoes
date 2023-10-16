@@ -16,15 +16,16 @@ namespace Dominoes.Controllers
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private DominoesServiceProvider _serviceProvider;
 
-        private IVipService VipService { get; set; }
-        private List<Task> LoadingTasks { get; set; }
-        private TaskCompletionSource<bool> LoadingAnimationTask { get; set; }
+        private IGazeusServicesService _gazeusServicesService;
+        private IVipService _vipService;
+        private List<Task> _loadingTasks;
+        private TaskCompletionSource<bool> _loadingAnimationTask;
 
         #region Unity
         private void Awake()
         {
-            LoadingAnimationTask = new TaskCompletionSource<bool>();
-            LoadingTasks = new List<Task>();
+            _loadingAnimationTask = new TaskCompletionSource<bool>();
+            _loadingTasks = new List<Task>();
 
             _animationController.EventFired += AnimationController_EventFired;
         }
@@ -32,7 +33,8 @@ namespace Dominoes.Controllers
         private void Start()
         {
             InitializeServiceProvider();
-            VipService = _serviceProvider.GetRequiredService<IVipService>();
+            _gazeusServicesService = _serviceProvider.GetRequiredService<IGazeusServicesService>();
+            _vipService = _serviceProvider.GetRequiredService<IVipService>();
             AddLoadingTasks();
             _ = StartCoroutine(FinishedLoadingRoutine());
         }
@@ -43,14 +45,14 @@ namespace Dominoes.Controllers
             switch (@event)
             {
                 case "Jogatina_End":
-                    LoadingAnimationTask.SetResult(true);
+                    _loadingAnimationTask.SetResult(true);
                     break;
             }
         }
 
         private IEnumerator FinishedLoadingRoutine()
         {
-            while (LoadingTasks.Any(loadingTask => !loadingTask.IsCompleted))
+            while (_loadingTasks.Any(loadingTask => !loadingTask.IsCompleted))
             {
                 yield return null;
             }
@@ -60,14 +62,16 @@ namespace Dominoes.Controllers
         private void InitializeServiceProvider()
         {
             _serviceProvider.Initialize();
+            _serviceProvider.AddSingleton<IGazeusServicesService, GazeusServicesService>();
             _serviceProvider.AddSingleton<IVipService, VipService>();
             _serviceProvider.Build();
         }
 
         private void AddLoadingTasks()
         {
-            LoadingTasks.Add(LoadingAnimationTask.Task);
-            LoadingTasks.Add(VipService.InitializeAsync());
+            _loadingTasks.Add(_loadingAnimationTask.Task);
+            _loadingTasks.Add(_gazeusServicesService.InitializeAsync());
+            _loadingTasks.Add(_vipService.InitializeAsync());
         }
     }
 }

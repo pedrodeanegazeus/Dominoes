@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Game Type Strings_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: 4ba917c41080138449ef31b6f9100756, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 8087957317323325449
+  m_TableData:
+  - m_Id: 497355898880
+    m_Localized: Spielen Sie mit Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1111683022848
+    m_Localized: Anderen Spielern Spielen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378029715456
+    m_Localized: Mit Freunden Spielen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2476832505856
+    m_Localized: + Spiele
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1292590820790272
+    m_Localized: Klassisches Domino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1293539614298112
+    m_Localized: Geschlossenes Domino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1294922522464256
+    m_Localized: 5er-Domino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1295377667362816
+    m_Localized: Turbo-Domino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1322646045626368
+    m_Localized: '{count} Spieler online'
+    m_Metadata:
+      m_Items:
+      - rid: 8087957317323325449
+  references:
+    version: 2
+    RefIds:
+    - rid: 8087957317323325449
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0090b687f0b20400
