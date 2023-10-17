@@ -28,7 +28,7 @@ MonoBehaviour:
     m_ConfigSource: 0
   - m_Id: scoped:project:Gazeus
     m_Name: Gazeus
-    m_Url: https://nexus-aws.gazeus.com:9443/nexus/repository/gazeus-unity
+    m_Url: https://nexus.gazeus.com:9443/nexus/repository/gazeus-unity
     m_Scopes:
     - com.gazeus
     m_IsDefault: 0
@@ -39,6 +39,6 @@ MonoBehaviour:
   m_RegistryInfoDraft:
     m_Modified: 0
     m_ErrorMessage: 
-    m_UserModificationsInstanceId: -828
+    m_UserModificationsInstanceId: -826
     m_OriginalInstanceId: -830
   m_LoadAssets: 0

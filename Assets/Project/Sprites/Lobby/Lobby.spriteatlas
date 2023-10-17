@@ -50,6 +50,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
   - {fileID: 21300000, guid: c3cda6b40ed5633468e69ef2da763530, type: 3}
   - {fileID: 21300000, guid: 5a75d825c7794fa49a41d77e93aeb70d, type: 3}
+  - {fileID: 21300000, guid: e92710c5ad8d4f848b4f0bd1e2b5f2b6, type: 3}
   - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
   - {fileID: 21300000, guid: f62f6d262c2a2b94682fe3c6683f8dd8, type: 3}
   - {fileID: 21300000, guid: 81c80156bf57053498ffcf730ee687d7, type: 3}
@@ -82,6 +83,7 @@ SpriteAtlas:
   - Rect Blue
   - Background Bottom Right
   - Oval Red Ad
+  - Close
   - Rect Blue Pressed
   - Rect Cyan Cross Promotion
   - Shine

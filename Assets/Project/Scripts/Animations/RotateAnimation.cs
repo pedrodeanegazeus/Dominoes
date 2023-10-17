@@ -20,14 +20,14 @@ namespace Dominoes.Animations
 
         private void Start()
         {
-            StartCoroutine(StartDelayCoroutine());
+            _ = StartCoroutine(StartDelayCoroutine());
         }
         #endregion
 
         private void Rotate()
         {
             float duration = Random.Range(_durationMin, _durationMax);
-            _rectTransform
+            _ = _rectTransform
                 .DORotate(new Vector3(0, 0, _rectTransform.rotation.eulerAngles.z - 180), duration)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)

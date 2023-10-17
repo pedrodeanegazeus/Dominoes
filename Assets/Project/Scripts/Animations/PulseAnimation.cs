@@ -18,19 +18,19 @@ namespace Dominoes.Animations
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            _rectTransform.transform.localScale = Vector3.zero;
+            _rectTransform.localScale = Vector3.zero;
         }
 
         private void Start()
         {
-            StartCoroutine(StartDelayCoroutine());
+            _ = StartCoroutine(StartDelayCoroutine());
         }
         #endregion
 
         private void PulseIn()
         {
             float duration = Random.Range(_durationMin, _durationMax);
-            _rectTransform
+            _ = _rectTransform
                 .DOScale(Vector3.zero, duration)
                 .OnComplete(PulseOut);
         }
@@ -39,7 +39,7 @@ namespace Dominoes.Animations
         {
             float duration = Random.Range(_durationMin, _durationMax);
             float pulse = Random.Range(_pulseMin, _pulseMax);
-            _rectTransform
+            _ = _rectTransform
                 .DOScale(new Vector3(1, 1, 1) * pulse, duration)
                 .SetEase(Ease.OutBack)
                 .SetDelay(2)

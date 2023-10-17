@@ -14,8 +14,6 @@ namespace Dominoes.Controllers.Lobby
 {
     internal class GameTypeCanvasController : MonoBehaviour
     {
-        public event Action BackButtonClicked;
-
         [SerializeField] private GameObject _jogatinaLogo;
 
         [Header("Titles")]
@@ -24,7 +22,6 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private GameObject _playWithFriendsTitle;
 
         [Header("Buttons")]
-        [SerializeField] private Button _backButton;
         [SerializeField] private Button _drawButton;
         [SerializeField] private Button _blockButton;
         [SerializeField] private Button _allFivesButton;
@@ -63,7 +60,6 @@ namespace Dominoes.Controllers.Lobby
         #region Unity
         private void Awake()
         {
-            _backButton.onClick.AddListener(() => BackButtonClicked?.Invoke());
             _gazeusServicesService = _serviceProvider.GetRequiredService<IGazeusServicesService>();
             _vipService = _serviceProvider.GetRequiredService<IVipService>();
         }
