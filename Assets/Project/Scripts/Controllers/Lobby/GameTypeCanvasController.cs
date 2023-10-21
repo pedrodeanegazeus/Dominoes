@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
-using Dominoes.Components;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models.Services.GazeusServicesService;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -35,14 +35,16 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private LocalizeStringEvent _allFivesPlayersOnlineText;
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
-        [Header("Provider")]
-        [SerializeField] private DominoesServiceProvider _serviceProvider;
-
-        private IGazeusServicesService _gazeusServicesService;
-        private IVipService _vipService;
+        private readonly IGzLogger<GameTypeCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeCanvasController>>();
+        private readonly IGazeusServicesService _gazeusServicesService = ServiceProvider.GetRequiredService<IGazeusServicesService>();
+        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
 
         public void SetGameType(GameType gameType)
         {
+            _logger.Debug("CALLED: {method} - {gameType}",
+                          nameof(SetGameType),
+                          gameType);
+
             switch (gameType)
             {
                 case GameType.Multiplayer:
@@ -58,12 +60,6 @@ namespace Dominoes.Controllers.Lobby
         }
 
         #region Unity
-        private void Awake()
-        {
-            _gazeusServicesService = _serviceProvider.GetRequiredService<IGazeusServicesService>();
-            _vipService = _serviceProvider.GetRequiredService<IVipService>();
-        }
-
         private void Start()
         {
             SetVip(_vipService.IsVip);

@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dominoes.Components;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
-using Dominoes.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +12,6 @@ namespace Dominoes.Controllers
     internal class StartController : MonoBehaviour
     {
         [SerializeField] private AnimationController _animationController;
-        [SerializeField] private DominoesServiceProvider _serviceProvider;
 
         private IGazeusServicesService _gazeusServicesService;
         private IVipService _vipService;
@@ -32,9 +29,8 @@ namespace Dominoes.Controllers
 
         private void Start()
         {
-            InitializeServiceProvider();
-            _gazeusServicesService = _serviceProvider.GetRequiredService<IGazeusServicesService>();
-            _vipService = _serviceProvider.GetRequiredService<IVipService>();
+            _gazeusServicesService = ServiceProvider.GetRequiredService<IGazeusServicesService>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
             AddLoadingTasks();
             _ = StartCoroutine(FinishedLoadingRoutine());
         }
@@ -42,12 +38,7 @@ namespace Dominoes.Controllers
 
         private void AnimationController_EventFired(string @event)
         {
-            switch (@event)
-            {
-                case "Jogatina_End":
-                    _loadingAnimationTask.SetResult(true);
-                    break;
-            }
+            _loadingAnimationTask.SetResult(true);
         }
 
         private IEnumerator FinishedLoadingRoutine()
@@ -57,14 +48,6 @@ namespace Dominoes.Controllers
                 yield return null;
             }
             _ = SceneManager.LoadSceneAsync(nameof(DominoesScene.Lobby));
-        }
-
-        private void InitializeServiceProvider()
-        {
-            _serviceProvider.Initialize();
-            _serviceProvider.AddSingleton<IGazeusServicesService, GazeusServicesService>();
-            _serviceProvider.AddSingleton<IVipService, VipService>();
-            _serviceProvider.Build();
         }
 
         private void AddLoadingTasks()

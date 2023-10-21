@@ -1,10 +1,10 @@
-﻿using Assets.Project.Scripts.Managers;
-using Dominoes.Core.Enums;
+﻿using Dominoes.Core.Enums;
+using Dominoes.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.Project.Scripts.Components
+namespace Dominoes.Components
 {
     internal class ButtonAudio : UIBehaviour
     {

@@ -1,5 +1,4 @@
-﻿using Dominoes.Components;
-using Dominoes.Core.Interfaces.Services;
+﻿using Dominoes.Core.Interfaces.Services;
 using UnityEngine;
 
 namespace Dominoes.Controllers.HUD
@@ -9,17 +8,9 @@ namespace Dominoes.Controllers.HUD
         [SerializeField] private GameObject _noVipBorder;
         [SerializeField] private GameObject _vipBorder;
 
-        [Header("Provider")]
-        [SerializeField] private DominoesServiceProvider _serviceProvider;
-
-        private IVipService _vipService;
+        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
 
         #region Unity
-        private void Awake()
-        {
-            _vipService = _serviceProvider.GetRequiredService<IVipService>();
-        }
-
         private void Start()
         {
             SetVip();

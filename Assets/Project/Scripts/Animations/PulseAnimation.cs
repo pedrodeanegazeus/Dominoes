@@ -1,18 +1,51 @@
 using System.Collections;
 using DG.Tweening;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
 namespace Dominoes.Animations
 {
     internal class PulseAnimation : MonoBehaviour
     {
+        [SerializeField] private bool _startOnEnable;
         [SerializeField] private float _delay;
         [SerializeField] private float _durationMin;
         [SerializeField] private float _durationMax;
         [SerializeField] private float _pulseMin;
         [SerializeField] private float _pulseMax;
 
+        private readonly IGzLogger<PulseAnimation> _logger = ServiceProvider.GetRequiredService<IGzLogger<PulseAnimation>>();
+
+        private Coroutine _coroutine;
         private RectTransform _rectTransform;
+        private bool _isStarted;
+
+        public void StartAnimation()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(StartAnimation));
+
+            if (_isStarted)
+            {
+                _logger.Warn("Pulse animation has already been started");
+            }
+            _coroutine = StartCoroutine(StartDelayCoroutine());
+            _isStarted = true;
+        }
+
+        public void StopAnimation()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(StopAnimation));
+
+            if (!_isStarted)
+            {
+                _logger.Error("Pulse animation has not been started yet");
+                return;
+            }
+            StopCoroutine(_coroutine);
+            _isStarted = false;
+        }
 
         #region Unity
         private void Awake()
@@ -23,7 +56,10 @@ namespace Dominoes.Animations
 
         private void Start()
         {
-            _ = StartCoroutine(StartDelayCoroutine());
+            if (_startOnEnable)
+            {
+                StartAnimation();
+            }
         }
         #endregion
 

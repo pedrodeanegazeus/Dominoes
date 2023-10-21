@@ -2,7 +2,7 @@
 {
     internal enum DominoesScene
     {
-        Lobby,
         Start,
+        Lobby,
     }
 }

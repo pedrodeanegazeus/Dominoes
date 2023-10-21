@@ -1,4 +1,5 @@
 ﻿using Dominoes.Animations;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +8,20 @@ namespace Dominoes.Controllers.Lobby
     internal class SideMenuCanvasController : MonoBehaviour
     {
         [Header("Menu")]
-        [SerializeField] private SlideInAnimation _slideInAnimation;
-        [SerializeField] private SlideOutAnimation _slideOutAnimation;
+        [SerializeField] private SlideAnimation _slideAnimation;
 
         [Header("Header")]
         [SerializeField] private Button _closeButton;
 
+        private readonly IGzLogger<SideMenuCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasController>>();
+
         public void OpenSideMenu()
         {
+            _logger.Debug("CALLED: {method}",
+                          nameof(OpenSideMenu));
+
             gameObject.SetActive(true);
-            _slideInAnimation.SlideIn();
+            _slideAnimation.SlideIn();
         }
 
         #region Unity
@@ -28,7 +33,7 @@ namespace Dominoes.Controllers.Lobby
 
         private void CloseSideMenu()
         {
-            _slideOutAnimation.SlideOut(() => gameObject.SetActive(false));
+            _slideAnimation.SlideOut(() => gameObject.SetActive(false));
         }
     }
 }

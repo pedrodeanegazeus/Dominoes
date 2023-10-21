@@ -1,5 +1,4 @@
 ﻿using System;
-using Dominoes.Components;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using UnityEngine;
@@ -20,10 +19,7 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private Button _playWithFriendsButton;
         [SerializeField] private GameObject _vipButton;
 
-        [Header("Provider")]
-        [SerializeField] private DominoesServiceProvider _serviceProvider;
-
-        private IVipService _vipService;
+        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
 
         #region Localize Prefab Event
         public void OnUpdateAsset()
@@ -35,10 +31,9 @@ namespace Dominoes.Controllers.Lobby
         #region Unity
         private void Awake()
         {
-            _singlePlayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.SinglePlayer));
             _multiplayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.Multiplayer));
             _playWithFriendsButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.PlayWithFriends));
-            _vipService = _serviceProvider.GetRequiredService<IVipService>();
+            _singlePlayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.SinglePlayer));
         }
 
         private void Start()

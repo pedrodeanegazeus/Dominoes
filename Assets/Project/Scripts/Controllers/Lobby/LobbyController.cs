@@ -1,8 +1,6 @@
-using Dominoes.Components;
 using Dominoes.Controllers.Lobby;
 using Dominoes.Core.Enums;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Dominoes.Controllers
@@ -22,13 +20,6 @@ namespace Dominoes.Controllers
         #region Unity
         private void Awake()
         {
-            // debug helper
-            if (!DominoesServiceProvider.IsBuilt)
-            {
-                _ = SceneManager.LoadSceneAsync(nameof(DominoesScene.Start));
-                return;
-            }
-
             _backButton.onClick.AddListener(GoToLobby);
             _settingsButton.onClick.AddListener(_sideMenuCanvasController.OpenSideMenu);
 

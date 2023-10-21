@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d3723d1e0064a46b7f76c07e717873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startOnEnable: 1
   _delay: 500
   _durationMin: 0.25
   _durationMax: 0.75
@@ -107,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435a354040863a0478dd7612bc44fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startOnEnable: 1
   _delay: 0
   _durationMin: 250
   _durationMax: 250
@@ -200,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d3723d1e0064a46b7f76c07e717873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startOnEnable: 1
   _delay: 1500
   _durationMin: 0.25
   _durationMax: 0.75
@@ -217,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435a354040863a0478dd7612bc44fb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startOnEnable: 1
   _delay: 0
   _durationMin: 250
   _durationMax: 250
@@ -348,7 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48d8223de0917344a5f8de2f64b6cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serviceProvider: {fileID: 0}
 --- !u!1 &5686609107684121960
 GameObject:
   m_ObjectHideFlags: 0
