@@ -39,6 +39,8 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 485a6220a81b1b34b8a6c19bc2e9d752, type: 3}
+  - {fileID: 21300000, guid: 3ac5cab0a1d9ddc45b2439e012dd0bb5, type: 3}
+  - {fileID: 21300000, guid: b3b67b0198ab71745b2f41e2ccad4e60, type: 3}
   - {fileID: 21300000, guid: cabe42816f106bd46be05178ec609df0, type: 3}
   - {fileID: 21300000, guid: 4686a0b19834b2d418b1a66a59f2a9db, type: 3}
   - {fileID: 21300000, guid: 63f19723f02114b44983b5745e89ab81, type: 3}
@@ -67,11 +69,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5b7cf19e6aaf4454baf6ca63df513c38, type: 3}
   - {fileID: 21300000, guid: 364072be05a9012448c7b65b55e68ff1, type: 3}
   - {fileID: 21300000, guid: 4104aabe2b94cdc468fb3a918ead3978, type: 3}
+  - {fileID: 21300000, guid: 19ba3b1f72b975c49ac06d1898fda51e, type: 3}
   - {fileID: 21300000, guid: 95eca16f04eed0748943b89a6e77095b, type: 3}
   - {fileID: 21300000, guid: ea9c2d9fdff84e442b202df996d71244, type: 3}
   - {fileID: 21300000, guid: 333397ef39ec46a4fbc5f40355287a23, type: 3}
   m_PackedSpriteNamesToIndex:
   - Oval Red Ad Pressed
+  - Settings Title Background
+  - Right
   - Oval Cyan
   - Ad Tag
   - Game
@@ -100,6 +105,7 @@ SpriteAtlas:
   - Rect Cyan Inactive
   - Rect Yellow Inactive
   - Ribbon
+  - Settings Item Background
   - Rect Yellow Pressed
   - Rect Cyan
   - Oval Cyan Pressed

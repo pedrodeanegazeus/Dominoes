@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Dominoes.Core.Enums;
+using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models.Services.GazeusServicesService;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
@@ -36,7 +35,7 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
         private readonly IGzLogger<GameTypeCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeCanvasController>>();
-        private readonly IGazeusServicesService _gazeusServicesService = ServiceProvider.GetRequiredService<IGazeusServicesService>();
+        private readonly IMultiplayerService _gazeusServicesService = ServiceProvider.GetRequiredService<IMultiplayerService>();
         private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
 
         public void SetGameType(GameType gameType)
@@ -78,9 +77,9 @@ namespace Dominoes.Controllers.Lobby
             _turboPlayersOnlineText.gameObject.SetActive(true);
 
             Task<PlayersOnline> playersOnlineTask = _gazeusServicesService.GetPlayersOnlineAsync();
-            _ = StartCoroutine(WaitForTaskCompleteRoutine(playersOnlineTask, task =>
+            _ = StartCoroutine(playersOnlineTask.WaitForTaskCompleteRoutine(task =>
             {
-                PlayersOnline playersOnline = (task as Task<PlayersOnline>).Result;
+                PlayersOnline playersOnline = task.Result;
                 (_allFivesPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.AllFives;
                 (_blockPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.Block;
                 (_drawPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.Draw;
@@ -117,15 +116,6 @@ namespace Dominoes.Controllers.Lobby
             _jogatinaLogo.SetActive(isVip);
             _promotional.SetActive(!isVip);
             _vipButton.SetActive(!isVip);
-        }
-
-        private IEnumerator WaitForTaskCompleteRoutine(Task task, Action<Task> taskCompleted)
-        {
-            while (!task.IsCompleted)
-            {
-                yield return null;
-            }
-            taskCompleted?.Invoke(task);
         }
     }
 }

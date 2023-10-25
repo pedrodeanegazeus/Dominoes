@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Gazeus.CoreMobile.Commons;
+using Gazeus.CoreMobile.Commons.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,15 +14,19 @@ namespace Dominoes.Controllers
     internal class StartController : MonoBehaviour
     {
         [SerializeField] private AnimationController _animationController;
+        [SerializeField] private LogConfiguration _logConfiguration;
 
-        private IGazeusServicesService _gazeusServicesService;
-        private IVipService _vipService;
+        private IMultiplayerService _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
+        private IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
+        private IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
         private List<Task> _loadingTasks;
         private TaskCompletionSource<bool> _loadingAnimationTask;
 
         #region Unity
         private void Awake()
         {
+            GzLogger.Initialize(_logConfiguration);
+
             _loadingAnimationTask = new TaskCompletionSource<bool>();
             _loadingTasks = new List<Task>();
 
@@ -29,12 +35,18 @@ namespace Dominoes.Controllers
 
         private void Start()
         {
-            _gazeusServicesService = ServiceProvider.GetRequiredService<IGazeusServicesService>();
-            _vipService = ServiceProvider.GetRequiredService<IVipService>();
             AddLoadingTasks();
             _ = StartCoroutine(FinishedLoadingRoutine());
         }
         #endregion
+
+        private void AddLoadingTasks()
+        {
+            _loadingTasks.Add(_loadingAnimationTask.Task);
+            _loadingTasks.Add(_multiplayerService.InitializeAsync());
+            _loadingTasks.Add(_profileService.InitializeAsync());
+            _loadingTasks.Add(_vipService.InitializeAsync());
+        }
 
         private void AnimationController_EventFired(string @event)
         {
@@ -48,13 +60,6 @@ namespace Dominoes.Controllers
                 yield return null;
             }
             _ = SceneManager.LoadSceneAsync(nameof(DominoesScene.Lobby));
-        }
-
-        private void AddLoadingTasks()
-        {
-            _loadingTasks.Add(_loadingAnimationTask.Task);
-            _loadingTasks.Add(_gazeusServicesService.InitializeAsync());
-            _loadingTasks.Add(_vipService.InitializeAsync());
         }
     }
 }

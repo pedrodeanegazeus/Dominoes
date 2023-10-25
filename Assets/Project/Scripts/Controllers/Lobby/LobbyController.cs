@@ -21,7 +21,7 @@ namespace Dominoes.Controllers
         private void Awake()
         {
             _backButton.onClick.AddListener(GoToLobby);
-            _settingsButton.onClick.AddListener(_sideMenuCanvasController.OpenSideMenu);
+            _settingsButton.onClick.AddListener(OpenSideMenu);
 
             _lobbyCanvasController.GameTypeSelected += LobbyCanvasController_SelectedGameType;
         }
@@ -55,6 +55,12 @@ namespace Dominoes.Controllers
             _moreGamesButton.gameObject.SetActive(false);
 
             _gameTypeCanvasController.SetGameType(gameType);
+        }
+
+        private void OpenSideMenu()
+        {
+            _sideMenuCanvasController.gameObject.SetActive(true);
+            _sideMenuCanvasController.OpenSideMenu();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Dominoes
         static ServiceProvider()
         {
             GzServiceCollection serviceCollection = new();
-            serviceCollection.AddSingleton<IGazeusServicesService, GazeusServicesService>();
+            serviceCollection.AddSingleton<IMultiplayerService, MultiplayerService>();
+            serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }

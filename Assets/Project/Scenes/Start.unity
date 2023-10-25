@@ -1187,6 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationController: {fileID: 1094755327}
+  _logConfiguration: {fileID: 11400000, guid: 23925b0f62e761a49a05f393afbc86e3, type: 2}
 --- !u!4 &1749500156
 Transform:
   m_ObjectHideFlags: 0
