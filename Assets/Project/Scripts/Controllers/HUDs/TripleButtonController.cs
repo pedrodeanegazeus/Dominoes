@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ namespace Dominoes.Controllers.HUDs
         [SerializeField] private Button _button1;
         [SerializeField] private Button _button2;
         [SerializeField] private Button _button3;
+
+        [Space]
+        [SerializeField] private RectTransform _highlight;
 
         [Space]
         [SerializeField] private LocalizeStringEvent _button1Text;
@@ -41,6 +45,7 @@ namespace Dominoes.Controllers.HUDs
         {
             Debug.Log("1");
 
+            _highlight.DOMove(_button1.gameObject.transform.position, 0.25f);
             Clicked?.Invoke(1);
         }
 
@@ -48,6 +53,7 @@ namespace Dominoes.Controllers.HUDs
         {
             Debug.Log("2");
 
+            _highlight.DOMove(_button2.gameObject.transform.position, 0.25f);
             Clicked?.Invoke(2);
         }
 
@@ -55,6 +61,7 @@ namespace Dominoes.Controllers.HUDs
         {
             Debug.Log("3");
 
+            _highlight.DOMove(_button3.gameObject.transform.position, 0.25f);
             Clicked?.Invoke(3);
         }
     }
