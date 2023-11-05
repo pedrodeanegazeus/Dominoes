@@ -51,7 +51,12 @@ namespace Dominoes.Animations
             _rectTransform = GetComponent<RectTransform>();
         }
 
-        private void Start()
+        private void OnDisable()
+        {
+            StopAnimation();
+        }
+
+        private void OnEnable()
         {
             if (_startOnEnable)
             {

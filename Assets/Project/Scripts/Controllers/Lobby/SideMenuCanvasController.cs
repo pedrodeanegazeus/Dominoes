@@ -18,6 +18,9 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private GameObject _noVipBorder;
         [SerializeField] private GameObject _vipBorder;
         [SerializeField] private TextMeshProUGUI _profileName;
+        [SerializeField] private GameObject _androidItems;
+        [SerializeField] private GameObject _iosItems;
+        [SerializeField] private GameObject _logoutItem;
 
         private readonly IGzLogger<SideMenuCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasController>>();
         private readonly IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
@@ -29,6 +32,11 @@ namespace Dominoes.Controllers.Lobby
                           nameof(OpenSideMenu));
 
             _slideAnimation.SlideIn();
+        }
+
+        public void Test()
+        {
+            Debug.Log("Clicked");
         }
 
         #region Unity
@@ -47,6 +55,7 @@ namespace Dominoes.Controllers.Lobby
 
         private void Start()
         {
+            SetPlatform();
             SetVip();
         }
         #endregion
@@ -65,6 +74,17 @@ namespace Dominoes.Controllers.Lobby
         private void CloseSideMenu()
         {
             _slideAnimation.SlideOut(() => gameObject.SetActive(false));
+        }
+
+        private void SetPlatform()
+        {
+#if UNITY_ANDROID
+            _androidItems.SetActive(true);
+            _iosItems.SetActive(false);
+#elif UNITY_IOS
+            _androidItems.SetActive(false);
+            _iosItems.SetActive(true);
+#endif
         }
 
         private void SetVip()

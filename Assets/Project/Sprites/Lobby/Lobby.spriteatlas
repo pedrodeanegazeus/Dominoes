@@ -61,6 +61,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4528f8792a8159645ab459aed1280d17, type: 3}
   - {fileID: 21300000, guid: 819d53d9f3c43f64aa23e7a2632d4080, type: 3}
   - {fileID: 21300000, guid: 22038c9ab35b9924e86e330ca2a227fc, type: 3}
+  - {fileID: 21300000, guid: e3125cebf9750a94ca8c230be3052821, type: 3}
   - {fileID: 21300000, guid: 1a01077cb220fc148b06233ec627fd17, type: 3}
   - {fileID: 21300000, guid: 1d7e765d8448fe64c9252f8047316abb, type: 3}
   - {fileID: 21300000, guid: a9b1939d8da33244080eb137e1e08bfd, type: 3}
@@ -97,6 +98,7 @@ SpriteAtlas:
   - Profile Background
   - Background Bottom Left
   - Jogatina Logo
+  - Rect Gray
   - Menu
   - Rect Orange Pressed
   - Logo Tile

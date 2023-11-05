@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Lobby Side Menu Strings_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: d614cfaf9fb883d4bba8385710ee377e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 903685779456
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1211816128512
+    m_Localized: Robot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405152571392
+    m_Localized: "F\xE1cil"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1610103042048
+    m_Localized: Medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1752948453376
+    m_Localized: "Dif\xEDcil"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840092362911744
+    m_Localized: Sonidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841384724443136
+    m_Localized: Ayuda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841749771497472
+    m_Localized: Reglas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 842608496521216
+    m_Localized: "\xBFTe gusta este juego?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 842932665888768
+    m_Localized: "Eval\xFAa Domin\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843205631193088
+    m_Localized: Deja un Comentario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843428482953216
+    m_Localized: Mi cuenta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843622230437888
+    m_Localized: "Pol\xEDtica de Privacidad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843849914036224
+    m_Localized: Datos de la Cuenta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 844050057834496
+    m_Localized: "La Configuraci\xF3n de Privacidad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845120922365952
+    m_Localized: "Administrar la suscripci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845282969300992
+    m_Localized: Restaurar compras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845499256975360
+    m_Localized: Desconectarse
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

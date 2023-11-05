@@ -11,6 +11,7 @@ namespace Dominoes.Services
         private readonly IGzLogger<ProfileService> _logger;
 
         public bool IsGuest { get; private set; }
+        public bool IsLoggedIn { get; private set; }
 
         public ProfileService(IGzLogger<ProfileService> logger)
         {

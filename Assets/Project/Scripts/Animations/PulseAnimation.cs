@@ -54,7 +54,12 @@ namespace Dominoes.Animations
             _rectTransform.localScale = Vector3.zero;
         }
 
-        private void Start()
+        private void OnDisable()
+        {
+            StopAnimation();
+        }
+
+        private void OnEnable()
         {
             if (_startOnEnable)
             {
