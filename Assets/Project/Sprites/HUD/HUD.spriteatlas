@@ -38,8 +38,16 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: d775ca40c8bf7c44b9a8d516aa58833f, type: 3}
+  - {fileID: 21300000, guid: 89cd8bc2cb10a514aafd664c75eb05b9, type: 3}
+  - {fileID: 21300000, guid: 9d2b66166ba0d0a40a71816c8fbcb986, type: 3}
+  - {fileID: 21300000, guid: fdb6d1376c69d004bb55ba3ca48c0166, type: 3}
   - {fileID: 21300000, guid: 0dd8e26cdceb35b45b214d53c1b0feae, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Toggle Button Mask
+  - Toggle Button Switch-tmp
+  - Toggle Button Background
+  - Toggle Button Switch
   - Triple Button Highlight
   m_RenderDataMap: {}
   m_Tag: HUD

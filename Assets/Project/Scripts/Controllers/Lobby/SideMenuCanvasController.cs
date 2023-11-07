@@ -21,6 +21,7 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private GameObject _androidItems;
         [SerializeField] private GameObject _iosItems;
         [SerializeField] private GameObject _logoutItem;
+        [SerializeField] private TextMeshProUGUI _versionNumber;
 
         private readonly IGzLogger<SideMenuCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasController>>();
         private readonly IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
@@ -32,11 +33,6 @@ namespace Dominoes.Controllers.Lobby
                           nameof(OpenSideMenu));
 
             _slideAnimation.SlideIn();
-        }
-
-        public void Test()
-        {
-            Debug.Log("Clicked");
         }
 
         #region Unity
@@ -51,6 +47,7 @@ namespace Dominoes.Controllers.Lobby
         {
             Task<string> task = _profileService.GetProfileNameAsync();
             StartCoroutine(task.WaitForTaskCompleteRoutine(task => _profileName.text = task.Result));
+            _versionNumber.text = "6.0.0";
         }
 
         private void Start()

@@ -87,6 +87,10 @@ MonoBehaviour:
     m_Key: logout
     m_Metadata:
       m_Items: []
+  - m_Id: 1414295352971264
+    m_Key: version
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

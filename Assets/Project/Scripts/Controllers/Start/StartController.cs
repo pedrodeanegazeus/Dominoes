@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Gazeus.CoreMobile.Commons;
@@ -46,6 +47,8 @@ namespace Dominoes.Controllers
             _loadingTasks.Add(_multiplayerService.InitializeAsync());
             _loadingTasks.Add(_profileService.InitializeAsync());
             _loadingTasks.Add(_vipService.InitializeAsync());
+
+            _loadingTasks.Add(Task.Run(() => DOTween.Init()));
         }
 
         private void AnimationController_EventFired(string @event)

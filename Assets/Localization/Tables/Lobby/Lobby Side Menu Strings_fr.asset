@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: "D\xE9connexion"
     m_Metadata:
       m_Items: []
+  - m_Id: 1414295352971264
+    m_Localized: Version
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

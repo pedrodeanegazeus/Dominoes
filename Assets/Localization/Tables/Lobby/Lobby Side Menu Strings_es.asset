@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: Desconectarse
     m_Metadata:
       m_Items: []
+  - m_Id: 1414295352971264
+    m_Localized: "Versi\xF3n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
