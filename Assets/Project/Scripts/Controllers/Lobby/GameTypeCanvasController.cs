@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DG.Tweening;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
@@ -8,6 +9,7 @@ using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Dominoes.Controllers.Lobby
@@ -78,11 +80,29 @@ namespace Dominoes.Controllers.Lobby
         }
 
         #region Unity
+        private void Awake()
+        {
+            _drawButton.onClick.AddListener(() => SetGameMode(GameMode.Draw));
+            _blockButton.onClick.AddListener(() => SetGameMode(GameMode.Block));
+            _allFivesButton.onClick.AddListener(() => SetGameMode(GameMode.AllFives));
+            _turboButton.onClick.AddListener(() => SetGameMode(GameMode.Turbo));
+        }
+
         private void Start()
         {
             SetVip(_vipService.IsVip);
         }
         #endregion
+
+        private async void SetGameMode(GameMode gameMode)
+        {
+            _ = DOTween.KillAll();
+            _gameState.GameMode = gameMode;
+
+            // add transition
+            await Task.Delay(1000);
+            SceneManager.LoadSceneAsync(nameof(DominoesScene.Gameplay));
+        }
 
         private void SetMultiplayerGameType()
         {

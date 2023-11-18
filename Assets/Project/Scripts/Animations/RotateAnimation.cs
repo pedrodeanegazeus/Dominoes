@@ -13,7 +13,6 @@ namespace Dominoes.Animations
         [SerializeField] private float _durationMax;
 
         private IGzLogger<RotateAnimation> _logger;
-        private Coroutine _coroutine;
         private RectTransform _rectTransform;
         private bool _isStarted;
 
@@ -26,7 +25,7 @@ namespace Dominoes.Animations
             {
                 _logger.Warn("Pulse animation has already been started");
             }
-            _coroutine = StartCoroutine(StartDelayCoroutine());
+            _ = StartCoroutine(StartDelayCoroutine());
             _isStarted = true;
         }
 
@@ -40,7 +39,6 @@ namespace Dominoes.Animations
                 _logger.Error("Pulse animation has not been started yet");
                 return;
             }
-            StopCoroutine(_coroutine);
             _isStarted = false;
         }
 
@@ -67,12 +65,15 @@ namespace Dominoes.Animations
 
         private void Rotate()
         {
-            float duration = Random.Range(_durationMin, _durationMax);
-            _ = _rectTransform
-                .DORotate(new Vector3(0, 0, _rectTransform.rotation.eulerAngles.z - 180), duration)
-                .SetSpeedBased(true)
-                .SetEase(Ease.Linear)
-                .OnComplete(Rotate);
+            if (_isStarted)
+            {
+                float duration = Random.Range(_durationMin, _durationMax);
+                _ = _rectTransform
+                    .DORotate(new Vector3(0, 0, _rectTransform.rotation.eulerAngles.z - 180), duration)
+                    .SetSpeedBased(true)
+                    .SetEase(Ease.Linear)
+                    .OnComplete(Rotate);
+            }
         }
 
         private IEnumerator StartDelayCoroutine()

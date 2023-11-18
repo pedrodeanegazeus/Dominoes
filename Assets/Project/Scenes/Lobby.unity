@@ -13547,6 +13547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bcd19580bdd1f45887e8098453de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
   _moreGamesButton: {fileID: 638137833}
   _backButton: {fileID: 2062597310}
   _settingsButton: {fileID: 2005602056}

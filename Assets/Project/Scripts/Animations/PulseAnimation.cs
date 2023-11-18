@@ -15,7 +15,6 @@ namespace Dominoes.Animations
         [SerializeField] private float _pulseMax;
 
         private IGzLogger<PulseAnimation> _logger;
-        private Coroutine _coroutine;
         private RectTransform _rectTransform;
         private bool _isStarted;
 
@@ -28,7 +27,7 @@ namespace Dominoes.Animations
             {
                 _logger.Warn("Pulse animation has already been started");
             }
-            _coroutine = StartCoroutine(StartDelayCoroutine());
+            _ = StartCoroutine(StartDelayCoroutine());
             _isStarted = true;
         }
 
@@ -42,7 +41,6 @@ namespace Dominoes.Animations
                 _logger.Error("Pulse animation has not been started yet");
                 return;
             }
-            StopCoroutine(_coroutine);
             _isStarted = false;
         }
 
@@ -70,21 +68,27 @@ namespace Dominoes.Animations
 
         private void PulseIn()
         {
-            float duration = Random.Range(_durationMin, _durationMax);
-            _ = _rectTransform
-                .DOScale(Vector3.zero, duration)
-                .OnComplete(PulseOut);
+            if (_isStarted)
+            {
+                float duration = Random.Range(_durationMin, _durationMax);
+                _ = _rectTransform
+                    .DOScale(Vector3.zero, duration)
+                    .OnComplete(PulseOut);
+            }
         }
 
         private void PulseOut()
         {
-            float duration = Random.Range(_durationMin, _durationMax);
-            float pulse = Random.Range(_pulseMin, _pulseMax);
-            _ = _rectTransform
-                .DOScale(new Vector3(1, 1, 1) * pulse, duration)
-                .SetEase(Ease.OutBack)
-                .SetDelay(2)
-                .OnComplete(PulseIn);
+            if (_isStarted)
+            {
+                float duration = Random.Range(_durationMin, _durationMax);
+                float pulse = Random.Range(_pulseMin, _pulseMax);
+                _ = _rectTransform
+                    .DOScale(new Vector3(1, 1, 1) * pulse, duration)
+                    .SetEase(Ease.OutBack)
+                    .SetDelay(2)
+                    .OnComplete(PulseIn);
+            }
         }
 
         private IEnumerator StartDelayCoroutine()

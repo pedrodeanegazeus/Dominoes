@@ -4,5 +4,6 @@
     {
         Start,
         Lobby,
+        Gameplay,
     }
 }

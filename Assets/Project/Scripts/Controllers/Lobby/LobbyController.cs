@@ -1,4 +1,5 @@
 ﻿using Dominoes.Controllers.Lobby;
+using Dominoes.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,8 @@ namespace Dominoes.Controllers
 {
     internal class LobbyController : MonoBehaviour
     {
+        [SerializeField] private GameState _gameState;
+
         [Header("Header")]
         [SerializeField] private Button _moreGamesButton;
         [SerializeField] private Button _backButton;
@@ -46,6 +49,8 @@ namespace Dominoes.Controllers
 
         private void GoToLobby()
         {
+            _gameState.Reset();
+
             _lobbyCanvasController.Show();
             _gameTypeCanvasController.Hide();
 
