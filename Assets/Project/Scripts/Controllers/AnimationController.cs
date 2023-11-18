@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -8,7 +8,12 @@ namespace Dominoes.Controllers
     {
         public event Action<string> EventFired;
 
-        private readonly IGzLogger<AnimationController> _logger = ServiceProvider.GetRequiredService<IGzLogger<AnimationController>>();
+        private IGzLogger<AnimationController> _logger;
+
+        public void Initialize()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<AnimationController>>();
+        }
 
         public void OnEventFired(string @event)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -14,8 +14,7 @@ namespace Dominoes.Animations
         [SerializeField] private float _pulseMin;
         [SerializeField] private float _pulseMax;
 
-        private readonly IGzLogger<PulseAnimation> _logger = ServiceProvider.GetRequiredService<IGzLogger<PulseAnimation>>();
-
+        private IGzLogger<PulseAnimation> _logger;
         private Coroutine _coroutine;
         private RectTransform _rectTransform;
         private bool _isStarted;
@@ -50,6 +49,7 @@ namespace Dominoes.Animations
         #region Unity
         private void Awake()
         {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<PulseAnimation>>();
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.localScale = Vector3.zero;
         }

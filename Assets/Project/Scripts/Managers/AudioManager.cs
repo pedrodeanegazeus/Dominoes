@@ -10,7 +10,7 @@ namespace Dominoes.Managers
         [SerializeField] private AudioSource _source;
         [SerializeField] private AudioTheme _theme;
 
-        private readonly IGzLogger<AudioManager> _logger = ServiceProvider.GetRequiredService<IGzLogger<AudioManager>>();
+        private IGzLogger<AudioManager> _logger;
 
         public void Play(Audio audio)
         {
@@ -24,5 +24,12 @@ namespace Dominoes.Managers
                 _source.Play();
             }
         }
+
+        #region Unity
+        private void Awake()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<AudioManager>>();
+        }
+        #endregion
     }
 }

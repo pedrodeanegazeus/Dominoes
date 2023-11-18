@@ -1,6 +1,8 @@
 ﻿using System;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.ScriptableObjects;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +10,11 @@ namespace Dominoes.Controllers.Lobby
 {
     internal class LobbyCanvasController : MonoBehaviour
     {
-        public event Action<GameType> GameTypeSelected;
+        public event Action GameTypeSelected;
 
+        [SerializeField] private GameState _gameState;
+
+        [Space]
         [SerializeField] private GameObject _jogatinaLogo;
         [SerializeField] private GameObject _defaultLogoPrefab;
 
@@ -19,21 +24,47 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private Button _playWithFriendsButton;
         [SerializeField] private GameObject _vipButton;
 
-        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IGzLogger<LobbyCanvasController> _logger;
+        private IVipService _vipService;
 
         #region Localize Prefab Event
         public void OnUpdateAsset()
         {
+            _logger.Debug("CALLED: {method}",
+                          nameof(OnUpdateAsset));
+
             Destroy(_defaultLogoPrefab);
         }
         #endregion
 
+        public void Hide()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Hide));
+
+            gameObject.SetActive(false);
+        }
+
+        public void Initialize()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<LobbyCanvasController>>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        }
+
+        public void Show()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Show));
+
+            gameObject.SetActive(true);
+        }
+
         #region Unity
         private void Awake()
         {
-            _multiplayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.Multiplayer));
-            _playWithFriendsButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.PlayWithFriends));
-            _singlePlayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.SinglePlayer));
+            _multiplayerButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.Multiplayer));
+            _playWithFriendsButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.PlayWithFriends));
+            _singlePlayerButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.SinglePlayer));
         }
 
         private void Start()
@@ -46,6 +77,12 @@ namespace Dominoes.Controllers.Lobby
         {
             _jogatinaLogo.SetActive(isVip);
             _vipButton.SetActive(!isVip);
+        }
+
+        private void TriggerGameTypeSelected(GameType gameType)
+        {
+            _gameState.GameType = gameType;
+            GameTypeSelected?.Invoke();
         }
     }
 }

@@ -23,8 +23,7 @@ namespace Dominoes.Animations
         [Space]
         [SerializeField] private float _duration;
 
-        private readonly IGzLogger<SlideAnimation> _logger = ServiceProvider.GetRequiredService<IGzLogger<SlideAnimation>>();
-
+        private IGzLogger<SlideAnimation> _logger;
         private RectTransform _rectTransform;
         private Vector3 _initialPosition;
         private Vector3 _outOfScreenIn;
@@ -56,6 +55,7 @@ namespace Dominoes.Animations
         #region Unity
         private void Awake()
         {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<SlideAnimation>>();
             _rectTransform = GetComponent<RectTransform>();
             _initialPosition = _rectTransform.position;
 

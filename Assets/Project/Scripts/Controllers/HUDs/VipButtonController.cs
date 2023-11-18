@@ -5,6 +5,13 @@ namespace Dominoes.Controllers.HUDs
 {
     internal class VipButtonController : MonoBehaviour
     {
-        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IVipService _vipService;
+
+        #region Unity
+        private void Awake()
+        {
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        }
+        #endregion
     }
 }

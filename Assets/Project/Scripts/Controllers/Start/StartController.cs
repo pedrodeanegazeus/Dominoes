@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.ScriptableObjects;
 using UnityEngine;
@@ -14,12 +15,15 @@ namespace Dominoes.Controllers
 {
     internal class StartController : MonoBehaviour
     {
+        [SerializeField] private GameState _gameState;
+
+        [Space]
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private LogConfiguration _logConfiguration;
 
-        private IMultiplayerService _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
-        private IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
-        private IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IMultiplayerService _multiplayerService;
+        private IProfileService _profileService;
+        private IVipService _vipService;
         private List<Task> _loadingTasks;
         private TaskCompletionSource<bool> _loadingAnimationTask;
 
@@ -27,6 +31,13 @@ namespace Dominoes.Controllers
         private void Awake()
         {
             GzLogger.Initialize(_logConfiguration);
+            _gameState.LoggerInitialized = true;
+
+            _animationController.Initialize();
+
+            _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
+            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
 
             _loadingAnimationTask = new TaskCompletionSource<bool>();
             _loadingTasks = new List<Task>();

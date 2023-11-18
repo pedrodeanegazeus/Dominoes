@@ -2,6 +2,7 @@
 using Dominoes.Animations;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace Dominoes.Controllers.Lobby
 {
     internal class SideMenuCanvasController : MonoBehaviour
     {
+        [SerializeField] private GameState _gameState;
+
+        [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private GameObject _noVipBorder;
@@ -23,14 +27,21 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private GameObject _logoutItem;
         [SerializeField] private TextMeshProUGUI _versionNumber;
 
-        private readonly IGzLogger<SideMenuCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasController>>();
-        private readonly IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
-        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IGzLogger<SideMenuCanvasController> _logger;
+        private IProfileService _profileService;
+        private IVipService _vipService;
 
-        public void OpenSideMenu()
+        public void Initialize()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasController>>();
+            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        }
+
+        public void Open()
         {
             _logger.Debug("CALLED: {method}",
-                          nameof(OpenSideMenu));
+                          nameof(Open));
 
             _slideAnimation.SlideIn();
         }

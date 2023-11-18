@@ -1,5 +1,4 @@
-using Dominoes.Controllers.Lobby;
-using Dominoes.Core.Enums;
+﻿using Dominoes.Controllers.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,10 +19,14 @@ namespace Dominoes.Controllers
         #region Unity
         private void Awake()
         {
+            _lobbyCanvasController.Initialize();
+            _gameTypeCanvasController.Initialize();
+            _sideMenuCanvasController.Initialize();
+
             _backButton.onClick.AddListener(GoToLobby);
             _settingsButton.onClick.AddListener(OpenSideMenu);
 
-            _lobbyCanvasController.GameTypeSelected += LobbyCanvasController_SelectedGameType;
+            _lobbyCanvasController.GameTypeSelected += GoToGameType;
         }
 
         private void Start()
@@ -32,35 +35,28 @@ namespace Dominoes.Controllers
         }
         #endregion
 
-        #region Events
-        private void LobbyCanvasController_SelectedGameType(GameType gameType)
+        private void GoToGameType()
         {
-            GoToGameTypeLobby(gameType);
+            _lobbyCanvasController.Hide();
+            _gameTypeCanvasController.Show();
+
+            _backButton.gameObject.SetActive(true);
+            _moreGamesButton.gameObject.SetActive(false);
         }
-        #endregion
 
         private void GoToLobby()
         {
+            _lobbyCanvasController.Show();
+            _gameTypeCanvasController.Hide();
+
             _backButton.gameObject.SetActive(false);
-            _lobbyCanvasController.gameObject.SetActive(true);
-            _gameTypeCanvasController.gameObject.SetActive(false);
             _moreGamesButton.gameObject.SetActive(true);
-        }
-
-        private void GoToGameTypeLobby(GameType gameType)
-        {
-            _backButton.gameObject.SetActive(true);
-            _lobbyCanvasController.gameObject.SetActive(false);
-            _gameTypeCanvasController.gameObject.SetActive(true);
-            _moreGamesButton.gameObject.SetActive(false);
-
-            _gameTypeCanvasController.SetGameType(gameType);
         }
 
         private void OpenSideMenu()
         {
             _sideMenuCanvasController.gameObject.SetActive(true);
-            _sideMenuCanvasController.OpenSideMenu();
+            _sideMenuCanvasController.Open();
         }
     }
 }

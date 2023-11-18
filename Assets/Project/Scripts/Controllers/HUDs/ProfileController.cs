@@ -14,12 +14,15 @@ namespace Dominoes.Controllers.HUD
         [SerializeField] private GameObject _vipBorder;
         [SerializeField] private TextMeshProUGUI _profileName;
 
-        private readonly IProfileService _profileService = ServiceProvider.GetRequiredService<IProfileService>();
-        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IProfileService _profileService;
+        private IVipService _vipService;
 
         #region Unity
         private void Awake()
         {
+            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }
 

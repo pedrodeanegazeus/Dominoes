@@ -3,6 +3,7 @@ using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models.Services.GazeusServicesService;
+using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -13,6 +14,9 @@ namespace Dominoes.Controllers.Lobby
 {
     internal class GameTypeCanvasController : MonoBehaviour
     {
+        [SerializeField] private GameState _gameState;
+
+        [Space]
         [SerializeField] private GameObject _jogatinaLogo;
 
         [Header("Titles")]
@@ -34,17 +38,32 @@ namespace Dominoes.Controllers.Lobby
         [SerializeField] private LocalizeStringEvent _allFivesPlayersOnlineText;
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
-        private readonly IGzLogger<GameTypeCanvasController> _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeCanvasController>>();
-        private readonly IMultiplayerService _gazeusServicesService = ServiceProvider.GetRequiredService<IMultiplayerService>();
-        private readonly IVipService _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        private IGzLogger<GameTypeCanvasController> _logger;
+        private IMultiplayerService _gazeusServicesService;
+        private IVipService _vipService;
 
-        public void SetGameType(GameType gameType)
+        public void Hide()
         {
-            _logger.Debug("CALLED: {method} - {gameType}",
-                          nameof(SetGameType),
-                          gameType);
+            _logger.Debug("CALLED: {method}",
+                          nameof(Hide));
 
-            switch (gameType)
+            gameObject.SetActive(false);
+        }
+
+        public void Initialize()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeCanvasController>>();
+            _gazeusServicesService = ServiceProvider.GetRequiredService<IMultiplayerService>();
+            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+        }
+
+        public void Show()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Show));
+
+            gameObject.SetActive(true);
+            switch (_gameState.GameType)
             {
                 case GameType.Multiplayer:
                     SetMultiplayerGameType();

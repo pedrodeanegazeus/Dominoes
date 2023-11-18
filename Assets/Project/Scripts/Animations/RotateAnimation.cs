@@ -12,8 +12,7 @@ namespace Dominoes.Animations
         [SerializeField] private float _durationMin;
         [SerializeField] private float _durationMax;
 
-        private readonly IGzLogger<RotateAnimation> _logger = ServiceProvider.GetRequiredService<IGzLogger<RotateAnimation>>();
-
+        private IGzLogger<RotateAnimation> _logger;
         private Coroutine _coroutine;
         private RectTransform _rectTransform;
         private bool _isStarted;
@@ -48,6 +47,7 @@ namespace Dominoes.Animations
         #region Unity
         private void Awake()
         {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<RotateAnimation>>();
             _rectTransform = GetComponent<RectTransform>();
         }
 
