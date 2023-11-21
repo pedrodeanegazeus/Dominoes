@@ -6,22 +6,22 @@ namespace Dominoes.Core.Extensions
 {
     internal static class TaskExtensions
     {
-        public static IEnumerator WaitForTaskCompleteRoutine(this Task task, Action<Task> taskCompleted)
+        public static IEnumerator WaitForTaskCompleteRoutine(this Task task, Action taskCompleted)
         {
             while (!task.IsCompleted)
             {
                 yield return null;
             }
-            taskCompleted?.Invoke(task);
+            taskCompleted?.Invoke();
         }
 
-        public static IEnumerator WaitForTaskCompleteRoutine<TResult>(this Task<TResult> task, Action<Task<TResult>> taskCompleted)
+        public static IEnumerator WaitForTaskCompleteRoutine<TResult>(this Task<TResult> task, Action<TResult> taskCompleted)
         {
             while (!task.IsCompleted)
             {
                 yield return null;
             }
-            taskCompleted?.Invoke(task);
+            taskCompleted?.Invoke(task.Result);
         }
     }
 }

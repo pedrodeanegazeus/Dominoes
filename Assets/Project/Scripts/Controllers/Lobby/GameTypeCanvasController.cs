@@ -116,13 +116,12 @@ namespace Dominoes.Controllers.Lobby
             _turboPlayersOnlineText.gameObject.SetActive(true);
 
             Task<PlayersOnline> playersOnlineTask = _gazeusServicesService.GetPlayersOnlineAsync();
-            _ = StartCoroutine(playersOnlineTask.WaitForTaskCompleteRoutine(task =>
+            _ = StartCoroutine(playersOnlineTask.WaitForTaskCompleteRoutine(result =>
             {
-                PlayersOnline playersOnline = task.Result;
-                (_allFivesPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.AllFives;
-                (_blockPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.Block;
-                (_drawPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.Draw;
-                (_turboPlayersOnlineText.StringReference["count"] as IntVariable).Value = playersOnline.Turbo;
+                (_allFivesPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.AllFives;
+                (_blockPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.Block;
+                (_drawPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.Draw;
+                (_turboPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.Turbo;
             }));
         }
 

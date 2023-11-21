@@ -69,7 +69,7 @@ namespace Dominoes.Controllers.Lobby
         private void OnEnable()
         {
             Task<string> task = _profileService.GetProfileNameAsync();
-            StartCoroutine(task.WaitForTaskCompleteRoutine(task => _profileName.text = task.Result));
+            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
         }
 
         private void Start()
@@ -95,7 +95,7 @@ namespace Dominoes.Controllers.Lobby
             if (gameObject.activeSelf)
             {
                 Task<string> task = _profileService.GetProfileNameAsync();
-                StartCoroutine(task.WaitForTaskCompleteRoutine(task => _profileName.text = task.Result));
+                _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
             }
         }
         #endregion
