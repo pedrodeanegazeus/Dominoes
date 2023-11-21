@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.ScriptableObjects;
@@ -19,6 +20,7 @@ namespace Dominoes.Controllers
 
         [Space]
         [SerializeField] private AnimationController _animationController;
+        [SerializeField] private AudioManager _audioManager;
         [SerializeField] private LogConfiguration _logConfiguration;
 
         private IMultiplayerService _multiplayerService;
@@ -31,9 +33,10 @@ namespace Dominoes.Controllers
         private void Awake()
         {
             GzLogger.Initialize(_logConfiguration);
-            _gameState.LoggerInitialized = true;
 
             _animationController.Initialize();
+            _audioManager.Initialize();
+            _gameState.Initialize();
 
             _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
             _profileService = ServiceProvider.GetRequiredService<IProfileService>();
@@ -55,6 +58,7 @@ namespace Dominoes.Controllers
         private void AddLoadingTasks()
         {
             _loadingTasks.Add(_loadingAnimationTask.Task);
+            _loadingTasks.Add(_gameState.LoadAsync());
             _loadingTasks.Add(_multiplayerService.InitializeAsync());
             _loadingTasks.Add(_profileService.InitializeAsync());
             _loadingTasks.Add(_vipService.InitializeAsync());

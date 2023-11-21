@@ -7,7 +7,7 @@ namespace Dominoes.Controllers.HUDs
 {
     internal class ToggleButtonController : MonoBehaviour
     {
-        public Action<bool> Clicked;
+        public event Action<bool> Clicked;
 
         [SerializeField] private Button _button;
         [SerializeField] private RectTransform _switch;
@@ -26,21 +26,31 @@ namespace Dominoes.Controllers.HUDs
 
         private Image _buttonImage;
         private bool _isEnabled;
+        private bool _isInitialized;
         private bool _state;
+
+        public void SetState(bool state)
+        {
+            _state = state;
+            _buttonImage.color = _state ? _onColor : _offColor;
+            _switch.position = _state ? _offPosition.position : _onPosition.position;
+            _isInitialized = true;
+        }
 
         #region Unity
         private void Awake()
         {
             _button.onClick.AddListener(ButtonClicked);
             _buttonImage = _button.GetComponent<Image>();
-            _buttonImage.color = _initialState ? _onColor : _offColor;
             _isEnabled = true;
-            _state = _initialState;
         }
 
         private void Start()
         {
-            _switch.position = _initialState ? _offPosition.position : _onPosition.position;
+            if (!_isInitialized)
+            {
+                SetState(_initialState);
+            }
         }
         #endregion
 

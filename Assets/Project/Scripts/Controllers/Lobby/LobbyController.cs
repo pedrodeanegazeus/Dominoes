@@ -49,7 +49,7 @@ namespace Dominoes.Controllers
 
         private void GoToLobby()
         {
-            _gameState.Reset();
+            _gameState.ResetState();
 
             _lobbyCanvasController.Show();
             _gameTypeCanvasController.Hide();

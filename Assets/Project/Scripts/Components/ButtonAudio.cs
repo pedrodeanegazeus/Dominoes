@@ -8,7 +8,6 @@ namespace Dominoes.Components
 {
     internal class ButtonAudio : UIBehaviour
     {
-        [SerializeField] private AudioManager _audioManager;
         [SerializeField] private Button _button;
         [SerializeField] private Audio _audio;
 
@@ -20,14 +19,13 @@ namespace Dominoes.Components
 
         protected override void Reset()
         {
-            _audioManager = FindObjectOfType<AudioManager>();
             _button = GetComponent<Button>();
         }
         #endregion
 
         private void PlayAudio()
         {
-            _audioManager.Play(_audio);
+            AudioManager.Instance.Play(_audio);
         }
     }
 }

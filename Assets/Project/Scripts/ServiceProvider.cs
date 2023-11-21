@@ -1,5 +1,7 @@
-﻿using Dominoes.Core.Interfaces.Services;
-using Dominoes.Services;
+﻿using Dominoes.Core.Interfaces.Repositories;
+using Dominoes.Core.Interfaces.Services;
+using Dominoes.Core.Services;
+using Dominoes.Infrastructure.Repositories;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
@@ -13,9 +15,15 @@ namespace Dominoes
         static ServiceProvider()
         {
             GzServiceCollection serviceCollection = new();
+
+            // Repositories
+            serviceCollection.AddSingleton<IGameStateRepository, GameStateRepository>();
+
+            // Services
             serviceCollection.AddSingleton<IMultiplayerService, MultiplayerService>();
             serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
+
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 

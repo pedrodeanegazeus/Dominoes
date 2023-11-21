@@ -2,7 +2,7 @@
 using Dominoes.Core.Interfaces.Services;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 
-namespace Dominoes.Services
+namespace Dominoes.Core.Services
 {
     internal class VipService : IVipService
     {

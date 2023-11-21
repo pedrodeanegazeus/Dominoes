@@ -7,7 +7,7 @@ namespace Dominoes.Controllers.HUDs
 {
     internal class TripleButtonController : MonoBehaviour
     {
-        public Action<int> Clicked;
+        public event Action<int> Clicked;
 
         [SerializeField] private Button _button1;
         [SerializeField] private Button _button2;
@@ -18,6 +18,18 @@ namespace Dominoes.Controllers.HUDs
         [SerializeField] private float _highlightMoveSpeed = 0.25f;
 
         private bool _isEnabled;
+
+        public void SetState(int state)
+        {
+            Vector3 position = state switch
+            {
+                1 => _button1.gameObject.transform.position,
+                2 => _button2.gameObject.transform.position,
+                3 => _button3.gameObject.transform.position,
+                _ => throw new ArgumentOutOfRangeException(nameof(state)),
+            };
+            _highlight.position = position;
+        }
 
         #region Unity
         private void Awake()

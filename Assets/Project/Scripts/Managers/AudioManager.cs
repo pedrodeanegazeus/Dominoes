@@ -7,10 +7,18 @@ namespace Dominoes.Managers
 {
     internal class AudioManager : MonoBehaviour
     {
-        [SerializeField] private AudioSource _source;
+        [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioTheme _theme;
+        [SerializeField] private GameState _gameState;
+
+        public static AudioManager Instance { get; private set; }
 
         private IGzLogger<AudioManager> _logger;
+
+        public void Initialize()
+        {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<AudioManager>>();
+        }
 
         public void Play(Audio audio)
         {
@@ -18,17 +26,21 @@ namespace Dominoes.Managers
                           nameof(Play),
                           audio);
 
-            if (audio != Audio.None)
+            if (_gameState.Audio && audio != Audio.None)
             {
-                _source.clip = _theme.Audios[audio];
-                _source.Play();
+                AudioClip audioClip = _theme.Audios[audio];
+                _audioSource.PlayOneShot(audioClip);
+
+                _logger.Info("Audio {audio} played", audio);
             }
         }
 
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<AudioManager>>();
+            Instance = this;
+
+            DontDestroyOnLoad(gameObject);
         }
         #endregion
     }

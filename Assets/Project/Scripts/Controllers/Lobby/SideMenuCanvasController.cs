@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Dominoes.Animations;
+using Dominoes.Controllers.HUDs;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.ScriptableObjects;
@@ -19,13 +20,19 @@ namespace Dominoes.Controllers.Lobby
         [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
+        [SerializeField] private TextMeshProUGUI _versionNumber;
+
+        [Header("Profile")]
         [SerializeField] private GameObject _noVipBorder;
         [SerializeField] private GameObject _vipBorder;
         [SerializeField] private TextMeshProUGUI _profileName;
+
+        [Header("Menu")]
+        [SerializeField] private TripleButtonController _botDifficulty;
+        [SerializeField] private ToggleButtonController _audioToggle;
         [SerializeField] private GameObject _androidItems;
         [SerializeField] private GameObject _iosItems;
         [SerializeField] private GameObject _logoutItem;
-        [SerializeField] private TextMeshProUGUI _versionNumber;
 
         private IGzLogger<SideMenuCanvasController> _logger;
         private IProfileService _profileService;
@@ -43,6 +50,8 @@ namespace Dominoes.Controllers.Lobby
             _logger.Debug("CALLED: {method}",
                           nameof(Open));
 
+            _botDifficulty.SetState(_gameState.BotDifficulty);
+            _audioToggle.SetState(_gameState.Audio);
             _slideAnimation.SlideIn();
         }
 
@@ -52,13 +61,15 @@ namespace Dominoes.Controllers.Lobby
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
 
             _closeButton.onClick.AddListener(CloseSideMenu);
+            _botDifficulty.Clicked += BotDifficulty_Clicked;
+            _audioToggle.Clicked += AudioToggle_Clicked;
+            _versionNumber.text = "6.0.0";
         }
 
         private void OnEnable()
         {
             Task<string> task = _profileService.GetProfileNameAsync();
             StartCoroutine(task.WaitForTaskCompleteRoutine(task => _profileName.text = task.Result));
-            _versionNumber.text = "6.0.0";
         }
 
         private void Start()
@@ -69,6 +80,16 @@ namespace Dominoes.Controllers.Lobby
         #endregion
 
         #region Events
+        private void AudioToggle_Clicked(bool state)
+        {
+            _gameState.Audio = state;
+        }
+
+        private void BotDifficulty_Clicked(int state)
+        {
+            _gameState.BotDifficulty = state;
+        }
+
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
         {
             if (gameObject.activeSelf)

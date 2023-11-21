@@ -4,7 +4,7 @@ using Dominoes.Core.Models.Services.GazeusServicesService;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
-namespace Dominoes.Services
+namespace Dominoes.Core.Services
 {
     internal class MultiplayerService : IMultiplayerService
     {

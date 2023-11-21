@@ -4,7 +4,7 @@ using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Dominoes.Services
+namespace Dominoes.Core.Services
 {
     internal class ProfileService : IProfileService
     {
