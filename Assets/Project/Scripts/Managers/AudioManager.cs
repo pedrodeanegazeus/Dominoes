@@ -24,14 +24,14 @@ namespace Dominoes.Managers
         {
             _logger.Debug("CALLED: {method} - {audio}",
                           nameof(Play),
-                          audio);
+                          audio.ToString());
 
             if (_gameState.Audio && audio != Audio.None)
             {
                 AudioClip audioClip = _theme.Audios[audio];
                 _audioSource.PlayOneShot(audioClip);
 
-                _logger.Info("Audio {audio} played", audio);
+                _logger.Info("Audio {audio} played", audio.ToString());
             }
         }
 

@@ -10,7 +10,6 @@ using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Dominoes.Controllers
 {
@@ -21,6 +20,7 @@ namespace Dominoes.Controllers
         [Space]
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private AudioManager _audioManager;
+        [SerializeField] private GameSceneManager _gameSceneManager;
         [SerializeField] private LogConfiguration _logConfiguration;
 
         private IMultiplayerService _multiplayerService;
@@ -36,6 +36,7 @@ namespace Dominoes.Controllers
 
             _animationController.Initialize();
             _audioManager.Initialize();
+            _gameSceneManager.Initialize();
             _gameState.Initialize();
 
             _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
@@ -77,7 +78,7 @@ namespace Dominoes.Controllers
             {
                 yield return null;
             }
-            _ = SceneManager.LoadSceneAsync(nameof(DominoesScene.Lobby));
+            GameSceneManager.Instance.LoadScene(DominoesScene.Lobby, false);
         }
     }
 }

@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
-using DG.Tweening;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models.Services.GazeusServicesService;
+using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Dominoes.Controllers.Lobby
@@ -94,14 +93,10 @@ namespace Dominoes.Controllers.Lobby
         }
         #endregion
 
-        private async void SetGameMode(GameMode gameMode)
+        private void SetGameMode(GameMode gameMode)
         {
-            _ = DOTween.KillAll();
             _gameState.GameMode = gameMode;
-
-            // add transition
-            await Task.Delay(1000);
-            SceneManager.LoadSceneAsync(nameof(DominoesScene.Gameplay));
+            GameSceneManager.Instance.LoadScene(DominoesScene.Gameplay);
         }
 
         private void SetMultiplayerGameType()
