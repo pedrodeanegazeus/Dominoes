@@ -6506,9 +6506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0175fe59c176dc949b9b5943b37b48e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _from: 1
+  _from: 2
   _fromEase: 9
-  _to: 1
+  _to: 2
   _toEase: 8
   _duration: 0.75
 --- !u!1 &920007959
@@ -13876,8 +13876,8 @@ MonoBehaviour:
   _noVipBorder: {fileID: 1386985281}
   _vipBorder: {fileID: 51513249}
   _profileName: {fileID: 996717630}
-  _audioToggle: {fileID: 1658685051}
   _botDifficulty: {fileID: 733951658}
+  _audioToggle: {fileID: 1658685051}
   _androidItems: {fileID: 1389780974}
   _iosItems: {fileID: 389241371}
   _logoutItem: {fileID: 57693665}

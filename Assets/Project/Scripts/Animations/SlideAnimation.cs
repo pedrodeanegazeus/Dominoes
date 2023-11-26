@@ -9,8 +9,10 @@ namespace Dominoes.Animations
     {
         public enum Direction
         {
+            Bottom,
             Left,
             Right,
+            Top,
         }
 
         [SerializeField] private Direction _from;
@@ -61,14 +63,18 @@ namespace Dominoes.Animations
 
             _outOfScreenIn = _from switch
             {
+                Direction.Bottom => Vector3.down * Screen.height,
                 Direction.Left => Vector3.left * Screen.width,
                 Direction.Right => Vector3.right * Screen.width,
+                Direction.Top => Vector3.up * Screen.height,
                 _ => throw new NotImplementedException("Direction not implemented"),
             };
             _outOfScreenOut = _to switch
             {
+                Direction.Bottom => Vector3.down * Screen.height,
                 Direction.Left => Vector3.left * Screen.width,
                 Direction.Right => Vector3.right * Screen.width,
+                Direction.Top => Vector3.up * Screen.height,
                 _ => throw new NotImplementedException("Direction not implemented"),
             };
         }
