@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Side Menu View Strings_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: d614cfaf9fb883d4bba8385710ee377e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 903685779456
+    m_Localized: die Einstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1211816128512
+    m_Localized: Roboter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405152571392
+    m_Localized: Leicht
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1610103042048
+    m_Localized: Mittel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1752948453376
+    m_Localized: Schwer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840092362911744
+    m_Localized: "T\xF6ne"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841384724443136
+    m_Localized: Hilfe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841749771497472
+    m_Localized: Regeln
+    m_Metadata:
+      m_Items: []
+  - m_Id: 842608496521216
+    m_Localized: "Gef\xE4llt dir dieses Applikativ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 842932665888768
+    m_Localized: Bewete Domino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843205631193088
+    m_Localized: Hinterlasse Kommentar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843428482953216
+    m_Localized: Mein Benutzerkonto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843622230437888
+    m_Localized: Datenschutz-Bestimmungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843849914036224
+    m_Localized: Kontodaten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 844050057834496
+    m_Localized: Datenschutzeinstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845120922365952
+    m_Localized: Abonnement verwalten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845282969300992
+    m_Localized: "K\xE4ufe wiederherstellen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 845499256975360
+    m_Localized: Ausloggen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1414295352971264
+    m_Localized: Version
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

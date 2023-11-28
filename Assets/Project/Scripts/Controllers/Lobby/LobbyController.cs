@@ -1,5 +1,5 @@
-﻿using Dominoes.Controllers.Lobby;
-using Dominoes.ScriptableObjects;
+﻿using Dominoes.ScriptableObjects;
+using Dominoes.Views.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,22 +14,22 @@ namespace Dominoes.Controllers
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _settingsButton;
 
-        [Header("Canvas controllers")]
-        [SerializeField] private LobbyCanvasController _lobbyCanvasController;
-        [SerializeField] private GameTypeCanvasController _gameTypeCanvasController;
-        [SerializeField] private SideMenuCanvasController _sideMenuCanvasController;
+        [Header("Canvas views")]
+        [SerializeField] private LobbyCanvasView _lobbyCanvasView;
+        [SerializeField] private GameTypeCanvasView _gameTypeCanvasView;
+        [SerializeField] private SideMenuCanvasView _sideMenuCanvasView;
 
         #region Unity
         private void Awake()
         {
-            _lobbyCanvasController.Initialize();
-            _gameTypeCanvasController.Initialize();
-            _sideMenuCanvasController.Initialize();
+            _lobbyCanvasView.Initialize();
+            _gameTypeCanvasView.Initialize();
+            _sideMenuCanvasView.Initialize();
 
             _backButton.onClick.AddListener(GoToLobby);
             _settingsButton.onClick.AddListener(OpenSideMenu);
 
-            _lobbyCanvasController.GameTypeSelected += GoToGameType;
+            _lobbyCanvasView.GameTypeSelected += GoToGameType;
         }
 
         private void Start()
@@ -40,8 +40,8 @@ namespace Dominoes.Controllers
 
         private void GoToGameType()
         {
-            _lobbyCanvasController.Hide();
-            _gameTypeCanvasController.Show();
+            _lobbyCanvasView.Hide();
+            _gameTypeCanvasView.Show();
 
             _backButton.gameObject.SetActive(true);
             _moreGamesButton.gameObject.SetActive(false);
@@ -51,8 +51,8 @@ namespace Dominoes.Controllers
         {
             _gameState.ResetState();
 
-            _lobbyCanvasController.Show();
-            _gameTypeCanvasController.Hide();
+            _lobbyCanvasView.Show();
+            _gameTypeCanvasView.Hide();
 
             _backButton.gameObject.SetActive(false);
             _moreGamesButton.gameObject.SetActive(true);
@@ -60,8 +60,8 @@ namespace Dominoes.Controllers
 
         private void OpenSideMenu()
         {
-            _sideMenuCanvasController.gameObject.SetActive(true);
-            _sideMenuCanvasController.Open();
+            _sideMenuCanvasView.gameObject.SetActive(true);
+            _sideMenuCanvasView.Open();
         }
     }
 }

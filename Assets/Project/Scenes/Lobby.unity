@@ -4941,7 +4941,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 689613679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207b452bf75cb8845b894fffae297efb, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e12a6b505c22a040ae69d2f6df0d43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
@@ -8765,7 +8765,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1320714201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7776bd96bd65d274d85c801d856ee5ac, type: 3}
+  m_Script: {fileID: 11500000, guid: eab5957ac313cac4f96f4e64a41c439c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
@@ -13418,9 +13418,9 @@ MonoBehaviour:
   _moreGamesButton: {fileID: 638137833}
   _backButton: {fileID: 2062597310}
   _settingsButton: {fileID: 2005602056}
-  _lobbyCanvasController: {fileID: 1320714206}
-  _gameTypeCanvasController: {fileID: 689613684}
-  _sideMenuCanvasController: {fileID: 2001128084}
+  _lobbyCanvasView: {fileID: 1320714206}
+  _gameTypeCanvasView: {fileID: 689613684}
+  _sideMenuCanvasView: {fileID: 2001128084}
 --- !u!1 &1924325960
 GameObject:
   m_ObjectHideFlags: 0
@@ -13866,7 +13866,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2001128082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07fa37e97dee76e4884fd4b14336629f, type: 3}
+  m_Script: {fileID: 11500000, guid: de97bcc9a6061834e9812ac04d1c49dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
