@@ -55,6 +55,11 @@ namespace Dominoes.Managers
 
             DontDestroyOnLoad(gameObject);
         }
+
+        private void OnDestroy()
+        {
+            _animationController.EventFired -= AnimationController_EventFired;
+        }
         #endregion
 
         #region Events

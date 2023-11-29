@@ -44,6 +44,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
   - {fileID: 21300000, guid: 8d16a704471909a43bf4d24493f96968, type: 3}
   - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
+  - {fileID: 21300000, guid: 7279c3b4fde4cd043902a2b560a24bee, type: 3}
   - {fileID: 21300000, guid: 5a75d825c7794fa49a41d77e93aeb70d, type: 3}
   - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
   - {fileID: 21300000, guid: f62f6d262c2a2b94682fe3c6683f8dd8, type: 3}
@@ -51,6 +52,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e3125cebf9750a94ca8c230be3052821, type: 3}
   - {fileID: 21300000, guid: 64d994fb883a534459cb5038a903b7a0, type: 3}
   - {fileID: 21300000, guid: 1d7e765d8448fe64c9252f8047316abb, type: 3}
+  - {fileID: 21300000, guid: 6acc3aadea97fed4e8b6d90daaf32c95, type: 3}
   - {fileID: 21300000, guid: cf04bcedb8c08ce40be84af1032d40b6, type: 3}
   - {fileID: 21300000, guid: 860fa07ea9fbee64d99d86e374c02cfa, type: 3}
   - {fileID: 21300000, guid: 5b7cf19e6aaf4454baf6ca63df513c38, type: 3}
@@ -65,6 +67,7 @@ SpriteAtlas:
   - Rect Cyan Pressed
   - Backgound Mask
   - Rect Blue
+  - Rect Gray Pressed
   - Oval Red Ad
   - Rect Blue Pressed
   - Rect Cyan Cross Promotion
@@ -72,6 +75,7 @@ SpriteAtlas:
   - Rect Gray
   - Audion On Icon
   - Rect Orange Pressed
+  - Round Close
   - Rect Blue Inactive
   - Rect Yellow
   - Rect Cyan Inactive

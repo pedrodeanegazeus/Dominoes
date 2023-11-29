@@ -45,6 +45,11 @@ namespace Dominoes.Controllers.HUDs
             _isEnabled = true;
         }
 
+        private void OnDestroy()
+        {
+            _button.onClick.RemoveAllListeners();
+        }
+
         private void Start()
         {
             if (!_isInitialized)

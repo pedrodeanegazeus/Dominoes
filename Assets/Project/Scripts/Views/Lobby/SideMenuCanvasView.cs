@@ -66,6 +66,15 @@ namespace Dominoes.Views.Lobby
             _versionNumber.text = "6.0.0";
         }
 
+        private void OnDestroy()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
+
+            _closeButton.onClick.RemoveAllListeners();
+            _botDifficulty.Clicked -= BotDifficulty_Clicked;
+            _audioToggle.Clicked -= AudioToggle_Clicked;
+        }
+
         private void OnEnable()
         {
             Task<string> task = _profileService.GetProfileNameAsync();

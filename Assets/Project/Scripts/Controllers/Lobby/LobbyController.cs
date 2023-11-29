@@ -32,6 +32,14 @@ namespace Dominoes.Controllers
             _lobbyCanvasView.GameTypeSelected += GoToGameType;
         }
 
+        private void OnDestroy()
+        {
+            _backButton.onClick.RemoveAllListeners();
+            _settingsButton.onClick.RemoveAllListeners();
+
+            _lobbyCanvasView.GameTypeSelected -= GoToGameType;
+        }
+
         private void Start()
         {
             GoToLobby();

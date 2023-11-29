@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: Settings Menu View Strings
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 79505a63a7af86143a9c4fa05c67382c, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 47c465c38eb07544b91cbd33943a0449, type: 2}
+  - {fileID: 11400000, guid: c88a8ee2fe787634d9cc80dcf97874fc, type: 2}
+  - {fileID: 11400000, guid: e0b1e3d5fc257ee44b680639285885eb, type: 2}
+  - {fileID: 11400000, guid: 2d9406bfade2204479f59e863492a388, type: 2}
+  - {fileID: 11400000, guid: 702081ee32d37914caa5a0799e62a06b, type: 2}
+  - {fileID: 11400000, guid: fc9968e6b4c815c498dbeb0832e66dc6, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

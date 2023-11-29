@@ -67,6 +67,13 @@ namespace Dominoes.Views.Lobby
             _singlePlayerButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.SinglePlayer));
         }
 
+        private void OnDestroy()
+        {
+            _multiplayerButton.onClick.RemoveAllListeners();
+            _playWithFriendsButton.onClick.RemoveAllListeners();
+            _singlePlayerButton.onClick.RemoveAllListeners();
+        }
+
         private void Start()
         {
             SetVip(_vipService.IsVip);

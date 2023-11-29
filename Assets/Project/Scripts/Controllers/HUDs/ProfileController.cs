@@ -26,6 +26,11 @@ namespace Dominoes.Controllers.HUD
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }
 
+        private void OnDestroy()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
+        }
+
         private void OnEnable()
         {
             Task<string> task = _profileService.GetProfileNameAsync();

@@ -49,6 +49,11 @@ namespace Dominoes.Controllers
             _animationController.EventFired += AnimationController_EventFired;
         }
 
+        private void OnDestroy()
+        {
+            _animationController.EventFired -= AnimationController_EventFired;
+        }
+
         private void Start()
         {
             AddLoadingTasks();

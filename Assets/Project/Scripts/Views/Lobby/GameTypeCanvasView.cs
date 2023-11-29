@@ -87,6 +87,14 @@ namespace Dominoes.Views.Lobby
             _turboButton.onClick.AddListener(() => SetGameMode(GameMode.Turbo));
         }
 
+        private void OnDestroy()
+        {
+            _drawButton.onClick.RemoveAllListeners();
+            _blockButton.onClick.RemoveAllListeners();
+            _allFivesButton.onClick.RemoveAllListeners();
+            _turboButton.onClick.RemoveAllListeners();
+        }
+
         private void Start()
         {
             SetVip(_vipService.IsVip);

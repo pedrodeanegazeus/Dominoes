@@ -39,6 +39,13 @@ namespace Dominoes.Controllers.HUDs
             _button3.onClick.AddListener(Button3Clicked);
             _isEnabled = true;
         }
+
+        private void OnDestroy()
+        {
+            _button1.onClick.RemoveAllListeners();
+            _button2.onClick.RemoveAllListeners();
+            _button3.onClick.RemoveAllListeners();
+        }
         #endregion
 
         private void Button1Clicked()
