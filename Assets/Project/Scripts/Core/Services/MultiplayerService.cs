@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Dominoes.Core.Interfaces.Services;
-using Dominoes.Core.Models.Services.GazeusServicesService;
+using Dominoes.Core.Models.Services.MultiplayerService;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 

@@ -2,7 +2,7 @@
 using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
-using Dominoes.Core.Models.Services.GazeusServicesService;
+using Dominoes.Core.Models.Services.MultiplayerService;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;

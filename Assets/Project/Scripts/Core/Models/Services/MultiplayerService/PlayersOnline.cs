@@ -1,4 +1,4 @@
-﻿namespace Dominoes.Core.Models.Services.GazeusServicesService
+﻿namespace Dominoes.Core.Models.Services.MultiplayerService
 {
     internal class PlayersOnline
     {

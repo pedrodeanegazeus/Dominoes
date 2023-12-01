@@ -1,6 +1,8 @@
-﻿using Dominoes.Core.Interfaces.Repositories;
+﻿using Dominoes.Core.Enums;
+using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Services;
+using Dominoes.Core.Services.Gameplay;
 using Dominoes.Infrastructure.Repositories;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
@@ -24,7 +26,17 @@ namespace Dominoes
             serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
 
+            serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(nameof(GameType.Multiplayer));
+            serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(nameof(GameType.SinglePlayer));
+
             _serviceProvider = serviceCollection.BuildServiceProvider();
+        }
+
+        public static TService GetRequiredKeyedService<TService>(string serviceKey)
+            where TService : class
+        {
+            TService service = _serviceProvider.GetRequiredKeyedService<TService>(serviceKey);
+            return service;
         }
 
         public static TService GetRequiredService<TService>()
