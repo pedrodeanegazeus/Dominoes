@@ -1,4 +1,6 @@
-﻿using Dominoes.ScriptableObjects;
+﻿using Dominoes.Core.Enums;
+using Dominoes.Managers;
+using Dominoes.ScriptableObjects;
 using Dominoes.Views.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,21 +17,25 @@ namespace Dominoes.Controllers
         [SerializeField] private Button _settingsButton;
 
         [Header("Canvas views")]
-        [SerializeField] private LobbyCanvasView _lobbyCanvasView;
-        [SerializeField] private GameTypeCanvasView _gameTypeCanvasView;
-        [SerializeField] private SideMenuCanvasView _sideMenuCanvasView;
+        [SerializeField] private LobbyView _lobbyView;
+        [SerializeField] private GameTypeView _gameTypeView;
+        [SerializeField] private NumberPlayersView _numberPlayersView;
+        [SerializeField] private SideMenuView _sideMenuView;
 
         #region Unity
         private void Awake()
         {
-            _lobbyCanvasView.Initialize();
-            _gameTypeCanvasView.Initialize();
-            _sideMenuCanvasView.Initialize();
+            _lobbyView.Initialize();
+            _gameTypeView.Initialize();
+            _numberPlayersView.Initialize();
+            _sideMenuView.Initialize();
 
             _backButton.onClick.AddListener(GoToLobby);
             _settingsButton.onClick.AddListener(OpenSideMenu);
 
-            _lobbyCanvasView.GameTypeSelected += GoToGameType;
+            _lobbyView.GameTypeSelected += LobbyView_GameTypeSelected;
+            _gameTypeView.GameModeSelected += GameTypeView_GameModeSelected;
+            _numberPlayersView.NumberPlayersSelected += NumberPlayersView_NumberPlayersSelected;
         }
 
         private void OnDestroy()
@@ -37,7 +43,9 @@ namespace Dominoes.Controllers
             _backButton.onClick.RemoveAllListeners();
             _settingsButton.onClick.RemoveAllListeners();
 
-            _lobbyCanvasView.GameTypeSelected -= GoToGameType;
+            _lobbyView.GameTypeSelected -= LobbyView_GameTypeSelected;
+            _gameTypeView.GameModeSelected -= GameTypeView_GameModeSelected;
+            _numberPlayersView.NumberPlayersSelected -= NumberPlayersView_NumberPlayersSelected;
         }
 
         private void Start()
@@ -46,21 +54,34 @@ namespace Dominoes.Controllers
         }
         #endregion
 
-        private void GoToGameType()
+        #region Events
+        private void GameTypeView_GameModeSelected()
         {
-            _lobbyCanvasView.Hide();
-            _gameTypeCanvasView.Show();
+            _numberPlayersView.gameObject.SetActive(true);
+            _numberPlayersView.Open();
+        }
+
+        private void LobbyView_GameTypeSelected()
+        {
+            _lobbyView.Hide();
+            _gameTypeView.Show();
 
             _backButton.gameObject.SetActive(true);
             _moreGamesButton.gameObject.SetActive(false);
         }
 
+        private void NumberPlayersView_NumberPlayersSelected()
+        {
+            GameSceneManager.Instance.LoadScene(DominoesScene.Gameplay);
+        }
+        #endregion
+
         private void GoToLobby()
         {
             _gameState.ResetState();
 
-            _lobbyCanvasView.Show();
-            _gameTypeCanvasView.Hide();
+            _lobbyView.Show();
+            _gameTypeView.Hide();
 
             _backButton.gameObject.SetActive(false);
             _moreGamesButton.gameObject.SetActive(true);
@@ -68,8 +89,8 @@ namespace Dominoes.Controllers
 
         private void OpenSideMenu()
         {
-            _sideMenuCanvasView.gameObject.SetActive(true);
-            _sideMenuCanvasView.Open();
+            _sideMenuView.gameObject.SetActive(true);
+            _sideMenuView.Open();
         }
     }
 }

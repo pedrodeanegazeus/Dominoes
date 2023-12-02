@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Number Players View Strings_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 97766558310400
+    m_Localized: Choisissez le nombre de joueurs!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631309221888
+    m_Localized: 2 Joueurs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102967067451392
+    m_Localized: 4 Joueurs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166792890327040
+    m_Localized: "Ce mode utilise les r\xE8gles classiques. Marquez 100 points pour
+      gagner. Avec Boneyard!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166834392965120
+    m_Localized: "Ce mode utilise les r\xE8gles classiques. Marquez 100 points pour
+      gagner. Sans Boneyard!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166870325567488
+    m_Localized: "Vous pouvez gagner des points suppl\xE9mentaires lorsque la somme
+      des extr\xE9mit\xE9s ouvertes donne un multiple de 5. Marque 150 points pour
+      gagner!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166895990513664
+    m_Localized: "Ce mode contient toutes les r\xE8gles classiques. Marquez 100 points
+      pour gagner. Avec le Cimeti\xE8re ! Chaque joueur a 5 s par mouvement.\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Number Players View Strings_it
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: it
+  m_SharedData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 97766558310400
+    m_Localized: Scegli il numero di giocatori!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631309221888
+    m_Localized: 2 Giocatori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102967067451392
+    m_Localized: 4 Giocatori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166792890327040
+    m_Localized: "Questa modalit\xE1 segue la regole classiche. Dovrai totalizzare
+      100 punti per vincere. Con riserva!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166834392965120
+    m_Localized: "Questa modalit\xE1 segue la regole classiche. Dovrai totalizzare
+      100 punti per vincere. Senza riserva!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166870325567488
+    m_Localized: "In questa modalit\xE0, ottieni punti extra qui quando le estremit\xE0
+      aperte si sommano a un multiplo o 5. Dovrai ottenere 150 punti per vincere!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166895990513664
+    m_Localized: "Questa modalt\xE0 prevede le regole classiche. Totalizza 100 punti
+      per vincere. Con Boneyard! Ogni giocatore ha 5 s per mossa.\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -44,7 +44,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4e7088c57cb1afc4b900b66509479438, type: 3}
   - {fileID: 21300000, guid: 84b3e587ba105c14b9a7f54c0498a763, type: 3}
   - {fileID: 21300000, guid: ca5631c78bfd5a94ebab793d991f4559, type: 3}
-  - {fileID: 21300000, guid: df6d8a784669cab4cb6f9b5712fd9820, type: 3}
+  - {fileID: 21300000, guid: fd09708b9b83e6444a629e6921acbf5e, type: 3}
   - {fileID: 21300000, guid: c0c4e71d7dba35246a40593899cd56d1, type: 3}
   - {fileID: 21300000, guid: 78125daf01575d54a8838c382e4bc336, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -54,7 +54,7 @@ SpriteAtlas:
   - Info
   - Ribbon
   - Score Border
-  - Settings Background
+  - Table Border
   - Settings
   - Chat
   m_RenderDataMap: {}

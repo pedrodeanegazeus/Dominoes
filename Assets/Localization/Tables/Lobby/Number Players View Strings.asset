@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: Number Players View Strings
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: a7f9a6f950f5b4f449b271d301f8e621, type: 2}
+  - {fileID: 11400000, guid: 47c43fd734bf5f34c99245a495d583a2, type: 2}
+  - {fileID: 11400000, guid: b27543626a1bc1d4f8a0de290aff4b94, type: 2}
+  - {fileID: 11400000, guid: ed842c0bc2aba0d4bb64a440395f7ea1, type: 2}
+  - {fileID: 11400000, guid: beb866fae85821c47900c320cdc9d69c, type: 2}
+  - {fileID: 11400000, guid: 89c335292d82e4b488223362363a71da, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

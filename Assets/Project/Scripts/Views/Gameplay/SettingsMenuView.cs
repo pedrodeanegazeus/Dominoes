@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Dominoes.Views.Gameplay
 {
-    internal class SettingsMenuCanvasView : MonoBehaviour
+    internal class SettingsMenuView : MonoBehaviour
     {
         [SerializeField] private GameState _gameState;
 
@@ -17,11 +17,11 @@ namespace Dominoes.Views.Gameplay
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _leaveButton;
 
-        private IGzLogger<SettingsMenuCanvasView> _logger;
+        private IGzLogger<SettingsMenuView> _logger;
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuCanvasView>>();
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
         }
 
         public void Open()
@@ -35,7 +35,7 @@ namespace Dominoes.Views.Gameplay
         #region Unity
         private void Awake()
         {
-            _closeButton.onClick.AddListener(CloseSideMenu);
+            _closeButton.onClick.AddListener(Close);
             _leaveButton.onClick.AddListener(LeaveGame);
         }
 
@@ -46,7 +46,7 @@ namespace Dominoes.Views.Gameplay
         }
         #endregion
 
-        private void CloseSideMenu()
+        private void Close()
         {
             _slideAnimation.SlideOut(() => gameObject.SetActive(false));
         }

@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace Dominoes.Views.Lobby
 {
-    internal class SideMenuCanvasView : MonoBehaviour
+    internal class SideMenuView : MonoBehaviour
     {
         [SerializeField] private GameState _gameState;
 
@@ -34,13 +34,13 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private GameObject _iosItems;
         [SerializeField] private GameObject _logoutItem;
 
-        private IGzLogger<SideMenuCanvasView> _logger;
+        private IGzLogger<SideMenuView> _logger;
         private IProfileService _profileService;
         private IVipService _vipService;
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuCanvasView>>();
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<SideMenuView>>();
             _profileService = ServiceProvider.GetRequiredService<IProfileService>();
             _vipService = ServiceProvider.GetRequiredService<IVipService>();
         }
@@ -60,7 +60,7 @@ namespace Dominoes.Views.Lobby
         {
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
 
-            _closeButton.onClick.AddListener(CloseSideMenu);
+            _closeButton.onClick.AddListener(Close);
             _botDifficulty.Clicked += BotDifficulty_Clicked;
             _audioToggle.Clicked += AudioToggle_Clicked;
             _versionNumber.text = "6.0.0";
@@ -109,7 +109,7 @@ namespace Dominoes.Views.Lobby
         }
         #endregion
 
-        private void CloseSideMenu()
+        private void Close()
         {
             _slideAnimation.SlideOut(() => gameObject.SetActive(false));
         }

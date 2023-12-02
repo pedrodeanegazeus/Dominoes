@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Number Players View Strings_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 97766558310400
+    m_Localized: "\xA1Escoge el n\xFAmero de jugadores!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631309221888
+    m_Localized: 2 Jugadores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102967067451392
+    m_Localized: 4 Jugadores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166792890327040
+    m_Localized: "Este mode tiene las reglas cl\xE1sicas. Haz 100 puntos para ganar.
+      Con Reserva!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166834392965120
+    m_Localized: "Este mode tiene las reglas cl\xE1sicas. Haz 100 puntos para ganar.
+      Sin Reserva!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166870325567488
+    m_Localized: "En este modo, ganas puntos extra aqu\xED cuando las fichas de las
+      puntas somadas dan un m\xFAltiplo de 5. \xA1Haz 150 puntos para ganar!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166895990513664
+    m_Localized: "Este modo consta de las reglas cl\xE1sicas. Obt\xE9n 100 puntos
+      para ganar. \xA1Con pila! Cada jugador dispone de 5 segundos por movimiento.\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

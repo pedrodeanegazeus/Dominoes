@@ -49,12 +49,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c3cda6b40ed5633468e69ef2da763530, type: 3}
   - {fileID: 21300000, guid: e92710c5ad8d4f848b4f0bd1e2b5f2b6, type: 3}
   - {fileID: 21300000, guid: 81c80156bf57053498ffcf730ee687d7, type: 3}
+  - {fileID: 21300000, guid: 345c1ac723fd092448ed11ececf2ed2d, type: 3}
   - {fileID: 21300000, guid: 8597a719068906f488b39dd938c10500, type: 3}
   - {fileID: 21300000, guid: 4528f8792a8159645ab459aed1280d17, type: 3}
   - {fileID: 21300000, guid: 819d53d9f3c43f64aa23e7a2632d4080, type: 3}
   - {fileID: 21300000, guid: 22038c9ab35b9924e86e330ca2a227fc, type: 3}
   - {fileID: 21300000, guid: 1a01077cb220fc148b06233ec627fd17, type: 3}
   - {fileID: 21300000, guid: a9b1939d8da33244080eb137e1e08bfd, type: 3}
+  - {fileID: 21300000, guid: f0b8ff2e7f05fb34d867cdaccc390353, type: 3}
   - {fileID: 21300000, guid: 4104aabe2b94cdc468fb3a918ead3978, type: 3}
   - {fileID: 21300000, guid: 19ba3b1f72b975c49ac06d1898fda51e, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -69,12 +71,14 @@ SpriteAtlas:
   - Background Bottom Right
   - Close
   - Shine
+  - 4 Players
   - Avatar VIP Border
   - Profile Background
   - Background Bottom Left
   - Jogatina Logo
   - Menu
   - Logo Tile
+  - 2 Players
   - Ribbon
   - Settings Item Background
   m_RenderDataMap: {}

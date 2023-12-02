@@ -12,6 +12,7 @@ namespace Dominoes.ScriptableObjects
         [Header("Game")]
         [SerializeField] private GameType _gameType;
         [SerializeField] private GameMode _gameMode;
+        [SerializeField] private NumberPlayers _numberPlayers;
 
         [Header("Config")]
         [SerializeField] private GameConfig _gameConfig;
@@ -20,6 +21,7 @@ namespace Dominoes.ScriptableObjects
 
         public GameMode GameMode { get => _gameMode; set => _gameMode = value; }
         public GameType GameType { get => _gameType; set => _gameType = value; }
+        public NumberPlayers NumberPlayers { get => _numberPlayers; set => _numberPlayers = value; }
 
         public bool Audio
         {
@@ -56,6 +58,7 @@ namespace Dominoes.ScriptableObjects
         {
             GameMode = GameMode.None;
             GameType = GameType.None;
+            NumberPlayers = NumberPlayers.None;
         }
 
         #region Unity
@@ -63,6 +66,7 @@ namespace Dominoes.ScriptableObjects
         {
             _gameType = GameType.None;
             _gameMode = GameMode.None;
+            _numberPlayers = NumberPlayers.None;
         }
         #endregion
     }

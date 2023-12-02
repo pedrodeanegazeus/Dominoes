@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Dominoes.Views.Lobby
 {
-    internal class LobbyCanvasView : MonoBehaviour
+    internal class LobbyView : MonoBehaviour
     {
         public event Action GameTypeSelected;
 
@@ -24,7 +24,7 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private Button _playWithFriendsButton;
         [SerializeField] private GameObject _vipButton;
 
-        private IGzLogger<LobbyCanvasView> _logger;
+        private IGzLogger<LobbyView> _logger;
         private IVipService _vipService;
 
         #region Localize Prefab Event
@@ -47,7 +47,7 @@ namespace Dominoes.Views.Lobby
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<LobbyCanvasView>>();
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<LobbyView>>();
             _vipService = ServiceProvider.GetRequiredService<IVipService>();
         }
 

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Number Players View Strings_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 97766558310400
+    m_Localized: "Escolha o n\xFAmero de jogadores!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631309221888
+    m_Localized: 2 Jogadores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102967067451392
+    m_Localized: 4 Jogadores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166792890327040
+    m_Localized: "Nesse modo tem as regras cl\xE1ssicas. Fa\xE7a 100 pontos para
+      vencer. Com Estoque!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166834392965120
+    m_Localized: "Nesse modo tem as regras cl\xE1ssicas. Fa\xE7a 100 pontos para
+      vencer. Sem Estoque!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166870325567488
+    m_Localized: "Nesse modo, voc\xEA ganha pontos extras quando as pontas das pedras
+      somadas derem m\xFAltiplo de 5. Fa\xE7a 150 pontos para ganhar!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166895990513664
+    m_Localized: "Este modo usa as regras cl\xE1ssicas. Atinja 100 pontos para vencer.
+      Com Estoque! Cada jogador tem 5s por jogada."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

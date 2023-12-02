@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models.Services.MultiplayerService;
-using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -13,8 +13,10 @@ using UnityEngine.UI;
 
 namespace Dominoes.Views.Lobby
 {
-    internal class GameTypeCanvasView : MonoBehaviour
+    internal class GameTypeView : MonoBehaviour
     {
+        public event Action GameModeSelected;
+
         [SerializeField] private GameState _gameState;
 
         [Space]
@@ -39,7 +41,7 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private LocalizeStringEvent _allFivesPlayersOnlineText;
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
-        private IGzLogger<GameTypeCanvasView> _logger;
+        private IGzLogger<GameTypeView> _logger;
         private IMultiplayerService _gazeusServicesService;
         private IVipService _vipService;
 
@@ -53,7 +55,7 @@ namespace Dominoes.Views.Lobby
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeCanvasView>>();
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<GameTypeView>>();
             _gazeusServicesService = ServiceProvider.GetRequiredService<IMultiplayerService>();
             _vipService = ServiceProvider.GetRequiredService<IVipService>();
         }
@@ -104,7 +106,7 @@ namespace Dominoes.Views.Lobby
         private void SetGameMode(GameMode gameMode)
         {
             _gameState.GameMode = gameMode;
-            GameSceneManager.Instance.LoadScene(DominoesScene.Gameplay);
+            GameModeSelected?.Invoke();
         }
 
         private void SetMultiplayerGameType()

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Number Players View Strings_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b073d8c0f10093a43bbd2c3d09ec0236, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 97766558310400
+    m_Localized: Choose the number of players!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631309221888
+    m_Localized: 2 Players
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102967067451392
+    m_Localized: 4 Players
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166792890327040
+    m_Localized: This mode has the classic rules. Score 100 points to win. With Boneyard!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166834392965120
+    m_Localized: This  mode has the classic rules. Score 100 points to win. Without
+      Boneyard!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166870325567488
+    m_Localized: In this mode, You get extra points here when open ends add up to
+      a multiple o 5. Score 150 points to win!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166895990513664
+    m_Localized: This mode has the classic rules. Score 100 points to win. With Boneyard!
+      Each player has 5s per move.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -30,7 +30,7 @@ MonoBehaviour:
     - Locale-de
     - Preload
   - m_GUID: 3d53505a3ef06064da8e2d79e627bae1
-    m_Address: Game Type Strings_de
+    m_Address: Game Type View Strings_de
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-de
@@ -43,6 +43,12 @@ MonoBehaviour:
     - Preload
   - m_GUID: e0b1e3d5fc257ee44b680639285885eb
     m_Address: Settings Menu View Strings_de
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-de
+    - Preload
+  - m_GUID: b27543626a1bc1d4f8a0de290aff4b94
+    m_Address: Number Players View Strings_de
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-de

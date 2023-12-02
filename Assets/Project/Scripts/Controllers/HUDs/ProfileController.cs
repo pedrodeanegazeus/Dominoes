@@ -33,8 +33,7 @@ namespace Dominoes.Controllers.HUD
 
         private void OnEnable()
         {
-            Task<string> task = _profileService.GetProfileNameAsync();
-            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
+            SetProfileName();
         }
 
         private void Start()
@@ -46,13 +45,15 @@ namespace Dominoes.Controllers.HUD
         #region Events
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
         {
-            if (gameObject.activeSelf)
-            {
-                Task<string> task = _profileService.GetProfileNameAsync();
-                _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
-            }
+            SetProfileName();
         }
         #endregion
+
+        private void SetProfileName()
+        {
+            Task<string> task = _profileService.GetProfileNameAsync();
+            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
+        }
 
         private void SetVip()
         {

@@ -40,18 +40,22 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 9b68bb10c59f36246955de13ca8cd8ba, type: 3}
   - {fileID: 21300000, guid: 485a6220a81b1b34b8a6c19bc2e9d752, type: 3}
+  - {fileID: 21300000, guid: 3e4c7d41219661642bd764f57d9836a5, type: 3}
   - {fileID: 21300000, guid: cabe42816f106bd46be05178ec609df0, type: 3}
   - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
   - {fileID: 21300000, guid: 8d16a704471909a43bf4d24493f96968, type: 3}
   - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
+  - {fileID: 21300000, guid: 108303741bbf63247bb399f6138f32e7, type: 3}
   - {fileID: 21300000, guid: 7279c3b4fde4cd043902a2b560a24bee, type: 3}
   - {fileID: 21300000, guid: 5a75d825c7794fa49a41d77e93aeb70d, type: 3}
   - {fileID: 21300000, guid: c58940d5142513d4d83454536adeb4eb, type: 3}
   - {fileID: 21300000, guid: f62f6d262c2a2b94682fe3c6683f8dd8, type: 3}
   - {fileID: 21300000, guid: d8c320d8066687843a511682ebfcb615, type: 3}
+  - {fileID: 21300000, guid: 9f12924b8b50f924bba7be553e9ab8d6, type: 3}
   - {fileID: 21300000, guid: e3125cebf9750a94ca8c230be3052821, type: 3}
   - {fileID: 21300000, guid: 64d994fb883a534459cb5038a903b7a0, type: 3}
   - {fileID: 21300000, guid: 1d7e765d8448fe64c9252f8047316abb, type: 3}
+  - {fileID: 21300000, guid: 5d1b326d6df2e984daeabde2a971a2c6, type: 3}
   - {fileID: 21300000, guid: 6acc3aadea97fed4e8b6d90daaf32c95, type: 3}
   - {fileID: 21300000, guid: cf04bcedb8c08ce40be84af1032d40b6, type: 3}
   - {fileID: 21300000, guid: 860fa07ea9fbee64d99d86e374c02cfa, type: 3}
@@ -59,22 +63,27 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 364072be05a9012448c7b65b55e68ff1, type: 3}
   - {fileID: 21300000, guid: 95eca16f04eed0748943b89a6e77095b, type: 3}
   - {fileID: 21300000, guid: ea9c2d9fdff84e442b202df996d71244, type: 3}
+  - {fileID: 21300000, guid: 60eaccbfabccda64dbca778c73adf471, type: 3}
   - {fileID: 21300000, guid: 333397ef39ec46a4fbc5f40355287a23, type: 3}
   m_PackedSpriteNamesToIndex:
   - Audio Off Icon
   - Oval Red Ad Pressed
+  - Transition Tiles
   - Oval Cyan
   - Rect Cyan Pressed
   - Backgound Mask
   - Rect Blue
+  - Transition Tile Top
   - Rect Gray Pressed
   - Oval Red Ad
   - Rect Blue Pressed
   - Rect Cyan Cross Promotion
   - Rect Orange
+  - Popup Border Gray Outline
   - Rect Gray
   - Audion On Icon
   - Rect Orange Pressed
+  - Domito Teacher
   - Round Close
   - Rect Blue Inactive
   - Rect Yellow
@@ -82,6 +91,7 @@ SpriteAtlas:
   - Rect Yellow Inactive
   - Rect Yellow Pressed
   - Rect Cyan
+  - Popup Border Blue Outline
   - Oval Cyan Pressed
   m_RenderDataMap: {}
   m_Tag: Common
