@@ -30,8 +30,8 @@ namespace Dominoes.Controllers
         [SerializeField] private SettingsMenuView _settingsMenuView;
 
         [Header("Texts")]
-        [SerializeField] private TextMeshProUGUI _usText;
-        [SerializeField] private TextMeshProUGUI _themText;
+        [SerializeField] private TextMeshProUGUI _usScoreTitle;
+        [SerializeField] private TextMeshProUGUI _themScoreTitle;
 
         private IGameplayService _gameplayService;
         private ConcurrentQueue<Action> _actions;
@@ -55,6 +55,11 @@ namespace Dominoes.Controllers
             _settingsButton.onClick.RemoveAllListeners();
 
             LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
+        }
+
+        private void OnEnable()
+        {
+            SetScoreTitle();
         }
 
         private void Start()
@@ -94,10 +99,7 @@ namespace Dominoes.Controllers
 
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
         {
-            AsyncOperationHandle<string> usScore = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay Strings", "us-score");
-            AsyncOperationHandle<string> themScore = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay Strings", "them-score");
-            _ = StartCoroutine(usScore.Task.WaitForTaskCompleteRoutine(usScore => _usText.text = usScore));
-            _ = StartCoroutine(usScore.Task.WaitForTaskCompleteRoutine(themScore => _themText.text = themScore));
+            SetScoreTitle();
         }
         #endregion
 
@@ -110,6 +112,28 @@ namespace Dominoes.Controllers
         {
             _settingsMenuView.gameObject.SetActive(true);
             _settingsMenuView.Open();
+        }
+
+        private void SetScoreTitle()
+        {
+            string key = _gameState.NumberPlayers switch
+            {
+                NumberPlayers.Two => "score-title-2",
+                NumberPlayers.Four => "score-title-4",
+                _ => throw new NotImplementedException("Number of players not implemented"),
+            };
+            string type = _gameState.GameType switch
+            {
+                GameType.Multiplayer or GameType.PlayWithFriends => "mp",
+                GameType.SinglePlayer => "sp",
+                _ => throw new NotImplementedException("Game type not implemented"),
+            };
+
+            AsyncOperationHandle<string> usScoreTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay View Strings", $"us-{key}");
+            _usScoreTitle.text = usScoreTitleTask.WaitForCompletion();
+
+            AsyncOperationHandle<string> themScoreTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay View Strings", $"them-{key}-{type}");
+            _themScoreTitle.text = themScoreTitleTask.WaitForCompletion();
         }
     }
 }

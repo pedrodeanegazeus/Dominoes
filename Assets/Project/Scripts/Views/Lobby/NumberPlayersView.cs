@@ -96,12 +96,10 @@ namespace Dominoes.Views.Lobby
             };
 
             AsyncOperationHandle<string> infoPanelTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Number Players View Strings", key);
-            infoPanelTask.WaitForCompletion();
-            _infoPanel.text = infoPanelTask.Result;
+            _infoPanel.text = infoPanelTask.WaitForCompletion();
 
             AsyncOperationHandle<string> ribbonTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Game Type View Strings", key);
-            ribbonTitleTask.WaitForCompletion();
-            _ribbonTitle.text = ribbonTitleTask.Result;
+            _ribbonTitle.text = ribbonTitleTask.WaitForCompletion();
         }
     }
 }
