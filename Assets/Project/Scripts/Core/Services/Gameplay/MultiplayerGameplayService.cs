@@ -8,6 +8,8 @@ namespace Dominoes.Core.Services.Gameplay
     internal class MultiplayerGameplayService : IGameplayService
     {
         public event Action ChatReceived;
+        public event Action<int> CornerPointsChanged;
+        public event Action<int> StockTilesChanged;
 
         private readonly IGzLogger<MultiplayerGameplayService> _logger;
 

@@ -8,8 +8,12 @@ namespace Dominoes.Core.Services.Gameplay
     internal class SinglePlayerGameplayService : IGameplayService
     {
 #pragma warning disable CS0067
+        // SinglePlayer doesn't have chat
         public event Action ChatReceived;
 #pragma warning restore CS0067
+
+        public event Action<int> CornerPointsChanged;
+        public event Action<int> StockTilesChanged;
 
         private readonly IGzLogger<SinglePlayerGameplayService> _logger;
 

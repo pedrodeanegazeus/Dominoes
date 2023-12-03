@@ -9,7 +9,9 @@ using Dominoes.Views.Gameplay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
@@ -18,6 +20,9 @@ namespace Dominoes.Controllers
     internal class GameplayController : MonoBehaviour
     {
         [SerializeField] private GameState _gameState;
+
+        [Space]
+        [SerializeField] private GameObject _cornerPointsObject;
 
         [Header("Header")]
         [SerializeField] private Button _chatButton;
@@ -32,9 +37,13 @@ namespace Dominoes.Controllers
         [Header("Texts")]
         [SerializeField] private TextMeshProUGUI _usScoreTitle;
         [SerializeField] private TextMeshProUGUI _themScoreTitle;
+        [SerializeField] private LocalizeStringEvent _cornerPointsText;
+        [SerializeField] private LocalizeStringEvent _stockTilesText;
 
         private IGameplayService _gameplayService;
         private ConcurrentQueue<Action> _actions;
+        private int _cornerPoints;
+        private int _stockTiles;
 
         #region Unity
         private void Awake()
@@ -54,16 +63,25 @@ namespace Dominoes.Controllers
             _chatButton.onClick.RemoveAllListeners();
             _settingsButton.onClick.RemoveAllListeners();
 
+            _gameplayService.ChatReceived -= GameplayService_ChatReceived;
+            _gameplayService.CornerPointsChanged -= GameplayService_CornerPointsChanged;
+            _gameplayService.StockTilesChanged -= GameplayService_StockTilesChanged;
+
             LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
         }
 
         private void OnEnable()
         {
-            SetScoreTitle();
+            SetLocalizedTexts();
         }
 
         private void Start()
         {
+            if (_gameState.GameMode != GameMode.AllFives)
+            {
+                _cornerPointsObject.SetActive(false);
+            }
+
             switch (_gameState.GameType)
             {
                 case GameType.Multiplayer:
@@ -80,6 +98,8 @@ namespace Dominoes.Controllers
             StartCoroutine(initializeTask.WaitForTaskCompleteRoutine(() => _tableTilesView.Initialize(_gameplayService)));
 
             _gameplayService.ChatReceived += GameplayService_ChatReceived;
+            _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
+            _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;
         }
 
         private void Update()
@@ -97,9 +117,21 @@ namespace Dominoes.Controllers
             _actions.Enqueue(() => _chatAlert.SetActive(true));
         }
 
+        private void GameplayService_CornerPointsChanged(int points)
+        {
+            _cornerPoints = points;
+            (_cornerPointsText.StringReference["points"] as IntVariable).Value = _cornerPoints;
+        }
+
+        private void GameplayService_StockTilesChanged(int tiles)
+        {
+            _stockTiles = tiles;
+            (_stockTilesText.StringReference["count"] as IntVariable).Value = _stockTiles;
+        }
+
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
         {
-            SetScoreTitle();
+            SetLocalizedTexts();
         }
         #endregion
 
@@ -114,7 +146,7 @@ namespace Dominoes.Controllers
             _settingsMenuView.Open();
         }
 
-        private void SetScoreTitle()
+        private void SetLocalizedTexts()
         {
             string key = _gameState.NumberPlayers switch
             {

@@ -39,6 +39,14 @@ MonoBehaviour:
     m_Key: them-score-title-4-mp
     m_Metadata:
       m_Items: []
+  - m_Id: 312167125192704
+    m_Key: corner-points
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329797022224384
+    m_Key: stock-tiles
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
