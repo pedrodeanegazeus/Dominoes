@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Threading.Tasks;
 using Dominoes.Core.Enums;
-using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.ScriptableObjects;
 using Dominoes.Views.Gameplay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
@@ -21,9 +17,6 @@ namespace Dominoes.Controllers
     {
         [SerializeField] private GameState _gameState;
 
-        [Space]
-        [SerializeField] private GameObject _cornerPointsObject;
-
         [Header("Header")]
         [SerializeField] private Button _chatButton;
         [SerializeField] private GameObject _chatAlert;
@@ -31,30 +24,29 @@ namespace Dominoes.Controllers
         [SerializeField] private Button _settingsButton;
 
         [Header("Canvas views")]
-        [SerializeField] private TableTilesView _tableTilesView;
+        [SerializeField] private GameplayView _gameplayView;
         [SerializeField] private SettingsMenuView _settingsMenuView;
 
         [Header("Texts")]
         [SerializeField] private TextMeshProUGUI _usScoreTitle;
         [SerializeField] private TextMeshProUGUI _themScoreTitle;
-        [SerializeField] private LocalizeStringEvent _cornerPointsText;
-        [SerializeField] private LocalizeStringEvent _stockTilesText;
 
-        private IGameplayService _gameplayService;
+        private IChatService _chatService;
         private ConcurrentQueue<Action> _actions;
-        private int _cornerPoints;
-        private int _stockTiles;
 
         #region Unity
         private void Awake()
         {
             _actions = new ConcurrentQueue<Action>();
+            _chatService = ServiceProvider.GetRequiredService<IChatService>();
 
+            _gameplayView.Initialize();
             _settingsMenuView.Initialize();
 
             _chatButton.onClick.AddListener(OpenChat);
             _settingsButton.onClick.AddListener(OpenSettingsMenu);
 
+            _chatService.ChatReceived += ChatService_ChatReceived;
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }
 
@@ -63,10 +55,7 @@ namespace Dominoes.Controllers
             _chatButton.onClick.RemoveAllListeners();
             _settingsButton.onClick.RemoveAllListeners();
 
-            _gameplayService.ChatReceived -= GameplayService_ChatReceived;
-            _gameplayService.CornerPointsChanged -= GameplayService_CornerPointsChanged;
-            _gameplayService.StockTilesChanged -= GameplayService_StockTilesChanged;
-
+            _chatService.ChatReceived -= ChatService_ChatReceived;
             LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
         }
 
@@ -77,29 +66,16 @@ namespace Dominoes.Controllers
 
         private void Start()
         {
-            if (_gameState.GameMode != GameMode.AllFives)
-            {
-                _cornerPointsObject.SetActive(false);
-            }
-
             switch (_gameState.GameType)
             {
                 case GameType.Multiplayer:
                 case GameType.PlayWithFriends:
                     _chatButton.gameObject.SetActive(true);
-                    _gameplayService = ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer));
                     break;
                 case GameType.SinglePlayer:
                     _infoButton.gameObject.SetActive(true);
-                    _gameplayService = ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer));
                     break;
             }
-            Task initializeTask = _gameplayService.InitializeAsync();
-            StartCoroutine(initializeTask.WaitForTaskCompleteRoutine(() => _tableTilesView.Initialize(_gameplayService)));
-
-            _gameplayService.ChatReceived += GameplayService_ChatReceived;
-            _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
-            _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;
         }
 
         private void Update()
@@ -112,21 +88,9 @@ namespace Dominoes.Controllers
         #endregion
 
         #region Events
-        private void GameplayService_ChatReceived()
+        private void ChatService_ChatReceived()
         {
             _actions.Enqueue(() => _chatAlert.SetActive(true));
-        }
-
-        private void GameplayService_CornerPointsChanged(int points)
-        {
-            _cornerPoints = points;
-            (_cornerPointsText.StringReference["points"] as IntVariable).Value = _cornerPoints;
-        }
-
-        private void GameplayService_StockTilesChanged(int tiles)
-        {
-            _stockTiles = tiles;
-            (_stockTilesText.StringReference["count"] as IntVariable).Value = _stockTiles;
         }
 
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)

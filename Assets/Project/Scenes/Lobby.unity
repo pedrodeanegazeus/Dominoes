@@ -5352,7 +5352,7 @@ GameObject:
   - component: {fileID: 689613683}
   - component: {fileID: 689613684}
   m_Layer: 5
-  m_Name: Game Type View
+  m_Name: GameTypeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9833,7 +9833,7 @@ GameObject:
   - component: {fileID: 1320714205}
   - component: {fileID: 1320714206}
   m_Layer: 5
-  m_Name: Lobby View
+  m_Name: LobbyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10271,7 +10271,7 @@ GameObject:
   - component: {fileID: 1384193065}
   - component: {fileID: 1384193066}
   m_Layer: 5
-  m_Name: Number Players View
+  m_Name: NumberPlayersView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15620,7 +15620,7 @@ GameObject:
   - component: {fileID: 2001128083}
   - component: {fileID: 2001128084}
   m_Layer: 5
-  m_Name: Side Menu View
+  m_Name: SideMenuView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

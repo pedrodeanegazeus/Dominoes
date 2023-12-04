@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Dominoes.Core.Interfaces.Services;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 
@@ -7,11 +6,6 @@ namespace Dominoes.Core.Services.Gameplay
 {
     internal class SinglePlayerGameplayService : IGameplayService
     {
-#pragma warning disable CS0067
-        // SinglePlayer doesn't have chat
-        public event Action ChatReceived;
-#pragma warning restore CS0067
-
         public event Action<int> CornerPointsChanged;
         public event Action<int> StockTilesChanged;
 
@@ -20,14 +14,6 @@ namespace Dominoes.Core.Services.Gameplay
         public SinglePlayerGameplayService(IGzLogger<SinglePlayerGameplayService> logger)
         {
             _logger = logger;
-        }
-
-        public Task InitializeAsync()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(InitializeAsync));
-
-            return Task.CompletedTask;
         }
     }
 }

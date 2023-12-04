@@ -22,12 +22,14 @@ namespace Dominoes
             serviceCollection.AddSingleton<IGameStateRepository, GameStateRepository>();
 
             // Services
+            serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(nameof(GameType.Multiplayer));
+            serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(nameof(GameType.SinglePlayer));
+
             serviceCollection.AddSingleton<IMultiplayerService, MultiplayerService>();
             serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
 
-            serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(nameof(GameType.Multiplayer));
-            serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(nameof(GameType.SinglePlayer));
+            serviceCollection.AddTransient<IChatService, ChatService>();
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }

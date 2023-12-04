@@ -43,11 +43,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ea2ee58562fa0c847863e373bdc00009, type: 3}
   - {fileID: 21300000, guid: 82df08955f8fa134dbc8236c6e34a4e6, type: 3}
   - {fileID: 21300000, guid: 4e7088c57cb1afc4b900b66509479438, type: 3}
+  - {fileID: 21300000, guid: bea804c6443b5354da8143bcf541a464, type: 3}
   - {fileID: 21300000, guid: 84b3e587ba105c14b9a7f54c0498a763, type: 3}
   - {fileID: 21300000, guid: ca5631c78bfd5a94ebab793d991f4559, type: 3}
   - {fileID: 21300000, guid: fd09708b9b83e6444a629e6921acbf5e, type: 3}
   - {fileID: 21300000, guid: c0c4e71d7dba35246a40593899cd56d1, type: 3}
   - {fileID: 21300000, guid: ad873e7d72c3654428e8621b179d159b, type: 3}
+  - {fileID: 21300000, guid: a6497add9f286234eb129804f592abe6, type: 3}
   - {fileID: 21300000, guid: 78125daf01575d54a8838c382e4bc336, type: 3}
   m_PackedSpriteNamesToIndex:
   - Leave
@@ -55,11 +57,13 @@ SpriteAtlas:
   - Versus
   - Red Alert
   - Info
+  - Tile Peep
   - Ribbon
   - Score Border
   - Table Border
   - Settings
   - Tile Background
+  - Tile Divider
   - Chat
   m_RenderDataMap: {}
   m_Tag: Gameplay
