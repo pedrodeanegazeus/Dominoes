@@ -43,6 +43,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3e4c7d41219661642bd764f57d9836a5, type: 3}
   - {fileID: 21300000, guid: cabe42816f106bd46be05178ec609df0, type: 3}
   - {fileID: 21300000, guid: 4b9abc7315b24144a9608d7dd3dccc5d, type: 3}
+  - {fileID: 21300000, guid: 76f8f5c3f9d0fe34fa3b68bb8c067527, type: 3}
+  - {fileID: 21300000, guid: 3d016bc3745dfc148ac08f323c65a4cb, type: 3}
   - {fileID: 21300000, guid: 8d16a704471909a43bf4d24493f96968, type: 3}
   - {fileID: 21300000, guid: 16b3b0143e2534349a162e553ce7a7b1, type: 3}
   - {fileID: 21300000, guid: 108303741bbf63247bb399f6138f32e7, type: 3}
@@ -54,7 +56,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9f12924b8b50f924bba7be553e9ab8d6, type: 3}
   - {fileID: 21300000, guid: e3125cebf9750a94ca8c230be3052821, type: 3}
   - {fileID: 21300000, guid: 64d994fb883a534459cb5038a903b7a0, type: 3}
-  - {fileID: 21300000, guid: 439e76fc0edfb014fbc6966538453ddc, type: 3}
   - {fileID: 21300000, guid: 1d7e765d8448fe64c9252f8047316abb, type: 3}
   - {fileID: 21300000, guid: 5d1b326d6df2e984daeabde2a971a2c6, type: 3}
   - {fileID: 21300000, guid: 6acc3aadea97fed4e8b6d90daaf32c95, type: 3}
@@ -72,6 +73,8 @@ SpriteAtlas:
   - Transition Tiles
   - Oval Cyan
   - Rect Cyan Pressed
+  - Default Avatar
+  - Avatar White Border
   - Backgound Mask
   - Rect Blue
   - Transition Tile Top
@@ -83,7 +86,6 @@ SpriteAtlas:
   - Popup Border Gray Outline
   - Rect Gray
   - Audion On Icon
-  - Container Background
   - Rect Orange Pressed
   - Domito Teacher
   - Round Close

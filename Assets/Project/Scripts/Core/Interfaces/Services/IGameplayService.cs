@@ -1,4 +1,6 @@
 ﻿using System;
+using Dominoes.Core.Enums;
+using UnityEngine.UI;
 
 namespace Dominoes.Core.Interfaces.Services
 {
@@ -6,5 +8,7 @@ namespace Dominoes.Core.Interfaces.Services
     {
         event Action<int> CornerPointsChanged;
         event Action<int> StockTilesChanged;
+
+        Image GetAvatar(TablePosition position);
     }
 }

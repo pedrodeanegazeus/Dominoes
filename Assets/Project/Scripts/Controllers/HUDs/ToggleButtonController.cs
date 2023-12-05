@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,7 @@ namespace Dominoes.Controllers.HUDs
         [SerializeField] private bool _initialState;
         [SerializeField] private float _switchMoveSpeed = 0.25f;
 
+        private IGzLogger<ToggleButtonController> _logger;
         private Image _buttonImage;
         private bool _isEnabled;
         private bool _isInitialized;
@@ -31,6 +33,10 @@ namespace Dominoes.Controllers.HUDs
 
         public void SetState(bool state)
         {
+            _logger.Debug("CALLED: {method} - {state}",
+                          nameof(SetState),
+                          state);
+
             _state = state;
             _buttonImage.color = _state ? _onColor : _offColor;
             _switch.position = _state ? _offPosition.position : _onPosition.position;
@@ -40,6 +46,8 @@ namespace Dominoes.Controllers.HUDs
         #region Unity
         private void Awake()
         {
+            _logger = ServiceProvider.GetRequiredService<IGzLogger<ToggleButtonController>>();
+
             _button.onClick.AddListener(ButtonClicked);
             _buttonImage = _button.GetComponent<Image>();
             _isEnabled = true;

@@ -23,6 +23,22 @@ MonoBehaviour:
     m_Key: leave-button
     m_Metadata:
       m_Items: []
+  - m_Id: 2182365713240064
+    m_Key: position-bottom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182395765428224
+    m_Key: position-top
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182421325516800
+    m_Key: position-left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182446159990784
+    m_Key: position-right
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

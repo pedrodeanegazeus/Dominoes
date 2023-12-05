@@ -35,17 +35,9 @@ namespace Dominoes.Views.Gameplay
         public int TopPeeps => _topPeeps;
         public int BottomPeeps => _bottomPeeps;
 
-        public void Initialize()
+        public void Initialize(int topPeeps, int bottomPeeps, bool isVisible)
         {
             _logger = ServiceProvider.GetRequiredService<IGzLogger<TileView>>();
-        }
-
-        public void SetPeeps(int topPeeps, int bottomPeeps, bool isVisible)
-        {
-            _logger.Debug("CALLED: {method} - {topPeeps} - {bottomPeeps}",
-                          nameof(SetPeeps),
-                          topPeeps,
-                          bottomPeeps);
 
             _topPeeps = topPeeps;
             _bottomPeeps = bottomPeeps;
@@ -56,7 +48,7 @@ namespace Dominoes.Views.Gameplay
             }
         }
 
-        private void ShowTile()
+        public void ShowTile()
         {
             _logger.Debug("CALLED: {method}",
                           nameof(ShowTile));

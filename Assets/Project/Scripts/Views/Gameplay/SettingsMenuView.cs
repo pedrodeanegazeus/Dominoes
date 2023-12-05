@@ -1,6 +1,8 @@
 ﻿using System;
 using Dominoes.Animations;
+using Dominoes.Controllers.HUDs;
 using Dominoes.Core.Enums;
+using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
@@ -18,13 +20,21 @@ namespace Dominoes.Views.Gameplay
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private LocalizeStringEvent _gameModeText;
+        [SerializeField] private SettingsPlayerController _team1Player1;
+        [SerializeField] private SettingsPlayerController _team1Player2;
+        [SerializeField] private SettingsPlayerController _team2Player1;
+        [SerializeField] private SettingsPlayerController _team2Player2;
         [SerializeField] private Button _leaveButton;
 
+        private IGameplayService _gameplayService;
         private IGzLogger<SettingsMenuView> _logger;
+        private IProfileService _profileService;
 
-        public void Initialize()
+        public void Initialize(IGameplayService gameplayService)
         {
+            _gameplayService = gameplayService;
             _logger = ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
+            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
         }
 
         public void Open()
@@ -59,6 +69,22 @@ namespace Dominoes.Views.Gameplay
                 _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
             };
             _gameModeText.SetEntry(key);
+        }
+
+        private void Start()
+        {
+            switch (_gameState.NumberPlayers)
+            {
+                case NumberPlayers.Two:
+                    _team1Player2.gameObject.SetActive(false);
+                    _team2Player2.gameObject.SetActive(false);
+                    _team2Player1.SetPosition(TablePosition.Top);
+                    break;
+                case NumberPlayers.Four:
+                    _team1Player2.SetPosition(TablePosition.Top);
+                    _team2Player1.SetPosition(TablePosition.Left);
+                    break;
+            }
         }
         #endregion
 

@@ -37,8 +37,15 @@ namespace Dominoes.Controllers
             _actions = new ConcurrentQueue<Action>();
             _chatService = ServiceProvider.GetRequiredService<IChatService>();
 
-            _gameplayView.Initialize();
-            _settingsMenuView.Initialize();
+            IGameplayService gameplayService = _gameState.GameType switch
+            {
+                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer)),
+                GameType.SinglePlayer => ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer)),
+                _ => throw new NotImplementedException($"Game type {_gameState.GameType} not implemented"),
+            };
+
+            _gameplayView.Initialize(gameplayService);
+            _settingsMenuView.Initialize(gameplayService);
 
             _chatButton.onClick.AddListener(OpenChat);
             _settingsButton.onClick.AddListener(OpenSettingsMenu);

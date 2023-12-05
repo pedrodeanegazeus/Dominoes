@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Sair do Jogo
     m_Metadata:
       m_Items: []
+  - m_Id: 2182365713240064
+    m_Localized: Embaixo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182395765428224
+    m_Localized: Em cima
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182421325516800
+    m_Localized: Esquerda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182446159990784
+    m_Localized: Direita
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

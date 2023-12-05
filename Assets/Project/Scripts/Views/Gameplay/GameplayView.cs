@@ -26,28 +26,16 @@ namespace Dominoes.Views.Gameplay
         private int _cornerPoints;
         private int _stockTiles;
 
-        public void Initialize()
+        public void Initialize(IGameplayService gameplayService)
         {
+            _gameplayService = gameplayService;
             _logger = ServiceProvider.GetRequiredService<IGzLogger<GameplayView>>();
-        }
 
-        #region Unity
-        private void Awake()
-        {
-            switch (_gameState.GameType)
-            {
-                case GameType.Multiplayer:
-                case GameType.PlayWithFriends:
-                    _gameplayService = ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer));
-                    break;
-                case GameType.SinglePlayer:
-                    _gameplayService = ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer));
-                    break;
-            }
             _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
             _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;
         }
 
+        #region Unity
         private void OnDestroy()
         {
             _gameplayService.CornerPointsChanged -= GameplayService_CornerPointsChanged;

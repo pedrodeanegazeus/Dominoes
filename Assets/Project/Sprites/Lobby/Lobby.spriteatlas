@@ -43,8 +43,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4686a0b19834b2d418b1a66a59f2a9db, type: 3}
   - {fileID: 21300000, guid: 63f19723f02114b44983b5745e89ab81, type: 3}
   - {fileID: 21300000, guid: b4b4c1637fb725542a721fee750ccd74, type: 3}
-  - {fileID: 21300000, guid: 76f8f5c3f9d0fe34fa3b68bb8c067527, type: 3}
-  - {fileID: 21300000, guid: 3d016bc3745dfc148ac08f323c65a4cb, type: 3}
   - {fileID: 21300000, guid: fa0c0ae393085614084e4033c66cd70f, type: 3}
   - {fileID: 21300000, guid: c3cda6b40ed5633468e69ef2da763530, type: 3}
   - {fileID: 21300000, guid: e92710c5ad8d4f848b4f0bd1e2b5f2b6, type: 3}
@@ -65,8 +63,6 @@ SpriteAtlas:
   - Ad Tag
   - Game
   - Back
-  - Default Avatar
-  - Avatar White Border
   - VIP Badge
   - Background Bottom Right
   - Close

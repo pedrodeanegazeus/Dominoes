@@ -1,6 +1,8 @@
 ﻿using System;
+using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
+using UnityEngine.UI;
 
 namespace Dominoes.Core.Services.Gameplay
 {
@@ -14,6 +16,11 @@ namespace Dominoes.Core.Services.Gameplay
         public MultiplayerGameplayService(IGzLogger<MultiplayerGameplayService> logger)
         {
             _logger = logger;
+        }
+
+        public Image GetAvatar(TablePosition position)
+        {
+            return null;
         }
     }
 }

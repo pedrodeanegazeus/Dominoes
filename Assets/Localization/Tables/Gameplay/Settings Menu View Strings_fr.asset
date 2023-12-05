@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Quitter le Jeu
     m_Metadata:
       m_Items: []
+  - m_Id: 2182365713240064
+    m_Localized: En bas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182395765428224
+    m_Localized: En haut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182421325516800
+    m_Localized: Gauche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2182446159990784
+    m_Localized: Droite
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
