@@ -35,22 +35,6 @@ MonoBehaviour:
     m_Localized: + Giochi
     m_Metadata:
       m_Items: []
-  - m_Id: 1292590820790272
-    m_Localized: Domino Classico
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1293539614298112
-    m_Localized: Domino Chiuso
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1294922522464256
-    m_Localized: Domino Five-up
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1295377667362816
-    m_Localized: Domino Turbo
-    m_Metadata:
-      m_Items: []
   - m_Id: 1322646045626368
     m_Localized: '{count} Giocatori online'
     m_Metadata:

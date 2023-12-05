@@ -1,9 +1,11 @@
-﻿using Dominoes.Animations;
+﻿using System;
+using Dominoes.Animations;
 using Dominoes.Core.Enums;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 namespace Dominoes.Views.Gameplay
@@ -15,6 +17,7 @@ namespace Dominoes.Views.Gameplay
         [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
+        [SerializeField] private LocalizeStringEvent _gameModeText;
         [SerializeField] private Button _leaveButton;
 
         private IGzLogger<SettingsMenuView> _logger;
@@ -43,6 +46,19 @@ namespace Dominoes.Views.Gameplay
         {
             _closeButton.onClick.RemoveAllListeners();
             _leaveButton.onClick.RemoveAllListeners();
+        }
+
+        private void OnEnable()
+        {
+            string key = _gameState.GameMode switch
+            {
+                GameMode.Draw => "draw-game",
+                GameMode.Block => "block-game",
+                GameMode.AllFives => "all-fives-game",
+                GameMode.Turbo => "turbo-game",
+                _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
+            };
+            _gameModeText.SetEntry(key);
         }
         #endregion
 

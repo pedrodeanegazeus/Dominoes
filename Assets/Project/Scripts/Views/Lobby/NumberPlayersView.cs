@@ -3,11 +3,8 @@ using Dominoes.Animations;
 using Dominoes.Core.Enums;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 namespace Dominoes.Views.Lobby
@@ -21,10 +18,10 @@ namespace Dominoes.Views.Lobby
         [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
-        [SerializeField] private TextMeshProUGUI _ribbonTitle;
+        [SerializeField] private LocalizeStringEvent _ribbonTitle;
         [SerializeField] private Button _2PlayersButton;
         [SerializeField] private Button _4PlayersButton;
-        [SerializeField] private TextMeshProUGUI _infoPanel;
+        [SerializeField] private LocalizeStringEvent _infoPanel;
 
         private IGzLogger<NumberPlayersView> _logger;
 
@@ -47,8 +44,6 @@ namespace Dominoes.Views.Lobby
             _closeButton.onClick.AddListener(Close);
             _2PlayersButton.onClick.AddListener(() => SetNumberPlayers(2));
             _4PlayersButton.onClick.AddListener(() => SetNumberPlayers(4));
-
-            LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }
 
         private void OnDestroy()
@@ -56,20 +51,20 @@ namespace Dominoes.Views.Lobby
             _closeButton.onClick.RemoveAllListeners();
             _2PlayersButton.onClick.RemoveAllListeners();
             _4PlayersButton.onClick.RemoveAllListeners();
-
-            LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
         }
 
         private void OnEnable()
         {
-            SetLocalizedTexts();
-        }
-        #endregion
-
-        #region Events
-        private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
-        {
-            SetLocalizedTexts();
+            string key = _gameState.GameMode switch
+            {
+                GameMode.Draw => "draw-game",
+                GameMode.Block => "block-game",
+                GameMode.AllFives => "all-fives-game",
+                GameMode.Turbo => "turbo-game",
+                _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
+            };
+            _infoPanel.SetEntry(key);
+            _ribbonTitle.SetEntry(key);
         }
         #endregion
 
@@ -82,24 +77,6 @@ namespace Dominoes.Views.Lobby
         {
             _gameState.NumberPlayers = (NumberPlayers)numberPlayers;
             NumberPlayersSelected?.Invoke();
-        }
-
-        private void SetLocalizedTexts()
-        {
-            string key = _gameState.GameMode switch
-            {
-                GameMode.Draw => "draw-game",
-                GameMode.Block => "block-game",
-                GameMode.AllFives => "all-fives-game",
-                GameMode.Turbo => "turbo-game",
-                _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
-            };
-
-            AsyncOperationHandle<string> infoPanelTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Number Players View Strings", key);
-            _infoPanel.text = infoPanelTask.WaitForCompletion();
-
-            AsyncOperationHandle<string> ribbonTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Game Type View Strings", key);
-            _ribbonTitle.text = ribbonTitleTask.WaitForCompletion();
         }
     }
 }

@@ -35,22 +35,6 @@ MonoBehaviour:
     m_Localized: + Spiele
     m_Metadata:
       m_Items: []
-  - m_Id: 1292590820790272
-    m_Localized: Klassisches Domino
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1293539614298112
-    m_Localized: Geschlossenes Domino
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1294922522464256
-    m_Localized: 5er-Domino
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1295377667362816
-    m_Localized: Turbo-Domino
-    m_Metadata:
-      m_Items: []
   - m_Id: 1322646045626368
     m_Localized: '{count} Spieler online'
     m_Metadata:

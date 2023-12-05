@@ -10,39 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Game Type View Strings Shared Data
+  m_Name: Common Strings Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Game Type View Strings
-  m_TableCollectionNameGuidString: 4ba917c41080138449ef31b6f9100756
+  m_TableCollectionName: Common Strings
+  m_TableCollectionNameGuidString: 13831fa5c825e994facba1e90c7853f6
   m_Entries:
-  - m_Id: 497355898880
-    m_Key: single-player-title
+  - m_Id: 9665482752
+    m_Key: draw-game
     m_Metadata:
       m_Items: []
-  - m_Id: 1111683022848
-    m_Key: multiplayer-title
+  - m_Id: 31421337600
+    m_Key: block-game
     m_Metadata:
       m_Items: []
-  - m_Id: 1378029715456
-    m_Key: play-with-friends-title
+  - m_Id: 66447970304
+    m_Key: all-fives-game
     m_Metadata:
       m_Items: []
-  - m_Id: 2476832505856
-    m_Key: more-games
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1322646045626368
-    m_Key: players-online
+  - m_Id: 89361453056
+    m_Key: turbo-game
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 8087957234383847426
+    rid: 6832159757055819778
   references:
     version: 2
     RefIds:
-    - rid: 8087957234383847426
+    - rid: 6832159757055819778
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1697094923085
+        m_CustomEpoch: 1701735430212

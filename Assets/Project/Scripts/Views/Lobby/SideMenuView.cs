@@ -77,8 +77,7 @@ namespace Dominoes.Views.Lobby
 
         private void OnEnable()
         {
-            Task<string> task = _profileService.GetProfileNameAsync();
-            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
+            SetProfileName();
         }
 
         private void Start()
@@ -101,11 +100,7 @@ namespace Dominoes.Views.Lobby
 
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
         {
-            if (gameObject.activeSelf)
-            {
-                Task<string> task = _profileService.GetProfileNameAsync();
-                _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
-            }
+            SetProfileName();
         }
         #endregion
 
@@ -123,6 +118,12 @@ namespace Dominoes.Views.Lobby
             _androidItems.SetActive(false);
             _iosItems.SetActive(true);
 #endif
+        }
+
+        private void SetProfileName()
+        {
+            Task<string> task = _profileService.GetProfileNameAsync();
+            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
         }
 
         private void SetVip()

@@ -4,11 +4,8 @@ using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.ScriptableObjects;
 using Dominoes.Views.Gameplay;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 namespace Dominoes.Controllers
@@ -28,8 +25,8 @@ namespace Dominoes.Controllers
         [SerializeField] private SettingsMenuView _settingsMenuView;
 
         [Header("Texts")]
-        [SerializeField] private TextMeshProUGUI _usScoreTitle;
-        [SerializeField] private TextMeshProUGUI _themScoreTitle;
+        [SerializeField] private LocalizeStringEvent _usScoreTitle;
+        [SerializeField] private LocalizeStringEvent _themScoreTitle;
 
         private IChatService _chatService;
         private ConcurrentQueue<Action> _actions;
@@ -47,7 +44,6 @@ namespace Dominoes.Controllers
             _settingsButton.onClick.AddListener(OpenSettingsMenu);
 
             _chatService.ChatReceived += ChatService_ChatReceived;
-            LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }
 
         private void OnDestroy()
@@ -56,12 +52,24 @@ namespace Dominoes.Controllers
             _settingsButton.onClick.RemoveAllListeners();
 
             _chatService.ChatReceived -= ChatService_ChatReceived;
-            LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
         }
 
         private void OnEnable()
         {
-            SetLocalizedTexts();
+            string key = _gameState.NumberPlayers switch
+            {
+                NumberPlayers.Two => "score-title-2",
+                NumberPlayers.Four => "score-title-4",
+                _ => throw new NotImplementedException($"Number of players {_gameState.NumberPlayers} not implemented"),
+            };
+            string type = _gameState.GameType switch
+            {
+                GameType.Multiplayer or GameType.PlayWithFriends => "mp",
+                GameType.SinglePlayer => "sp",
+                _ => throw new NotImplementedException($"Game type {_gameState.GameType} not implemented"),
+            };
+            _usScoreTitle.SetEntry($"us-{key}");
+            _themScoreTitle.SetEntry($"them-{key}-{type}");
         }
 
         private void Start()
@@ -92,11 +100,6 @@ namespace Dominoes.Controllers
         {
             _actions.Enqueue(() => _chatAlert.SetActive(true));
         }
-
-        private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
-        {
-            SetLocalizedTexts();
-        }
         #endregion
 
         private void OpenChat()
@@ -108,28 +111,6 @@ namespace Dominoes.Controllers
         {
             _settingsMenuView.gameObject.SetActive(true);
             _settingsMenuView.Open();
-        }
-
-        private void SetLocalizedTexts()
-        {
-            string key = _gameState.NumberPlayers switch
-            {
-                NumberPlayers.Two => "score-title-2",
-                NumberPlayers.Four => "score-title-4",
-                _ => throw new NotImplementedException("Number of players not implemented"),
-            };
-            string type = _gameState.GameType switch
-            {
-                GameType.Multiplayer or GameType.PlayWithFriends => "mp",
-                GameType.SinglePlayer => "sp",
-                _ => throw new NotImplementedException("Game type not implemented"),
-            };
-
-            AsyncOperationHandle<string> usScoreTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay View Strings", $"us-{key}");
-            _usScoreTitle.text = usScoreTitleTask.WaitForCompletion();
-
-            AsyncOperationHandle<string> themScoreTitleTask = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Gameplay View Strings", $"them-{key}-{type}");
-            _themScoreTitle.text = themScoreTitleTask.WaitForCompletion();
         }
     }
 }

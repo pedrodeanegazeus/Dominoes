@@ -35,22 +35,6 @@ MonoBehaviour:
     m_Localized: + Juegos
     m_Metadata:
       m_Items: []
-  - m_Id: 1292590820790272
-    m_Localized: "Domin\xF3 Cl\xE1sico"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1293539614298112
-    m_Localized: "Domin\xF3 Cerrado"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1294922522464256
-    m_Localized: Punta de 5
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1295377667362816
-    m_Localized: "Domin\xF3 Turbo"
-    m_Metadata:
-      m_Items: []
   - m_Id: 1322646045626368
     m_Localized: "{count} Jugadores en l\xEDnea"
     m_Metadata:
