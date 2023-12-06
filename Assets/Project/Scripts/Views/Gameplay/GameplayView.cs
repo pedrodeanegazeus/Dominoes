@@ -16,6 +16,7 @@ namespace Dominoes.Views.Gameplay
         [SerializeField] private TileView _tilePrefab;
         [SerializeField] private GameObject _tableTiles;
         [SerializeField] private GameObject _cornerPointsObject;
+        [SerializeField] private GameObject _stockTilesObject;
 
         [Header("Texts")]
         [SerializeField] private LocalizeStringEvent _cornerPointsText;
@@ -44,9 +45,18 @@ namespace Dominoes.Views.Gameplay
 
         private void Start()
         {
-            if (_gameState.GameMode != GameMode.AllFives)
+            switch (_gameState.GameMode)
             {
-                _cornerPointsObject.SetActive(false);
+                case GameMode.Draw:
+                    _cornerPointsObject.SetActive(false);
+                    break;
+                case GameMode.Block:
+                    _cornerPointsObject.SetActive(false);
+                    _stockTilesObject.SetActive(false);
+                    break;
+                case GameMode.Turbo:
+                    _cornerPointsObject.SetActive(false);
+                    break;
             }
         }
         #endregion
