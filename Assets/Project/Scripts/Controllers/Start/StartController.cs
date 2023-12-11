@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,29 +23,20 @@ namespace Dominoes.Controllers
         [SerializeField] private AudioManager _audioManager;
         [SerializeField] private GameSceneManager _gameSceneManager;
         [SerializeField] private LogConfiguration _logConfiguration;
+        [SerializeField] private ServiceProviderManager _serviceProviderManager;
 
-        private IMultiplayerService _multiplayerService;
         private IProfileService _profileService;
         private IVipService _vipService;
-        private List<Task> _loadingTasks;
+        private Queue<Func<Task>> _asynchronousStartupTasks;
+        private Queue<Func<Task>> _synchronousStartupTasks;
         private TaskCompletionSource<bool> _loadingAnimationTask;
 
         #region Unity
         private void Awake()
         {
-            GzLogger.Initialize(_logConfiguration);
-
-            _animationController.Initialize();
-            _audioManager.Initialize();
-            _gameSceneManager.Initialize();
-            _gameState.Initialize();
-
-            _multiplayerService = ServiceProvider.GetRequiredService<IMultiplayerService>();
-            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
-            _vipService = ServiceProvider.GetRequiredService<IVipService>();
-
+            _asynchronousStartupTasks = new Queue<Func<Task>>();
+            _synchronousStartupTasks = new Queue<Func<Task>>();
             _loadingAnimationTask = new TaskCompletionSource<bool>();
-            _loadingTasks = new List<Task>();
 
             _animationController.EventFired += AnimationController_EventFired;
         }
@@ -56,20 +48,30 @@ namespace Dominoes.Controllers
 
         private void Start()
         {
-            AddLoadingTasks();
+            _synchronousStartupTasks.Enqueue(ActionToTaskFunc(GzLogger.Initialize, _logConfiguration));
+            _synchronousStartupTasks.Enqueue(ActionToTaskFunc(_serviceProviderManager.Initialize));
+            _synchronousStartupTasks.Enqueue(ActionToTaskFunc(Initialize));
+
+            _asynchronousStartupTasks.Enqueue(() => _loadingAnimationTask.Task);
+            _asynchronousStartupTasks.Enqueue(FuncToTaskFunc(DOTween.Init, (bool?)null, (bool?)null, (LogBehaviour?)null));
+            _asynchronousStartupTasks.Enqueue(ActionToTaskFunc(_gameState.Load));
+            _asynchronousStartupTasks.Enqueue(ActionToTaskFunc(_profileService.Initialize));
+            _asynchronousStartupTasks.Enqueue(ActionToTaskFunc(_vipService.Initialize));
+
             _ = StartCoroutine(FinishedLoadingRoutine());
         }
         #endregion
 
-        private void AddLoadingTasks()
+        private Func<Task> ActionToTaskFunc(Action action)
         {
-            _loadingTasks.Add(_loadingAnimationTask.Task);
-            _loadingTasks.Add(_gameState.LoadAsync());
-            _loadingTasks.Add(_multiplayerService.InitializeAsync());
-            _loadingTasks.Add(_profileService.InitializeAsync());
-            _loadingTasks.Add(_vipService.InitializeAsync());
+            action();
+            return () => Task.CompletedTask;
+        }
 
-            _loadingTasks.Add(Task.Run(() => DOTween.Init()));
+        private Func<Task> ActionToTaskFunc<TParam1>(Action<TParam1> action, TParam1 param1)
+        {
+            action(param1);
+            return () => Task.CompletedTask;
         }
 
         private void AnimationController_EventFired(string @event)
@@ -79,11 +81,47 @@ namespace Dominoes.Controllers
 
         private IEnumerator FinishedLoadingRoutine()
         {
-            while (_loadingTasks.Any(loadingTask => !loadingTask.IsCompleted))
+            while (_synchronousStartupTasks.Any())
+            {
+                Func<Task> func = _synchronousStartupTasks.Dequeue();
+                Task task = func();
+                yield return TaskWait(task);
+            }
+            List<Task> tasks = new();
+            while (_asynchronousStartupTasks.Any())
+            {
+                Func<Task> func = _asynchronousStartupTasks.Dequeue();
+                Task task = func();
+                tasks.Add(task);
+            }
+            Task whenAllTask = Task.WhenAll(tasks);
+            yield return TaskWait(whenAllTask);
+            GameSceneManager.Instance.LoadScene(DominoesScene.Lobby, false);
+        }
+
+        private Func<Task> FuncToTaskFunc<TParam1, TParam2, TParam3, TResult>(Func<TParam1, TParam2, TParam3, TResult> func, TParam1 param1, TParam2 param2, TParam3 param3)
+        {
+            _ = func(param1, param2, param3);
+            return () => Task.CompletedTask;
+        }
+
+        private void Initialize()
+        {
+            _animationController.Initialize();
+            _audioManager.Initialize();
+            _gameSceneManager.Initialize();
+            _gameState.Initialize();
+
+            _profileService = ServiceProviderManager.Instance.GetRequiredService<IProfileService>();
+            _vipService = ServiceProviderManager.Instance.GetRequiredService<IVipService>();
+        }
+
+        private IEnumerator TaskWait(Task task)
+        {
+            while (!task.IsCompleted)
             {
                 yield return null;
             }
-            GameSceneManager.Instance.LoadScene(DominoesScene.Lobby, false);
         }
     }
 }

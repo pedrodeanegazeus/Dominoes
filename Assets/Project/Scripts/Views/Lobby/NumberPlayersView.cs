@@ -1,6 +1,7 @@
 ﻿using System;
 using Dominoes.Animations;
 using Dominoes.Core.Enums;
+using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Dominoes.Views.Lobby
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<NumberPlayersView>>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<NumberPlayersView>>();
         }
 
         public void Open()

@@ -6,6 +6,5 @@ namespace Dominoes.Core.Interfaces.Services
     internal interface IMultiplayerService
     {
         Task<PlayersOnline> GetPlayersOnlineAsync();
-        Task InitializeAsync();
     }
 }

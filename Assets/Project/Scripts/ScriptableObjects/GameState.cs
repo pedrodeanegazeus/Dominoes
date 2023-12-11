@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using Dominoes.Core.Enums;
+﻿using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.Core.Models;
+using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
 namespace Dominoes.ScriptableObjects
@@ -18,6 +19,7 @@ namespace Dominoes.ScriptableObjects
         [SerializeField] private GameConfig _gameConfig;
 
         private IGameStateRepository _gameStateRepository;
+        private IGzLogger<GameState> _logger;
 
         public GameMode GameMode { get => _gameMode; set => _gameMode = value; }
         public GameType GameType { get => _gameType; set => _gameType = value; }
@@ -45,17 +47,23 @@ namespace Dominoes.ScriptableObjects
 
         public void Initialize()
         {
-            _gameStateRepository = ServiceProvider.GetRequiredService<IGameStateRepository>();
+            _gameStateRepository = ServiceProviderManager.Instance.GetRequiredService<IGameStateRepository>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameState>>();
         }
 
-        public Task LoadAsync()
+        public void Load()
         {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Load));
+
             _gameConfig = _gameStateRepository.LoadGameConfig();
-            return Task.CompletedTask;
         }
 
         public void ResetState()
         {
+            _logger.Debug("CALLED: {method}",
+                          nameof(ResetState));
+
             GameMode = GameMode.None;
             GameType = GameType.None;
             NumberPlayers = NumberPlayers.None;

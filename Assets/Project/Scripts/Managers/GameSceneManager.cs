@@ -24,7 +24,7 @@ namespace Dominoes.Managers
         public void Initialize()
         {
             _animationController.Initialize();
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<GameSceneManager>>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameSceneManager>>();
         }
 
         public void LoadScene(DominoesScene scene, bool useTransition = true)

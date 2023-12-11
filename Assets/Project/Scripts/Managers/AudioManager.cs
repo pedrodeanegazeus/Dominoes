@@ -17,7 +17,7 @@ namespace Dominoes.Managers
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<AudioManager>>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<AudioManager>>();
         }
 
         public void Play(Audio audio)

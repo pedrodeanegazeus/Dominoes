@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Dominoes.Views.Gameplay;
 using UnityEngine;
@@ -35,12 +36,12 @@ namespace Dominoes.Controllers
         private void Awake()
         {
             _actions = new ConcurrentQueue<Action>();
-            _chatService = ServiceProvider.GetRequiredService<IChatService>();
+            _chatService = ServiceProviderManager.Instance.GetRequiredService<IChatService>();
 
             IGameplayService gameplayService = _gameState.GameType switch
             {
-                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer)),
-                GameType.SinglePlayer => ServiceProvider.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer)),
+                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer)),
+                GameType.SinglePlayer => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer)),
                 _ => throw new NotImplementedException($"Game type {_gameState.GameType} not implemented"),
             };
 

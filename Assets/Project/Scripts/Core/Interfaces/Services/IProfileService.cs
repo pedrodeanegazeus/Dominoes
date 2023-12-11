@@ -9,6 +9,6 @@ namespace Dominoes.Core.Interfaces.Services
 
         Task<string> GetProfileNameAsync();
 
-        Task InitializeAsync();
+        void Initialize();
     }
 }

@@ -30,13 +30,5 @@ namespace Dominoes.Core.Services
             };
             return playersOnline;
         }
-
-        public Task InitializeAsync()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(InitializeAsync));
-
-            return Task.CompletedTask;
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Dominoes.Core.Interfaces.Services;
+﻿using Dominoes.Core.Interfaces.Services;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 
 namespace Dominoes.Core.Services
@@ -15,13 +14,12 @@ namespace Dominoes.Core.Services
             _logger = logger;
         }
 
-        public Task InitializeAsync()
+        public void Initialize()
         {
             _logger.Debug("CALLED: {method}",
-                          nameof(InitializeAsync));
+                          nameof(Initialize));
 
             IsVip = false;
-            return Task.CompletedTask;
         }
     }
 }

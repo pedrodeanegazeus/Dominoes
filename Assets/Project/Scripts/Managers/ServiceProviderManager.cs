@@ -7,14 +7,17 @@ using Dominoes.Infrastructure.Repositories;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
+using UnityEngine;
 
-namespace Dominoes
+namespace Dominoes.Managers
 {
-    internal static class ServiceProvider
+    internal class ServiceProviderManager : MonoBehaviour
     {
-        private static readonly IGzServiceProvider _serviceProvider;
+        public static ServiceProviderManager Instance { get; private set; }
 
-        static ServiceProvider()
+        private IGzServiceProvider _serviceProvider;
+
+        public void Initialize()
         {
             GzServiceCollection serviceCollection = new();
 
@@ -34,18 +37,27 @@ namespace Dominoes
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public static TService GetRequiredKeyedService<TService>(string serviceKey)
+        public TService GetRequiredKeyedService<TService>(string serviceKey)
             where TService : class
         {
             TService service = _serviceProvider.GetRequiredKeyedService<TService>(serviceKey);
             return service;
         }
 
-        public static TService GetRequiredService<TService>()
+        public TService GetRequiredService<TService>()
             where TService : class
         {
             TService service = _serviceProvider.GetRequiredService<TService>();
             return service;
         }
+
+        #region Unity
+        private void Awake()
+        {
+            Instance = this;
+
+            DontDestroyOnLoad(gameObject);
+        }
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Dominoes.Managers;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ namespace Dominoes.Controllers.HUDs
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<TripleButtonController>>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<TripleButtonController>>();
 
             _button1.onClick.AddListener(Button1Clicked);
             _button2.onClick.AddListener(Button2Clicked);

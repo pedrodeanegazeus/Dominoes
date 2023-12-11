@@ -33,8 +33,8 @@ namespace Dominoes.Views.Gameplay
         public void Initialize(IGameplayService gameplayService)
         {
             _gameplayService = gameplayService;
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
-            _profileService = ServiceProvider.GetRequiredService<IProfileService>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<SettingsMenuView>>();
+            _profileService = ServiceProviderManager.Instance.GetRequiredService<IProfileService>();
         }
 
         public void Open()

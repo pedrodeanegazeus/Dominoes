@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Dominoes.Managers;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,7 +47,7 @@ namespace Dominoes.Controllers.HUDs
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<ToggleButtonController>>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<ToggleButtonController>>();
 
             _button.onClick.AddListener(ButtonClicked);
             _buttonImage = _button.GetComponent<Image>();

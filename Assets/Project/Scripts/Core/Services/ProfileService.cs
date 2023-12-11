@@ -27,13 +27,12 @@ namespace Dominoes.Core.Services
             return handle.Task;
         }
 
-        public Task InitializeAsync()
+        public void Initialize()
         {
             _logger.Debug("CALLED: {method}",
-                          nameof(InitializeAsync));
+                          nameof(Initialize));
 
             IsGuest = true;
-            return Task.CompletedTask;
         }
     }
 }

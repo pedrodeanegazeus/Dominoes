@@ -1,6 +1,7 @@
 ﻿using System;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -47,8 +48,8 @@ namespace Dominoes.Views.Lobby
 
         public void Initialize()
         {
-            _logger = ServiceProvider.GetRequiredService<IGzLogger<LobbyView>>();
-            _vipService = ServiceProvider.GetRequiredService<IVipService>();
+            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<LobbyView>>();
+            _vipService = ServiceProviderManager.Instance.GetRequiredService<IVipService>();
         }
 
         public void Show()
