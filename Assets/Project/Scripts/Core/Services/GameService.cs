@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Dominoes.Core.Services
 {
-    internal class MultiplayerService : IMultiplayerService
+    internal class GameService : IGameService
     {
-        private readonly IGzLogger<MultiplayerService> _logger;
+        private readonly IGzLogger<GameService> _logger;
 
-        public MultiplayerService(IGzLogger<MultiplayerService> logger)
+        public GameService(IGzLogger<GameService> logger)
         {
             _logger = logger;
         }

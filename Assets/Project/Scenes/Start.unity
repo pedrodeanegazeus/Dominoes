@@ -682,8 +682,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017323720}
-  - component: {fileID: 1017323724}
-  - component: {fileID: 1017323723}
   - component: {fileID: 1017323722}
   - component: {fileID: 1017323721}
   m_Layer: 0
@@ -752,39 +750,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017323719}
   m_CullTransparentMesh: 1
---- !u!95 &1017323723
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017323719}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7432908ba2a3f54aa0c9d41d29b8809, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1017323724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017323719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 298d86e356c858746b63457df316aeaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1073787576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,8 +1454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6270d72f9b933e24b9f34551ee301b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationController: {fileID: 1017323724}
-  _animator: {fileID: 1017323723}
+  _transitionTilesAlpha: {fileID: 1017323721}
+  _transitionTilesTopAlpha: {fileID: 199448853}
+  _transitionTilesTransform: {fileID: 1017323720}
 --- !u!4 &1462374306
 Transform:
   m_ObjectHideFlags: 0

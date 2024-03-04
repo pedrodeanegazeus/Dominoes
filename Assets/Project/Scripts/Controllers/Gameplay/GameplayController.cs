@@ -40,8 +40,8 @@ namespace Dominoes.Controllers
 
             IGameplayService gameplayService = _gameState.GameType switch
             {
-                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(nameof(GameType.Multiplayer)),
-                GameType.SinglePlayer => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(nameof(GameType.SinglePlayer)),
+                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(GameType.Multiplayer),
+                GameType.SinglePlayer => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(GameType.SinglePlayer),
                 _ => throw new NotImplementedException($"Game type {_gameState.GameType} not implemented"),
             };
 

@@ -1,9 +1,9 @@
 ﻿using DG.Tweening;
-using Dominoes.Controllers;
 using Dominoes.Core.Enums;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Dominoes.Managers
 {
@@ -11,19 +11,15 @@ namespace Dominoes.Managers
     {
         public static GameSceneManager Instance { get; private set; }
 
-        [SerializeField] private AnimationController _animationController;
-        [SerializeField] private Animator _animator;
-
-        private readonly int _hideTriggerHash = Animator.StringToHash("Hide");
-        private readonly int _showTriggerHash = Animator.StringToHash("Show");
+        [SerializeField] private Image _transitionTilesAlpha;
+        [SerializeField] private Image _transitionTilesTopAlpha;
+        [SerializeField] private RectTransform _transitionTilesTransform;
 
         private IGzLogger<GameSceneManager> _logger;
         private DominoesScene _dominoesScene;
-        private bool _useTransition;
 
         public void Initialize()
         {
-            _animationController.Initialize();
             _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameSceneManager>>();
         }
 
@@ -35,10 +31,25 @@ namespace Dominoes.Managers
 
             _ = DOTween.KillAll();
             _dominoesScene = scene;
-            _useTransition = useTransition;
-            if (_useTransition)
+            if (useTransition)
             {
-                _animator.SetTrigger(_showTriggerHash);
+                _ = _transitionTilesAlpha.DOColor(Color.white, 0.6f);
+                _ = _transitionTilesTopAlpha.DOColor(Color.white, 0.6f);
+                _ = DOTween.Sequence()
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.16f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.32f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.48f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.64f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.80f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.96f), 0f))
+                    .AppendInterval(0.1f)
+                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 1f), 0f))
+                    .OnComplete(() => DoLoadScene(_dominoesScene.ToString()));
             }
             else
             {
@@ -51,36 +62,35 @@ namespace Dominoes.Managers
         {
             Instance = this;
 
-            _animationController.EventFired += AnimationController_EventFired;
-
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void OnDestroy()
-        {
-            _animationController.EventFired -= AnimationController_EventFired;
         }
         #endregion
 
         #region Events
-        private void AnimationController_EventFired(string @event)
-        {
-            if (@event == "Transition_End" && _useTransition)
-            {
-                DoLoadScene(_dominoesScene.ToString());
-            }
-        }
-
         private void LoadScene_Completed(AsyncOperation operation)
         {
             _logger.Info("Scene {scene} loaded", _dominoesScene.ToString());
 
             operation.completed -= LoadScene_Completed;
-            if (_useTransition)
-            {
-                _useTransition = false;
-                _animator.SetTrigger(_hideTriggerHash);
-            }
+
+            Color transparent = new(1f, 1f, 1f, 0f);
+            _ = _transitionTilesAlpha.DOColor(transparent, 0.6f);
+            _ = _transitionTilesTopAlpha.DOColor(transparent, 0.6f);
+            _ = DOTween.Sequence()
+                .AppendInterval(0.5f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.96f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.80f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.64f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.48f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.32f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.16f), 0f))
+                .AppendInterval(0.1f)
+                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0f), 0f));
         }
         #endregion
 

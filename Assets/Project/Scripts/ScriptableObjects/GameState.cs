@@ -68,14 +68,5 @@ namespace Dominoes.ScriptableObjects
             GameType = GameType.None;
             NumberPlayers = NumberPlayers.None;
         }
-
-        #region Unity
-        private void Awake()
-        {
-            _gameType = GameType.None;
-            _gameMode = GameMode.None;
-            _numberPlayers = NumberPlayers.None;
-        }
-        #endregion
     }
 }

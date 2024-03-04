@@ -25,10 +25,10 @@ namespace Dominoes.Managers
             serviceCollection.AddSingleton<IGameStateRepository, GameStateRepository>();
 
             // Services
-            serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(nameof(GameType.Multiplayer));
-            serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(nameof(GameType.SinglePlayer));
+            serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(GameType.Multiplayer);
+            serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(GameType.SinglePlayer);
 
-            serviceCollection.AddSingleton<IMultiplayerService, MultiplayerService>();
+            serviceCollection.AddSingleton<IGameService, GameService>();
             serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
 
@@ -37,7 +37,7 @@ namespace Dominoes.Managers
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public TService GetRequiredKeyedService<TService>(string serviceKey)
+        public TService GetRequiredKeyedService<TService>(object serviceKey)
             where TService : class
         {
             TService service = _serviceProvider.GetRequiredKeyedService<TService>(serviceKey);

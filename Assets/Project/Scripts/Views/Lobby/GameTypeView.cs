@@ -43,7 +43,7 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
         private IGzLogger<GameTypeView> _logger;
-        private IMultiplayerService _gazeusServicesService;
+        private IGameService _gazeusServicesService;
         private IVipService _vipService;
 
         public void Hide()
@@ -57,7 +57,7 @@ namespace Dominoes.Views.Lobby
         public void Initialize()
         {
             _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameTypeView>>();
-            _gazeusServicesService = ServiceProviderManager.Instance.GetRequiredService<IMultiplayerService>();
+            _gazeusServicesService = ServiceProviderManager.Instance.GetRequiredService<IGameService>();
             _vipService = ServiceProviderManager.Instance.GetRequiredService<IVipService>();
         }
 
@@ -122,7 +122,7 @@ namespace Dominoes.Views.Lobby
             _turboPlayersOnlineText.gameObject.SetActive(true);
 
             Task<PlayersOnline> playersOnlineTask = _gazeusServicesService.GetPlayersOnlineAsync();
-            _ = StartCoroutine(playersOnlineTask.WaitForTaskCompleteRoutine(result =>
+            _ = StartCoroutine(playersOnlineTask.WaitTask(result =>
             {
                 (_allFivesPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.AllFives;
                 (_blockPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.Block;

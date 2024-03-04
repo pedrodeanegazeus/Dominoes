@@ -1,0 +1,18 @@
+# All files
+[*]
+indent_style = space
+
+# Json files
+[*.json]
+indent_size = 2
+tab_width = 2
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+[*.{cs,vb}]
+end_of_line = lf
+indent_size = 4
+insert_final_newline = true
+tab_width = 4

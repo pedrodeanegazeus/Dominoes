@@ -53,7 +53,7 @@ namespace Dominoes.Controllers.HUD
         private void SetProfileName()
         {
             Task<string> task = _profileService.GetProfileNameAsync();
-            _ = StartCoroutine(task.WaitForTaskCompleteRoutine(result => _profileName.text = result));
+            _ = StartCoroutine(task.WaitTask(result => _profileName.text = result));
         }
 
         private void SetVip()
