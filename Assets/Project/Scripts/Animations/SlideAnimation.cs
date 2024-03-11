@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ namespace Dominoes.Animations
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<SlideAnimation>>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SlideAnimation>>();
             _rectTransform = GetComponent<RectTransform>();
             _initialPosition = _rectTransform.position;
 

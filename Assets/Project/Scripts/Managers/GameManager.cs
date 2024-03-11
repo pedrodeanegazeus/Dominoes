@@ -11,13 +11,44 @@ using UnityEngine;
 
 namespace Dominoes.Managers
 {
-    internal class ServiceProviderManager : MonoBehaviour
+    internal class GameManager : MonoBehaviour
     {
-        public static ServiceProviderManager Instance { get; private set; }
+        [SerializeField] private AudioManager _audioManager;
+        [SerializeField] private GameSceneManager _gameSceneManager;
 
-        private IGzServiceProvider _serviceProvider;
+        public static IGzServiceProvider ServiceProvider { get; private set; }
+        public static AudioManager Audio { get; private set; }
+        public static GameSceneManager Scene { get; private set; }
+
+        #region Unity
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        #endregion
 
         public void Initialize()
+        {
+            // service provider always first
+            InitializeServiceProvider();
+
+            InitializeAudioManager();
+            InitializeGameSceneManager();
+        }
+
+        private void InitializeAudioManager()
+        {
+            _audioManager.Initialize(ServiceProvider);
+            Audio = _audioManager;
+        }
+
+        private void InitializeGameSceneManager()
+        {
+            _gameSceneManager.Initialize(ServiceProvider);
+            Scene = _gameSceneManager;
+        }
+
+        private static void InitializeServiceProvider()
         {
             GzServiceCollection serviceCollection = new();
 
@@ -34,30 +65,7 @@ namespace Dominoes.Managers
 
             serviceCollection.AddTransient<IChatService, ChatService>();
 
-            _serviceProvider = serviceCollection.BuildServiceProvider();
+            ServiceProvider = serviceCollection.BuildServiceProvider();
         }
-
-        public TService GetRequiredKeyedService<TService>(object serviceKey)
-            where TService : class
-        {
-            TService service = _serviceProvider.GetRequiredKeyedService<TService>(serviceKey);
-            return service;
-        }
-
-        public TService GetRequiredService<TService>()
-            where TService : class
-        {
-            TService service = _serviceProvider.GetRequiredService<TService>();
-            return service;
-        }
-
-        #region Unity
-        private void Awake()
-        {
-            Instance = this;
-
-            DontDestroyOnLoad(gameObject);
-        }
-        #endregion
     }
 }

@@ -5,6 +5,7 @@ using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using TMPro;
 using UnityEngine;
@@ -41,9 +42,9 @@ namespace Dominoes.Views.Lobby
 
         public void Initialize()
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<SideMenuView>>();
-            _profileService = ServiceProviderManager.Instance.GetRequiredService<IProfileService>();
-            _vipService = ServiceProviderManager.Instance.GetRequiredService<IVipService>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SideMenuView>>();
+            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
         }
 
         public void Open()

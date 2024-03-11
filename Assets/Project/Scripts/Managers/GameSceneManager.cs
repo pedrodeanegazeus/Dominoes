@@ -1,70 +1,51 @@
 ﻿using DG.Tweening;
+using Dominoes.Controllers;
 using Dominoes.Core.Enums;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Dominoes.Managers
 {
     internal class GameSceneManager : MonoBehaviour
     {
-        public static GameSceneManager Instance { get; private set; }
-
-        [SerializeField] private Image _transitionTilesAlpha;
-        [SerializeField] private Image _transitionTilesTopAlpha;
-        [SerializeField] private RectTransform _transitionTilesTransform;
+        [SerializeField] private TransitionController _transitionController;
 
         private IGzLogger<GameSceneManager> _logger;
         private DominoesScene _dominoesScene;
 
-        public void Initialize()
+        #region Unity
+        private void Awake()
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameSceneManager>>();
+            _transitionController.Completed += TransitionController_Completed;
+        }
+        #endregion
+
+        public void Initialize(IGzServiceProvider serviceProvider)
+        {
+            _logger = serviceProvider.GetRequiredService<IGzLogger<GameSceneManager>>();
+            _transitionController.Initialize(serviceProvider);
         }
 
         public void LoadScene(DominoesScene scene, bool useTransition = true)
         {
-            _logger.Debug("CALLED: {method} - {scene}",
+            _logger.Debug("CALLED: {method} - {scene} - {useTransition}",
                           nameof(LoadScene),
-                          scene.ToString());
+                          scene.ToString(),
+                          useTransition);
 
             _ = DOTween.KillAll();
             _dominoesScene = scene;
             if (useTransition)
             {
-                _ = _transitionTilesAlpha.DOColor(Color.white, 0.6f);
-                _ = _transitionTilesTopAlpha.DOColor(Color.white, 0.6f);
-                _ = DOTween.Sequence()
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.16f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.32f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.48f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.64f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.80f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.96f), 0f))
-                    .AppendInterval(0.1f)
-                    .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 1f), 0f))
-                    .OnComplete(() => DoLoadScene(_dominoesScene.ToString()));
+                _transitionController.StartTransition();
             }
             else
             {
-                DoLoadScene(_dominoesScene.ToString());
+                LoadScene(_dominoesScene.ToString());
             }
         }
-
-        #region Unity
-        private void Awake()
-        {
-            Instance = this;
-
-            DontDestroyOnLoad(gameObject);
-        }
-        #endregion
 
         #region Events
         private void LoadScene_Completed(AsyncOperation operation)
@@ -72,29 +53,16 @@ namespace Dominoes.Managers
             _logger.Info("Scene {scene} loaded", _dominoesScene.ToString());
 
             operation.completed -= LoadScene_Completed;
+            _transitionController.FinishTransition();
+        }
 
-            Color transparent = new(1f, 1f, 1f, 0f);
-            _ = _transitionTilesAlpha.DOColor(transparent, 0.6f);
-            _ = _transitionTilesTopAlpha.DOColor(transparent, 0.6f);
-            _ = DOTween.Sequence()
-                .AppendInterval(0.5f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.96f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.80f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.64f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.48f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.32f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.16f), 0f))
-                .AppendInterval(0.1f)
-                .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0f), 0f));
+        private void TransitionController_Completed()
+        {
+            LoadScene(_dominoesScene.ToString());
         }
         #endregion
 
-        private void DoLoadScene(string scene)
+        private void LoadScene(string scene)
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene);
             asyncOperation.completed += LoadScene_Completed;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Dominoes.Core.Enums;
 using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using TMPro;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Dominoes.Controllers.HUDs
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<SettingsPlayerController>>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SettingsPlayerController>>();
         }
         #endregion
     }

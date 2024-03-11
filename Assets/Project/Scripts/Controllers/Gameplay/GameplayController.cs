@@ -5,6 +5,7 @@ using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
 using Dominoes.Views.Gameplay;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -36,12 +37,12 @@ namespace Dominoes.Controllers
         private void Awake()
         {
             _actions = new ConcurrentQueue<Action>();
-            _chatService = ServiceProviderManager.Instance.GetRequiredService<IChatService>();
+            _chatService = GameManager.ServiceProvider.GetRequiredService<IChatService>();
 
             IGameplayService gameplayService = _gameState.GameType switch
             {
-                GameType.Multiplayer or GameType.PlayWithFriends => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(GameType.Multiplayer),
-                GameType.SinglePlayer => ServiceProviderManager.Instance.GetRequiredKeyedService<IGameplayService>(GameType.SinglePlayer),
+                GameType.Multiplayer or GameType.PlayWithFriends => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.Multiplayer),
+                GameType.SinglePlayer => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.SinglePlayer),
                 _ => throw new NotImplementedException($"Game type {_gameState.GameType} not implemented"),
             };
 

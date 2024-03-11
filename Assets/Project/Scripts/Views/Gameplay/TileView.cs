@@ -1,4 +1,5 @@
 ﻿using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace Dominoes.Views.Gameplay
 
         public void Initialize(int topPeeps, int bottomPeeps, bool isVisible)
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<TileView>>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<TileView>>();
 
             _topPeeps = topPeeps;
             _bottomPeeps = bottomPeeps;

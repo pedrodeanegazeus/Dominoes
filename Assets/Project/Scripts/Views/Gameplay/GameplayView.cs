@@ -2,6 +2,7 @@
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -31,7 +32,7 @@ namespace Dominoes.Views.Gameplay
         public void Initialize(IGameplayService gameplayService)
         {
             _gameplayService = gameplayService;
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameplayView>>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<GameplayView>>();
 
             _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
             _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;

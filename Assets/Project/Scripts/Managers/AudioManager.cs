@@ -1,5 +1,6 @@
 ﻿using Dominoes.Core.Enums;
 using Dominoes.ScriptableObjects;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -9,15 +10,14 @@ namespace Dominoes.Managers
     {
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioTheme _theme;
-        [SerializeField] private GameState _gameState;
 
-        public static AudioManager Instance { get; private set; }
+        [SerializeField] private GameState _gameState;
 
         private IGzLogger<AudioManager> _logger;
 
-        public void Initialize()
+        public void Initialize(IGzServiceProvider serviceProvider)
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<AudioManager>>();
+            _logger = serviceProvider.GetRequiredService<IGzLogger<AudioManager>>();
         }
 
         public void Play(Audio audio)
@@ -34,14 +34,5 @@ namespace Dominoes.Managers
                 _logger.Info("Audio {audio} played", audio.ToString());
             }
         }
-
-        #region Unity
-        private void Awake()
-        {
-            Instance = this;
-
-            DontDestroyOnLoad(gameObject);
-        }
-        #endregion
     }
 }

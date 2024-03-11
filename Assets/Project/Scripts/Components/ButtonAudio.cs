@@ -25,7 +25,7 @@ namespace Dominoes.Components
 
         private void PlayAudio()
         {
-            AudioManager.Instance.Play(_audio);
+            GameManager.Audio.Play(_audio);
         }
     }
 }

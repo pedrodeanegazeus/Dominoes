@@ -2,6 +2,7 @@
 using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.Core.Models;
 using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -47,8 +48,8 @@ namespace Dominoes.ScriptableObjects
 
         public void Initialize()
         {
-            _gameStateRepository = ServiceProviderManager.Instance.GetRequiredService<IGameStateRepository>();
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<GameState>>();
+            _gameStateRepository = GameManager.ServiceProvider.GetRequiredService<IGameStateRepository>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<GameState>>();
         }
 
         public void Load()

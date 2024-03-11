@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using DG.Tweening;
 using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ namespace Dominoes.Animations
         #region Unity
         private void Awake()
         {
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<RotateAnimation>>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<RotateAnimation>>();
             _rectTransform = GetComponent<RectTransform>();
         }
 

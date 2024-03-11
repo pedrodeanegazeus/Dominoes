@@ -2,6 +2,7 @@
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -21,8 +22,8 @@ namespace Dominoes.Controllers.HUD
         #region Unity
         private void Awake()
         {
-            _profileService = ServiceProviderManager.Instance.GetRequiredService<IProfileService>();
-            _vipService = ServiceProviderManager.Instance.GetRequiredService<IVipService>();
+            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
 
             LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
         }

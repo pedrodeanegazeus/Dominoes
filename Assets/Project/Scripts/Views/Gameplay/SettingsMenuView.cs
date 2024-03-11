@@ -5,6 +5,7 @@ using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
 using Dominoes.ScriptableObjects;
+using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -33,8 +34,8 @@ namespace Dominoes.Views.Gameplay
         public void Initialize(IGameplayService gameplayService)
         {
             _gameplayService = gameplayService;
-            _logger = ServiceProviderManager.Instance.GetRequiredService<IGzLogger<SettingsMenuView>>();
-            _profileService = ServiceProviderManager.Instance.GetRequiredService<IProfileService>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
+            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
         }
 
         public void Open()
@@ -95,7 +96,7 @@ namespace Dominoes.Views.Gameplay
 
         private void LeaveGame()
         {
-            GameSceneManager.Instance.LoadScene(DominoesScene.Lobby);
+            GameManager.Scene.LoadScene(DominoesScene.Lobby);
         }
     }
 }

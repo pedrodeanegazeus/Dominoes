@@ -72,7 +72,7 @@ namespace Dominoes.Controllers
 
         private void NumberPlayersView_NumberPlayersSelected()
         {
-            GameSceneManager.Instance.LoadScene(DominoesScene.Gameplay);
+            GameManager.Scene.LoadScene(DominoesScene.Gameplay);
         }
         #endregion
 
