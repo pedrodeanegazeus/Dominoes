@@ -19,6 +19,8 @@ namespace Dominoes.ScriptableObjects
         public GameType GameType { get => _gameType; set => _gameType = value; }
         public NumberPlayers NumberPlayers { get => _numberPlayers; set => _numberPlayers = value; }
 
+        public GameConfig GameConfig { get => _gameConfig; set => _gameConfig = value; }
+
         public void ResetState()
         {
             GameMode = GameMode.None;

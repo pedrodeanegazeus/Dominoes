@@ -5434,7 +5434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e12a6b505c22a040ae69d2f6df0d43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
   _jogatinaLogo: {fileID: 1299078615}
   _singlePlayerTitle: {fileID: 383228050}
   _multiplayerTitle: {fileID: 120588413}
@@ -9915,7 +9914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5957ac313cac4f96f4e64a41c439c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
   _jogatinaLogo: {fileID: 1299078615}
   _defaultLogoPrefab: {fileID: 1499846589}
   _singlePlayerButton: {fileID: 823070647}
@@ -10352,7 +10350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389838ad1aa940f48af2811c1a8e5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
   _slideAnimation: {fileID: 1479139491}
   _closeButton: {fileID: 1728604455}
   _ribbonTitle: {fileID: 5081524}
@@ -12951,7 +12948,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 9ae5f47cc7a9b534885135d0ce483c59, type: 3}
 --- !u!114 &1658685051 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5378760320908343500, guid: 9ae5f47cc7a9b534885135d0ce483c59, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5835349848184420902, guid: 9ae5f47cc7a9b534885135d0ce483c59, type: 3}
   m_PrefabInstance: {fileID: 1658685050}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

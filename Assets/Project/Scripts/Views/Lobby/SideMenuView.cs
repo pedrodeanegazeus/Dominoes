@@ -6,6 +6,7 @@ using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Core.Models;
 using Dominoes.Managers;
+using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using TMPro;
@@ -18,6 +19,10 @@ namespace Dominoes.Views.Lobby
 {
     internal class SideMenuView : MonoBehaviour
     {
+        [Header("DEBUG")]
+        [SerializeField] private GameState _gameState;
+
+        [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private TextMeshProUGUI _versionNumber;
@@ -95,12 +100,14 @@ namespace Dominoes.Views.Lobby
         {
             _gameConfigRepository.GameConfig.Audio = state;
             _gameConfigRepository.Sync();
+            _gameState.GameConfig.Audio = state;
         }
 
         private void BotDifficulty_Clicked(int state)
         {
             _gameConfigRepository.GameConfig.BotDifficulty = state;
             _gameConfigRepository.Sync();
+            _gameState.GameConfig.BotDifficulty = state;
         }
 
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)

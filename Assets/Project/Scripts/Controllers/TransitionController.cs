@@ -24,8 +24,12 @@ namespace Dominoes.Controllers
                           nameof(FinishTransition));
 
             Color transparent = new(1f, 1f, 1f, 0f);
-            _ = _transitionTilesAlpha.DOColor(transparent, 0.6f);
-            _ = _transitionTilesTopAlpha.DOColor(transparent, 0.6f);
+            _ = DOTween.Sequence()
+                .AppendInterval(0.5f)
+                .Append(_transitionTilesAlpha.DOColor(transparent, 0.7f));
+            _ = DOTween.Sequence()
+                .AppendInterval(0.5f)
+                .Append(_transitionTilesTopAlpha.DOColor(transparent, 0.7f));
             _ = DOTween.Sequence()
                 .AppendInterval(0.5f)
                 .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.96f), 0f))
@@ -53,8 +57,8 @@ namespace Dominoes.Controllers
             _logger.Debug("CALLED: {method}",
                           nameof(StartTransition));
 
-            _ = _transitionTilesAlpha.DOColor(Color.white, 0.6f);
-            _ = _transitionTilesTopAlpha.DOColor(Color.white, 0.6f);
+            _ = _transitionTilesAlpha.DOColor(Color.white, 0.7f);
+            _ = _transitionTilesTopAlpha.DOColor(Color.white, 0.7f);
             _ = DOTween.Sequence()
                 .Append(_transitionTilesTransform.DOAnchorMax(new Vector2(1f, 0.16f), 0f))
                 .AppendInterval(0.1f)

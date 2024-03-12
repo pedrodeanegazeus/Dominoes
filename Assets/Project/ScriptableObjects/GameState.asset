@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6214c94b6349534697676df4b439a25, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  _loggerInitialized: 0
   _gameType: 0
+  _gameMode: 0
+  _numberPlayers: 0
+  _gameConfig:
+    Audio: 0
+    BotDifficulty: 2

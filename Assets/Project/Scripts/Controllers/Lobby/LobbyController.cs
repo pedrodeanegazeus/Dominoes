@@ -25,7 +25,6 @@ namespace Dominoes.Controllers
 
         private GameMode _gameMode;
         private GameType _gameType;
-        private NumberPlayers _numberPlayers;
 
         #region Unity
         private void Awake()
@@ -83,16 +82,17 @@ namespace Dominoes.Controllers
 
         private void NumberPlayersView_NumberPlayersSelected(NumberPlayers numberPlayers)
         {
-            _numberPlayers = numberPlayers;
             _gameState.NumberPlayers = numberPlayers;
 
-            GameManager.Scene.LoadScene(DominoesScene.Gameplay);
+            GameManager.Scene.LoadSceneWithParameter(DominoesScene.Gameplay, (_gameType, _gameMode, numberPlayers));
         }
         #endregion
 
         private void GoToLobby()
         {
             _gameState.ResetState();
+            _gameType = GameType.None;
+            _gameMode = GameMode.None;
 
             _lobbyView.Show();
             _gameTypeView.Hide();

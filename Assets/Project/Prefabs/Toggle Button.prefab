@@ -134,7 +134,7 @@ MonoBehaviour:
   _onPosition: {fileID: 169864911625301419}
   _onColor: {r: 0, g: 0.7254902, b: 0.68235296, a: 1}
   _offPosition: {fileID: 8811310852882412731}
-  _offColor: {r: 0.9411765, g: 0.22745098, b: 0.34117648, a: 0}
+  _offColor: {r: 0.9411765, g: 0.22745098, b: 0.34117648, a: 1}
   _initialState: 0
   _switchMoveSpeed: 0.25
 --- !u!1 &5378760321084037269
