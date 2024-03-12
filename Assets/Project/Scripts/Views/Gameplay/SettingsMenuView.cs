@@ -4,7 +4,6 @@ using Dominoes.Controllers.HUDs;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -15,9 +14,6 @@ namespace Dominoes.Views.Gameplay
 {
     internal class SettingsMenuView : MonoBehaviour
     {
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private LocalizeStringEvent _gameModeText;
@@ -27,24 +23,10 @@ namespace Dominoes.Views.Gameplay
         [SerializeField] private SettingsPlayerController _team2Player2;
         [SerializeField] private Button _leaveButton;
 
-        private IGameplayService _gameplayService;
         private IGzLogger<SettingsMenuView> _logger;
         private IProfileService _profileService;
-
-        public void Initialize(IGameplayService gameplayService)
-        {
-            _gameplayService = gameplayService;
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
-            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
-        }
-
-        public void Open()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(Open));
-
-            _slideAnimation.SlideIn();
-        }
+        private GameMode _gameMode;
+        private NumberPlayers _numberPlayers;
 
         #region Unity
         private void Awake()
@@ -61,20 +43,20 @@ namespace Dominoes.Views.Gameplay
 
         private void OnEnable()
         {
-            string key = _gameState.GameMode switch
+            string key = _gameMode switch
             {
                 GameMode.Draw => "draw-game",
                 GameMode.Block => "block-game",
                 GameMode.AllFives => "all-fives-game",
                 GameMode.Turbo => "turbo-game",
-                _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
+                _ => throw new NotImplementedException($"Game mode {_gameMode} not implemented"),
             };
             _gameModeText.SetEntry(key);
         }
 
         private void Start()
         {
-            switch (_gameState.NumberPlayers)
+            switch (_numberPlayers)
             {
                 case NumberPlayers.Two:
                     _team1Player2.gameObject.SetActive(false);
@@ -88,6 +70,22 @@ namespace Dominoes.Views.Gameplay
             }
         }
         #endregion
+
+        public void Initialize(GameMode gameMode, NumberPlayers numberPlayers)
+        {
+            _gameMode = gameMode;
+            _numberPlayers = numberPlayers;
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SettingsMenuView>>();
+            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
+        }
+
+        public void Open()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Open));
+
+            _slideAnimation.SlideIn();
+        }
 
         private void Close()
         {

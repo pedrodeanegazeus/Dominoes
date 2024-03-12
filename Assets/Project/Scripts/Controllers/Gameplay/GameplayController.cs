@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
@@ -35,30 +34,20 @@ namespace Dominoes.Controllers
         private GameMode _gameMode;
         private GameType _gameType;
         private NumberPlayers _numberPlayers;
-        private ConcurrentQueue<Action> _actions;
 
         #region Unity
         private void Awake()
         {
             (_gameType, _gameMode, _numberPlayers) = GameManager.Scene.GetParameter<(GameType, GameMode, NumberPlayers)>();
 
-            _actions = new ConcurrentQueue<Action>();
             _chatService = GameManager.ServiceProvider.GetRequiredService<IChatService>();
+            _chatService.ChatReceived += ChatService_ChatReceived;
 
-            IGameplayService gameplayService = _gameType switch
-            {
-                GameType.Multiplayer or GameType.PlayWithFriends => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.Multiplayer),
-                GameType.SinglePlayer => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.SinglePlayer),
-                _ => throw new NotImplementedException($"Game type {_gameType} not implemented"),
-            };
-
-            _gameplayView.Initialize(gameplayService);
-            _settingsMenuView.Initialize(gameplayService);
+            _gameplayView.Initialize(_gameType, _gameMode);
+            _settingsMenuView.Initialize(_gameMode, _numberPlayers);
 
             _chatButton.onClick.AddListener(OpenChat);
             _settingsButton.onClick.AddListener(OpenSettingsMenu);
-
-            _chatService.ChatReceived += ChatService_ChatReceived;
         }
 
         private void OnDestroy()
@@ -100,20 +89,12 @@ namespace Dominoes.Controllers
                     break;
             }
         }
-
-        private void Update()
-        {
-            if (!_actions.IsEmpty && _actions.TryDequeue(out Action action))
-            {
-                action.Invoke();
-            }
-        }
         #endregion
 
         #region Events
         private void ChatService_ChatReceived()
         {
-            _actions.Enqueue(() => _chatAlert.SetActive(true));
+            _chatAlert.SetActive(true);
         }
         #endregion
 

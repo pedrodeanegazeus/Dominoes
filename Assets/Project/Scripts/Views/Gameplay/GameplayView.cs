@@ -1,9 +1,8 @@
-﻿using Dominoes.Core.Enums;
+﻿using System;
+using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
-using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -12,9 +11,6 @@ namespace Dominoes.Views.Gameplay
 {
     internal class GameplayView : MonoBehaviour
     {
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private TileView _tilePrefab;
         [SerializeField] private GameObject _tableTiles;
         [SerializeField] private GameObject _cornerPointsObject;
@@ -25,18 +21,6 @@ namespace Dominoes.Views.Gameplay
         [SerializeField] private LocalizeStringEvent _stockTilesText;
 
         private IGameplayService _gameplayService;
-        private IGzLogger<GameplayView> _logger;
-        private int _cornerPoints;
-        private int _stockTiles;
-
-        public void Initialize(IGameplayService gameplayService)
-        {
-            _gameplayService = gameplayService;
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<GameplayView>>();
-
-            _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
-            _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;
-        }
 
         #region Unity
         private void OnDestroy()
@@ -44,10 +28,20 @@ namespace Dominoes.Views.Gameplay
             _gameplayService.CornerPointsChanged -= GameplayService_CornerPointsChanged;
             _gameplayService.StockTilesChanged -= GameplayService_StockTilesChanged;
         }
+        #endregion
 
-        private void Start()
+        public void Initialize(GameType gameType, GameMode gameMode)
         {
-            switch (_gameState.GameMode)
+            _gameplayService = gameType switch
+            {
+                GameType.Multiplayer or GameType.PlayWithFriends => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.Multiplayer),
+                GameType.SinglePlayer => GameManager.ServiceProvider.GetRequiredKeyedService<IGameplayService>(GameType.SinglePlayer),
+                _ => throw new NotImplementedException($"Game type {gameType} not implemented"),
+            };
+            _gameplayService.CornerPointsChanged += GameplayService_CornerPointsChanged;
+            _gameplayService.StockTilesChanged += GameplayService_StockTilesChanged;
+
+            switch (gameMode)
             {
                 case GameMode.Draw:
                     _cornerPointsObject.SetActive(false);
@@ -61,19 +55,16 @@ namespace Dominoes.Views.Gameplay
                     break;
             }
         }
-        #endregion
 
         #region Events
         private void GameplayService_CornerPointsChanged(int points)
         {
-            _cornerPoints = points;
-            (_cornerPointsText.StringReference["points"] as IntVariable).Value = _cornerPoints;
+            (_cornerPointsText.StringReference["points"] as IntVariable).Value = points;
         }
 
         private void GameplayService_StockTilesChanged(int tiles)
         {
-            _stockTiles = tiles;
-            (_stockTilesText.StringReference["count"] as IntVariable).Value = _stockTiles;
+            (_stockTilesText.StringReference["count"] as IntVariable).Value = tiles;
         }
         #endregion
     }
