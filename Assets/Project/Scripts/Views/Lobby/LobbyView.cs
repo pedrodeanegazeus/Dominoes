@@ -2,7 +2,6 @@
 using Dominoes.Core.Enums;
 using Dominoes.Core.Interfaces.Services;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -12,11 +11,8 @@ namespace Dominoes.Views.Lobby
 {
     internal class LobbyView : MonoBehaviour
     {
-        public event Action GameTypeSelected;
+        public event Action<GameType> GameTypeSelected;
 
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private GameObject _jogatinaLogo;
         [SerializeField] private GameObject _defaultLogoPrefab;
 
@@ -29,13 +25,25 @@ namespace Dominoes.Views.Lobby
         private IGzLogger<LobbyView> _logger;
         private IVipService _vipService;
 
-        #region Localize Prefab Event
-        public void OnUpdateAsset()
+        #region Unity
+        private void Awake()
         {
-            _logger.Debug("CALLED: {method}",
-                          nameof(OnUpdateAsset));
+            _multiplayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.Multiplayer));
+            _playWithFriendsButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.PlayWithFriends));
+            _singlePlayerButton.onClick.AddListener(() => GameTypeSelected?.Invoke(GameType.SinglePlayer));
+        }
 
+        private void OnDestroy()
+        {
+            _multiplayerButton.onClick.RemoveAllListeners();
+            _playWithFriendsButton.onClick.RemoveAllListeners();
+            _singlePlayerButton.onClick.RemoveAllListeners();
+        }
+
+        private void Start()
+        {
             Destroy(_defaultLogoPrefab);
+            SetVip(_vipService.IsVip);
         }
         #endregion
 
@@ -61,37 +69,10 @@ namespace Dominoes.Views.Lobby
             gameObject.SetActive(true);
         }
 
-        #region Unity
-        private void Awake()
-        {
-            _multiplayerButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.Multiplayer));
-            _playWithFriendsButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.PlayWithFriends));
-            _singlePlayerButton.onClick.AddListener(() => TriggerGameTypeSelected(GameType.SinglePlayer));
-        }
-
-        private void OnDestroy()
-        {
-            _multiplayerButton.onClick.RemoveAllListeners();
-            _playWithFriendsButton.onClick.RemoveAllListeners();
-            _singlePlayerButton.onClick.RemoveAllListeners();
-        }
-
-        private void Start()
-        {
-            SetVip(_vipService.IsVip);
-        }
-        #endregion
-
         private void SetVip(bool isVip)
         {
             _jogatinaLogo.SetActive(isVip);
             _vipButton.SetActive(!isVip);
-        }
-
-        private void TriggerGameTypeSelected(GameType gameType)
-        {
-            _gameState.GameType = gameType;
-            GameTypeSelected?.Invoke();
         }
     }
 }

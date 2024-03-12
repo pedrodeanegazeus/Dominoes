@@ -18,6 +18,27 @@ namespace Dominoes.Animations
         private RectTransform _rectTransform;
         private bool _isStarted;
 
+        #region Unity
+        private void Awake()
+        {
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<RotateAnimation>>();
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
+        private void OnDisable()
+        {
+            StopAnimation();
+        }
+
+        private void OnEnable()
+        {
+            if (_startOnEnable)
+            {
+                StartAnimation();
+            }
+        }
+        #endregion
+
         public void StartAnimation()
         {
             _logger.Debug("CALLED: {method}",
@@ -43,27 +64,6 @@ namespace Dominoes.Animations
             }
             _isStarted = false;
         }
-
-        #region Unity
-        private void Awake()
-        {
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<RotateAnimation>>();
-            _rectTransform = GetComponent<RectTransform>();
-        }
-
-        private void OnDisable()
-        {
-            StopAnimation();
-        }
-
-        private void OnEnable()
-        {
-            if (_startOnEnable)
-            {
-                StartAnimation();
-            }
-        }
-        #endregion
 
         private void Rotate()
         {

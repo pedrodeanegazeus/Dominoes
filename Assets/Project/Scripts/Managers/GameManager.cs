@@ -7,6 +7,8 @@ using Dominoes.Infrastructure.Repositories;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
+using Gazeus.CoreMobile.SDK;
+using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using UnityEngine;
 
 namespace Dominoes.Managers
@@ -48,21 +50,22 @@ namespace Dominoes.Managers
             Scene = _gameSceneManager;
         }
 
-        private static void InitializeServiceProvider()
+        private void InitializeServiceProvider()
         {
             GzServiceCollection serviceCollection = new();
 
+            // Packages
+            serviceCollection.AddSingleton<IGazeusSDK, GazeusSDK>();
+
             // Repositories
-            serviceCollection.AddSingleton<IGameStateRepository, GameStateRepository>();
+            serviceCollection.AddSingleton<IGameConfigRepository, GameConfigRepository>();
 
             // Services
             serviceCollection.AddKeyedTransient<IGameplayService, MultiplayerGameplayService>(GameType.Multiplayer);
             serviceCollection.AddKeyedTransient<IGameplayService, SinglePlayerGameplayService>(GameType.SinglePlayer);
-
             serviceCollection.AddSingleton<IGameService, GameService>();
             serviceCollection.AddSingleton<IProfileService, ProfileService>();
             serviceCollection.AddSingleton<IVipService, VipService>();
-
             serviceCollection.AddTransient<IChatService, ChatService>();
 
             ServiceProvider = serviceCollection.BuildServiceProvider();

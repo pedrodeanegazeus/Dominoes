@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Dominoes.Core.Models.Services.MultiplayerService;
+using Dominoes.Core.Models.Services.GameService;
 
 namespace Dominoes.Core.Interfaces.Services
 {

@@ -9,6 +9,7 @@ namespace Dominoes.Controllers
 {
     internal class LobbyController : MonoBehaviour
     {
+        [Header("DEBUG")]
         [SerializeField] private GameState _gameState;
 
         [Header("Header")]
@@ -21,6 +22,10 @@ namespace Dominoes.Controllers
         [SerializeField] private GameTypeView _gameTypeView;
         [SerializeField] private NumberPlayersView _numberPlayersView;
         [SerializeField] private SideMenuView _sideMenuView;
+
+        private GameMode _gameMode;
+        private GameType _gameType;
+        private NumberPlayers _numberPlayers;
 
         #region Unity
         private void Awake()
@@ -55,23 +60,32 @@ namespace Dominoes.Controllers
         #endregion
 
         #region Events
-        private void GameTypeView_GameModeSelected()
+        private void GameTypeView_GameModeSelected(GameMode gameMode)
         {
+            _gameMode = gameMode;
+            _gameState.GameMode = gameMode;
+
             _numberPlayersView.gameObject.SetActive(true);
-            _numberPlayersView.Open();
+            _numberPlayersView.Open(gameMode);
         }
 
-        private void LobbyView_GameTypeSelected()
+        private void LobbyView_GameTypeSelected(GameType gameType)
         {
+            _gameType = gameType;
+            _gameState.GameType = gameType;
+
             _lobbyView.Hide();
-            _gameTypeView.Show();
+            _gameTypeView.Show(gameType);
 
             _backButton.gameObject.SetActive(true);
             _moreGamesButton.gameObject.SetActive(false);
         }
 
-        private void NumberPlayersView_NumberPlayersSelected()
+        private void NumberPlayersView_NumberPlayersSelected(NumberPlayers numberPlayers)
         {
+            _numberPlayers = numberPlayers;
+            _gameState.NumberPlayers = numberPlayers;
+
             GameManager.Scene.LoadScene(DominoesScene.Gameplay);
         }
         #endregion

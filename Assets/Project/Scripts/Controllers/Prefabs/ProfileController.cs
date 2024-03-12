@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
-namespace Dominoes.Controllers.HUD
+namespace Dominoes.Controllers.Prefabs
 {
     internal class ProfileController : MonoBehaviour
     {

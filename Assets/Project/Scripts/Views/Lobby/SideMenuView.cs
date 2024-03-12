@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Dominoes.Animations;
-using Dominoes.Controllers.HUDs;
+using Dominoes.Controllers.Prefabs;
 using Dominoes.Core.Extensions;
+using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.Core.Interfaces.Services;
+using Dominoes.Core.Models;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using TMPro;
@@ -17,9 +18,6 @@ namespace Dominoes.Views.Lobby
 {
     internal class SideMenuView : MonoBehaviour
     {
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private TextMeshProUGUI _versionNumber;
@@ -36,26 +34,10 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private GameObject _iosItems;
         [SerializeField] private GameObject _logoutItem;
 
+        private IGameConfigRepository _gameConfigRepository;
         private IGzLogger<SideMenuView> _logger;
         private IProfileService _profileService;
         private IVipService _vipService;
-
-        public void Initialize()
-        {
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SideMenuView>>();
-            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
-            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
-        }
-
-        public void Open()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(Open));
-
-            _botDifficulty.SetState(_gameState.BotDifficulty);
-            _audioToggle.SetState(_gameState.Audio);
-            _slideAnimation.SlideIn();
-        }
 
         #region Unity
         private void Awake()
@@ -89,15 +71,36 @@ namespace Dominoes.Views.Lobby
         }
         #endregion
 
+        public void Initialize()
+        {
+            _gameConfigRepository = GameManager.ServiceProvider.GetRequiredService<IGameConfigRepository>();
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<SideMenuView>>();
+            _profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
+            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
+        }
+
+        public void Open()
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(Open));
+
+            GameConfig gameConfig = _gameConfigRepository.GameConfig;
+            _botDifficulty.SetState(gameConfig.BotDifficulty);
+            _audioToggle.SetState(gameConfig.Audio);
+            _slideAnimation.SlideIn();
+        }
+
         #region Events
         private void AudioToggle_Clicked(bool state)
         {
-            _gameState.Audio = state;
+            _gameConfigRepository.GameConfig.Audio = state;
+            _gameConfigRepository.Sync();
         }
 
         private void BotDifficulty_Clicked(int state)
         {
-            _gameState.BotDifficulty = state;
+            _gameConfigRepository.GameConfig.BotDifficulty = state;
+            _gameConfigRepository.Sync();
         }
 
         private void LocalizationSettings_SelectedLocaleChanged(Locale locale)

@@ -6,7 +6,7 @@ using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dominoes.Controllers.HUDs
+namespace Dominoes.Controllers.Prefabs
 {
     internal class TripleButtonController : MonoBehaviour
     {
@@ -22,22 +22,6 @@ namespace Dominoes.Controllers.HUDs
 
         private IGzLogger<TripleButtonController> _logger;
         private bool _isEnabled;
-
-        public void SetState(int state)
-        {
-            _logger.Debug("CALLED: {method} - {state}",
-                          nameof(SetState),
-                          state);
-
-            Vector3 position = state switch
-            {
-                1 => _button1.gameObject.transform.position,
-                2 => _button2.gameObject.transform.position,
-                3 => _button3.gameObject.transform.position,
-                _ => throw new ArgumentOutOfRangeException(nameof(state)),
-            };
-            _highlight.position = position;
-        }
 
         #region Unity
         private void Awake()
@@ -57,6 +41,22 @@ namespace Dominoes.Controllers.HUDs
             _button3.onClick.RemoveAllListeners();
         }
         #endregion
+
+        public void SetState(int state)
+        {
+            _logger.Debug("CALLED: {method} - {state}",
+                          nameof(SetState),
+                          state);
+
+            Vector3 position = state switch
+            {
+                1 => _button1.gameObject.transform.position,
+                2 => _button2.gameObject.transform.position,
+                3 => _button3.gameObject.transform.position,
+                _ => throw new ArgumentOutOfRangeException(nameof(state)),
+            };
+            _highlight.position = position;
+        }
 
         private void Button1Clicked()
         {

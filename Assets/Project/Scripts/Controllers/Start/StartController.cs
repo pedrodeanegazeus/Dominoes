@@ -10,13 +10,15 @@ using Dominoes.Views.Start;
 using Gazeus.CoreMobile.Commons;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.ScriptableObjects;
+using Gazeus.CoreMobile.SDK.Core.Interfaces;
+using Gazeus.CoreMobile.SDK.ScriptableObjects;
 using UnityEngine;
 
 namespace Dominoes.Controllers
 {
     internal class StartController : MonoBehaviour
     {
-        [Header("DEGUBBER")]
+        [Header("DEBUG")]
         [SerializeField] private GameState _gameState;
 
         [Space]
@@ -24,6 +26,10 @@ namespace Dominoes.Controllers
 
         [Header("Configurations")]
         [SerializeField] private LogConfiguration _logConfiguration;
+
+        [Header("Gazeus SDK")]
+        [SerializeField] private AppConfiguration _appConfiguration;
+        [SerializeField] private AppEnvironment _appEnvironment;
 
         [Header("Views")]
         [SerializeField] private JogatinaView _jogatinaView;
@@ -42,32 +48,27 @@ namespace Dominoes.Controllers
             GzLogger.Initialize(_logConfiguration);
             DOTween.Init();
 
-            // singletons
+            // objects
             _gameManager.Initialize();
 
             // views
             _jogatinaView.Initialize();
             _loadingView.Initialize();
-
-            Task animationTask = _jogatinaView.AnimateAsync();
             _loadingView.Animate();
+            Task animationTask = _jogatinaView.AnimateAsync();
 
+            // singletons
+            IGazeusSDK gazeusSDK = GameManager.ServiceProvider.GetRequiredService<IGazeusSDK>();
+            gazeusSDK.Initialize(_appConfiguration, _appEnvironment);
 
-            // maybe will drop
-            _gameState.Initialize();
-            _gameState.Load();
-
-
-            // singleton services
             IProfileService profileService = GameManager.ServiceProvider.GetRequiredService<IProfileService>();
+            profileService.Initialize();
+
             IVipService vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
-            Task profileServiceInitializeTask = Task.Run(() => profileService.Initialize());
-            Task vipServiceInitializeTask = Task.Run(() => vipService.Initialize());
+            vipService.Initialize();
 
             yield return Task
-                .WhenAll(animationTask,
-                         profileServiceInitializeTask,
-                         vipServiceInitializeTask)
+                .WhenAll(animationTask)
                 .WaitTask();
 
             GameManager.Scene.LoadScene(DominoesScene.Lobby, false);

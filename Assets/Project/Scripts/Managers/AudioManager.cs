@@ -1,4 +1,5 @@
 ﻿using Dominoes.Core.Enums;
+using Dominoes.Core.Interfaces.Repositories;
 using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
@@ -11,12 +12,12 @@ namespace Dominoes.Managers
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioTheme _theme;
 
-        [SerializeField] private GameState _gameState;
-
+        private IGameConfigRepository _gameConfigRepository;
         private IGzLogger<AudioManager> _logger;
 
         public void Initialize(IGzServiceProvider serviceProvider)
         {
+            _gameConfigRepository = serviceProvider.GetRequiredService<IGameConfigRepository>();
             _logger = serviceProvider.GetRequiredService<IGzLogger<AudioManager>>();
         }
 
@@ -26,7 +27,7 @@ namespace Dominoes.Managers
                           nameof(Play),
                           audio.ToString());
 
-            if (_gameState.Audio && audio != Audio.None)
+            if (_gameConfigRepository.GameConfig.Audio && audio != Audio.None)
             {
                 AudioClip audioClip = _theme.Audios[audio];
                 _audioSource.PlayOneShot(audioClip);

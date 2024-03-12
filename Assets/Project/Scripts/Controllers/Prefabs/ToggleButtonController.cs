@@ -6,7 +6,7 @@ using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dominoes.Controllers.HUDs
+namespace Dominoes.Controllers.Prefabs
 {
     internal class ToggleButtonController : MonoBehaviour
     {
@@ -33,18 +33,6 @@ namespace Dominoes.Controllers.HUDs
         private bool _isInitialized;
         private bool _state;
 
-        public void SetState(bool state)
-        {
-            _logger.Debug("CALLED: {method} - {state}",
-                          nameof(SetState),
-                          state);
-
-            _state = state;
-            _buttonImage.color = _state ? _onColor : _offColor;
-            _switch.position = _state ? _offPosition.position : _onPosition.position;
-            _isInitialized = true;
-        }
-
         #region Unity
         private void Awake()
         {
@@ -68,6 +56,18 @@ namespace Dominoes.Controllers.HUDs
             }
         }
         #endregion
+
+        public void SetState(bool state)
+        {
+            _logger.Debug("CALLED: {method} - {state}",
+                          nameof(SetState),
+                          state);
+
+            _state = state;
+            _buttonImage.color = _state ? _onColor : _offColor;
+            _switch.position = _state ? _offPosition.position : _onPosition.position;
+            _isInitialized = true;
+        }
 
         private void ButtonClicked()
         {

@@ -3,7 +3,7 @@ using Dominoes.Managers;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using UnityEngine;
 
-namespace Dominoes.Controllers.HUDs
+namespace Dominoes.Controllers.Prefabs
 {
     internal class VipButtonController : MonoBehaviour
     {

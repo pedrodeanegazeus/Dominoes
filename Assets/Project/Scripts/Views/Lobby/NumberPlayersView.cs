@@ -2,7 +2,6 @@
 using Dominoes.Animations;
 using Dominoes.Core.Enums;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -13,11 +12,8 @@ namespace Dominoes.Views.Lobby
 {
     internal class NumberPlayersView : MonoBehaviour
     {
-        public event Action NumberPlayersSelected;
+        public event Action<NumberPlayers> NumberPlayersSelected;
 
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private SlideAnimation _slideAnimation;
         [SerializeField] private Button _closeButton;
         [SerializeField] private LocalizeStringEvent _ribbonTitle;
@@ -27,25 +23,12 @@ namespace Dominoes.Views.Lobby
 
         private IGzLogger<NumberPlayersView> _logger;
 
-        public void Initialize()
-        {
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<NumberPlayersView>>();
-        }
-
-        public void Open()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(Open));
-
-            _slideAnimation.SlideIn();
-        }
-
         #region Unity
         private void Awake()
         {
             _closeButton.onClick.AddListener(Close);
-            _2PlayersButton.onClick.AddListener(() => SetNumberPlayers(2));
-            _4PlayersButton.onClick.AddListener(() => SetNumberPlayers(4));
+            _2PlayersButton.onClick.AddListener(() => NumberPlayersSelected?.Invoke(NumberPlayers.Two));
+            _4PlayersButton.onClick.AddListener(() => NumberPlayersSelected?.Invoke(NumberPlayers.Four));
         }
 
         private void OnDestroy()
@@ -54,31 +37,37 @@ namespace Dominoes.Views.Lobby
             _2PlayersButton.onClick.RemoveAllListeners();
             _4PlayersButton.onClick.RemoveAllListeners();
         }
+        #endregion
 
-        private void OnEnable()
+        public void Initialize()
         {
-            string key = _gameState.GameMode switch
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<NumberPlayersView>>();
+        }
+
+        public void Open(GameMode gameMode)
+        {
+            _logger.Debug("CALLED: {method} - {gameMode}",
+                          nameof(Open),
+                          gameMode);
+
+            string key = gameMode switch
             {
                 GameMode.Draw => "draw-game",
                 GameMode.Block => "block-game",
                 GameMode.AllFives => "all-fives-game",
                 GameMode.Turbo => "turbo-game",
-                _ => throw new NotImplementedException($"Game mode {_gameState.GameMode} not implemented"),
+                _ => throw new NotImplementedException($"Game mode {gameMode} not implemented"),
             };
+
             _infoPanel.SetEntry(key);
             _ribbonTitle.SetEntry(key);
+
+            _slideAnimation.SlideIn();
         }
-        #endregion
 
         private void Close()
         {
             _slideAnimation.SlideOut(() => gameObject.SetActive(false));
-        }
-
-        private void SetNumberPlayers(int numberPlayers)
-        {
-            _gameState.NumberPlayers = (NumberPlayers)numberPlayers;
-            NumberPlayersSelected?.Invoke();
         }
     }
 }

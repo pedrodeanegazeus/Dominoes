@@ -20,6 +20,28 @@ namespace Dominoes.Animations
         private RectTransform _rectTransform;
         private bool _isStarted;
 
+        #region Unity
+        private void Awake()
+        {
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<PulseAnimation>>();
+            _rectTransform = GetComponent<RectTransform>();
+            _rectTransform.localScale = Vector3.zero;
+        }
+
+        private void OnDisable()
+        {
+            StopAnimation();
+        }
+
+        private void OnEnable()
+        {
+            if (_startOnEnable)
+            {
+                StartAnimation();
+            }
+        }
+        #endregion
+
         public void StartAnimation()
         {
             _logger.Debug("CALLED: {method}",
@@ -45,28 +67,6 @@ namespace Dominoes.Animations
             }
             _isStarted = false;
         }
-
-        #region Unity
-        private void Awake()
-        {
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<PulseAnimation>>();
-            _rectTransform = GetComponent<RectTransform>();
-            _rectTransform.localScale = Vector3.zero;
-        }
-
-        private void OnDisable()
-        {
-            StopAnimation();
-        }
-
-        private void OnEnable()
-        {
-            if (_startOnEnable)
-            {
-                StartAnimation();
-            }
-        }
-        #endregion
 
         private void PulseIn()
         {

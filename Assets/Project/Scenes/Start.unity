@@ -1094,7 +1094,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1161076514}
   _theme: {fileID: 11400000, guid: f9524d28ba1a420419171cf970685bf9, type: 2}
-  _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
 --- !u!82 &1161076514
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1712,6 +1711,8 @@ MonoBehaviour:
   _gameState: {fileID: 11400000, guid: 4c95c72b18f67ff48bfcee20a7bc78f7, type: 2}
   _gameManager: {fileID: 1117167974}
   _logConfiguration: {fileID: 11400000, guid: 23925b0f62e761a49a05f393afbc86e3, type: 2}
+  _appConfiguration: {fileID: 11400000, guid: cfbf069a85daa2449bf2d1ad8ca47753, type: 2}
+  _appEnvironment: {fileID: 11400000, guid: 661f41bec20b24a4d80c95aa97b8c48a, type: 2}
   _jogatinaView: {fileID: 1094755326}
   _loadingView: {fileID: 1680855752}
 --- !u!4 &1749500156

@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 using Dominoes.Core.Enums;
 using Dominoes.Core.Extensions;
 using Dominoes.Core.Interfaces.Services;
-using Dominoes.Core.Models.Services.MultiplayerService;
+using Dominoes.Core.Models.Services.GameService;
 using Dominoes.Managers;
-using Dominoes.ScriptableObjects;
 using Gazeus.CoreMobile.Commons.Core.Extensions;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
 using UnityEngine;
@@ -17,11 +16,8 @@ namespace Dominoes.Views.Lobby
 {
     internal class GameTypeView : MonoBehaviour
     {
-        public event Action GameModeSelected;
+        public event Action<GameMode> GameModeSelected;
 
-        [SerializeField] private GameState _gameState;
-
-        [Space]
         [SerializeField] private GameObject _jogatinaLogo;
 
         [Header("Titles")]
@@ -44,51 +40,16 @@ namespace Dominoes.Views.Lobby
         [SerializeField] private LocalizeStringEvent _turboPlayersOnlineText;
 
         private IGzLogger<GameTypeView> _logger;
-        private IGameService _gazeusServicesService;
+        private IGameService _gameService;
         private IVipService _vipService;
-
-        public void Hide()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(Hide));
-
-            gameObject.SetActive(false);
-        }
-
-        public void Initialize()
-        {
-            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<GameTypeView>>();
-            _gazeusServicesService = GameManager.ServiceProvider.GetRequiredService<IGameService>();
-            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
-        }
-
-        public void Show()
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(Show));
-
-            gameObject.SetActive(true);
-            switch (_gameState.GameType)
-            {
-                case GameType.Multiplayer:
-                    SetMultiplayerGameType();
-                    break;
-                case GameType.PlayWithFriends:
-                    SetPlayWithFriendsGameType();
-                    break;
-                case GameType.SinglePlayer:
-                    SetSinglePlayerGameType();
-                    break;
-            }
-        }
 
         #region Unity
         private void Awake()
         {
-            _drawButton.onClick.AddListener(() => SetGameMode(GameMode.Draw));
-            _blockButton.onClick.AddListener(() => SetGameMode(GameMode.Block));
-            _allFivesButton.onClick.AddListener(() => SetGameMode(GameMode.AllFives));
-            _turboButton.onClick.AddListener(() => SetGameMode(GameMode.Turbo));
+            _drawButton.onClick.AddListener(() => GameModeSelected?.Invoke(GameMode.Draw));
+            _blockButton.onClick.AddListener(() => GameModeSelected?.Invoke(GameMode.Block));
+            _allFivesButton.onClick.AddListener(() => GameModeSelected?.Invoke(GameMode.AllFives));
+            _turboButton.onClick.AddListener(() => GameModeSelected?.Invoke(GameMode.Turbo));
         }
 
         private void OnDestroy()
@@ -105,10 +66,40 @@ namespace Dominoes.Views.Lobby
         }
         #endregion
 
-        private void SetGameMode(GameMode gameMode)
+        public void Hide()
         {
-            _gameState.GameMode = gameMode;
-            GameModeSelected?.Invoke();
+            _logger.Debug("CALLED: {method}",
+                          nameof(Hide));
+
+            gameObject.SetActive(false);
+        }
+
+        public void Initialize()
+        {
+            _logger = GameManager.ServiceProvider.GetRequiredService<IGzLogger<GameTypeView>>();
+            _gameService = GameManager.ServiceProvider.GetRequiredService<IGameService>();
+            _vipService = GameManager.ServiceProvider.GetRequiredService<IVipService>();
+        }
+
+        public void Show(GameType gameType)
+        {
+            _logger.Debug("CALLED: {method} - {gameType}",
+                          nameof(Show),
+                          gameType);
+
+            gameObject.SetActive(true);
+            switch (gameType)
+            {
+                case GameType.Multiplayer:
+                    SetMultiplayerGameType();
+                    break;
+                case GameType.PlayWithFriends:
+                    SetPlayWithFriendsGameType();
+                    break;
+                case GameType.SinglePlayer:
+                    SetSinglePlayerGameType();
+                    break;
+            }
         }
 
         private void SetMultiplayerGameType()
@@ -122,7 +113,7 @@ namespace Dominoes.Views.Lobby
             _drawPlayersOnlineText.gameObject.SetActive(true);
             _turboPlayersOnlineText.gameObject.SetActive(true);
 
-            Task<PlayersOnline> playersOnlineTask = _gazeusServicesService.GetPlayersOnlineAsync();
+            Task<PlayersOnline> playersOnlineTask = _gameService.GetPlayersOnlineAsync();
             _ = StartCoroutine(playersOnlineTask.WaitTask(result =>
             {
                 (_allFivesPlayersOnlineText.StringReference["count"] as IntVariable).Value = result.AllFives;

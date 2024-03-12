@@ -33,29 +33,6 @@ namespace Dominoes.Animations
         private Vector3 _outOfScreenIn;
         private Vector3 _outOfScreenOut;
 
-        public void SlideIn(TweenCallback callback = null)
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(SlideIn));
-
-            _rectTransform.position = _initialPosition + _outOfScreenIn;
-            _ = _rectTransform
-                .DOMove(_initialPosition, _duration)
-                .SetEase(_fromEase)
-                .OnComplete(callback);
-        }
-
-        public void SlideOut(TweenCallback callback = null)
-        {
-            _logger.Debug("CALLED: {method}",
-                          nameof(SlideOut));
-
-            _ = _rectTransform
-                .DOMove(_initialPosition + _outOfScreenOut, _duration)
-                .SetEase(_toEase)
-                .OnComplete(callback);
-        }
-
         #region Unity
         private void Awake()
         {
@@ -81,5 +58,28 @@ namespace Dominoes.Animations
             };
         }
         #endregion
+
+        public void SlideIn(TweenCallback callback = null)
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(SlideIn));
+
+            _rectTransform.position = _initialPosition + _outOfScreenIn;
+            _ = _rectTransform
+                .DOMove(_initialPosition, _duration)
+                .SetEase(_fromEase)
+                .OnComplete(callback);
+        }
+
+        public void SlideOut(TweenCallback callback = null)
+        {
+            _logger.Debug("CALLED: {method}",
+                          nameof(SlideOut));
+
+            _ = _rectTransform
+                .DOMove(_initialPosition + _outOfScreenOut, _duration)
+                .SetEase(_toEase)
+                .OnComplete(callback);
+        }
     }
 }

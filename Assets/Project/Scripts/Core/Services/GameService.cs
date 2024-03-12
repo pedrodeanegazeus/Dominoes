@@ -1,18 +1,22 @@
 ﻿using System.Threading.Tasks;
 using Dominoes.Core.Interfaces.Services;
-using Dominoes.Core.Models.Services.MultiplayerService;
+using Dominoes.Core.Models.Services.GameService;
 using Gazeus.CoreMobile.Commons.Core.Interfaces;
-using UnityEngine;
+using Gazeus.CoreMobile.SDK.Core.Interfaces;
+using Gazeus.CoreMobile.SDK.Core.Models.PlayersOnline;
 
 namespace Dominoes.Core.Services
 {
     internal class GameService : IGameService
     {
+        private readonly IGazeusSDK _gazeusSDK;
         private readonly IGzLogger<GameService> _logger;
 
-        public GameService(IGzLogger<GameService> logger)
+        public GameService(IGazeusSDK gazeusSDK,
+                           IGzLogger<GameService> logger)
         {
             _logger = logger;
+            _gazeusSDK = gazeusSDK;
         }
 
         public async Task<PlayersOnline> GetPlayersOnlineAsync()
@@ -20,13 +24,22 @@ namespace Dominoes.Core.Services
             _logger.Debug("CALLED: {method}",
                           nameof(GetPlayersOnlineAsync));
 
-            await Task.Delay(Random.Range(0, 1000));
+            Task<TotalPlayersResult> allFivesOnlineTask = _gazeusSDK.PlayersOnlineService.GetTotalPlayersAsync("all_fives");
+            Task<TotalPlayersResult> blockOnlineTask = _gazeusSDK.PlayersOnlineService.GetTotalPlayersAsync("block");
+            Task<TotalPlayersResult> drawOnlineTask = _gazeusSDK.PlayersOnlineService.GetTotalPlayersAsync("draw");
+            Task<TotalPlayersResult> turboOnlineTask = _gazeusSDK.PlayersOnlineService.GetTotalPlayersAsync("turbo");
+
+            await Task.WhenAll(allFivesOnlineTask,
+                               blockOnlineTask,
+                               drawOnlineTask,
+                               turboOnlineTask);
+
             PlayersOnline playersOnline = new()
             {
-                AllFives = Random.Range(0, 1000),
-                Block = Random.Range(0, 1000),
-                Draw = Random.Range(0, 1000),
-                Turbo = Random.Range(0, 1000),
+                AllFives = allFivesOnlineTask.Result.Response,
+                Block = blockOnlineTask.Result.Response,
+                Draw = drawOnlineTask.Result.Response,
+                Turbo = turboOnlineTask.Result.Response,
             };
             return playersOnline;
         }
