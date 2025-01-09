@@ -1,0 +1,17 @@
+{
+    "name": "Gazeus.Mobile.Domino",
+    "rootNamespace": "Gazeus.Mobile.Domino",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:57060180a735fc44cb1e8589b6a401de"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
