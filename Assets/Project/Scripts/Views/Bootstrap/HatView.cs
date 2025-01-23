@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Gazeus.Mobile.Domino.Views
+namespace Gazeus.Mobile.Domino.Views.Bootstrap
 {
     public class HatView : MonoBehaviour
     {

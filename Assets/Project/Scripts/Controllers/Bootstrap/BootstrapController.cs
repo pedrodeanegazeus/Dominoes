@@ -3,7 +3,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using DG.Tweening;
-using Gazeus.Mobile.Domino.Views;
+using Gazeus.CoreMobile.SDK.Core;
+using Gazeus.CoreMobile.SDK.Core.ScriptableObjects;
+using Gazeus.Mobile.Domino.Core.Enum;
+using Gazeus.Mobile.Domino.Managers;
+using Gazeus.Mobile.Domino.Views.Bootstrap;
 using UnityEngine;
 
 namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
@@ -16,6 +20,9 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
         [SerializeField] private ShadowsView _shadowsView;
         [SerializeField] private LoadingView _loadingView;
 
+        [Header("Scriptable Objects")]
+        [SerializeField] private LogConfiguration _logConfiguration;
+
         private TaskCompletionSource<bool> _hatViewAnimationTask;
         private TaskCompletionSource<bool> _logoViewAnimationTask;
         private TaskCompletionSource<bool> _shadowsViewAnimationTask;
@@ -23,9 +30,6 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
         #region Unity
         private void Awake()
         {
-            _hatView.AnimationCompleted += HatView_AnimationCompleted;
-            _shadowsView.AnimationCompleted += ShadowsView_AnimationCompleted;
-
             _hatViewAnimationTask = new TaskCompletionSource<bool>();
             _logoViewAnimationTask = new TaskCompletionSource<bool>();
             _shadowsViewAnimationTask = new TaskCompletionSource<bool>();
@@ -33,26 +37,46 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
             _ = DOTween.Init();
         }
 
+        private void OnDisable()
+        {
+            _hatView.AnimationCompleted -= HatView_AnimationCompleted;
+            _logoView.AnimationCompleted -= LogoView_AnimationCompleted;
+            _shadowsView.AnimationCompleted -= ShadowsView_AnimationCompleted;
+        }
+
+        private void OnEnable()
+        {
+            _hatView.AnimationCompleted += HatView_AnimationCompleted;
+            _logoView.AnimationCompleted += LogoView_AnimationCompleted;
+            _shadowsView.AnimationCompleted += ShadowsView_AnimationCompleted;
+        }
+
         [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Unity Start method")]
         private async Awaitable Start()
         {
-            _hatView.Animate();
-            _logoView.Animate();
-            _shadowsView.Animate();
-            _loadingView.Animate();
+            StartAnimations();
+
+            GzLogger.Initialize(_logConfiguration);
+
+            GameManager.Initialize();
 
             await Task.WhenAll(_hatViewAnimationTask.Task,
                                _logoViewAnimationTask.Task,
                                _shadowsViewAnimationTask.Task);
 
-            Debug.Log("FINISHED!");
+            GameManager.GameSceneManager.LoadScene(GameScene.Lobby);
         }
         #endregion
 
-        #region Unity
+        #region Events
         private void HatView_AnimationCompleted()
         {
             _hatViewAnimationTask.SetResult(true);
+        }
+
+        private void LogoView_AnimationCompleted()
+        {
+            _logoViewAnimationTask?.SetResult(true);
         }
 
         private void ShadowsView_AnimationCompleted()
@@ -60,5 +84,13 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
             _shadowsViewAnimationTask.SetResult(true);
         }
         #endregion
+
+        private void StartAnimations()
+        {
+            _hatView.Animate();
+            _logoView.Animate();
+            _shadowsView.Animate();
+            _loadingView.Animate();
+        }
     }
 }

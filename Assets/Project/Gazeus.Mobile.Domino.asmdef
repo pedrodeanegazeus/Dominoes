@@ -2,8 +2,9 @@
     "name": "Gazeus.Mobile.Domino",
     "rootNamespace": "Gazeus.Mobile.Domino",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:57060180a735fc44cb1e8589b6a401de"
+        "GUID:57060180a735fc44cb1e8589b6a401de",
+        "GUID:b1b2552fa6ffada4e906a74da8e74e15",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

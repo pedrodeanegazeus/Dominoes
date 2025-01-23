@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gazeus.Mobile.Domino.Views
+namespace Gazeus.Mobile.Domino.Views.Bootstrap
 {
     public class ShadowsView : MonoBehaviour
     {
