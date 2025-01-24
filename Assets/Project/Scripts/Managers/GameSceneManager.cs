@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Gazeus.CoreMobile.SDK.Core.Extensions;
 using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.Mobile.Domino.Core.Enum;
 using UnityEngine;
@@ -36,6 +37,9 @@ namespace Gazeus.Mobile.Domino.Managers
 
         public void LoadScene(GameScene gameScene)
         {
+            _logger.LogMethodCall(nameof(LoadScene),
+                                  gameScene);
+
             _logger.Info($"Loading {gameScene}");
 
             _ = DOTween.KillAll();
@@ -48,6 +52,10 @@ namespace Gazeus.Mobile.Domino.Managers
 
         public void LoadSceneWithParameter<TParam>(GameScene gameScene, TParam param)
         {
+            _logger.LogMethodCall(nameof(LoadSceneWithParameter),
+                                  gameScene,
+                                  param);
+
             _parameters[gameScene] = param;
 
             LoadScene(gameScene);

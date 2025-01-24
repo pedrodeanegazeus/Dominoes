@@ -41,6 +41,7 @@ namespace Gazeus.Mobile.Domino.Managers
         public static void Initialize()
         {
             ServiceProviderManager.Initialize();
+            AudioManager.Initialize();
             GameSceneManager.Initialize();
 
             s_isInitialized = true;

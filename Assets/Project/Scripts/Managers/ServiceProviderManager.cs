@@ -15,6 +15,9 @@ namespace Gazeus.Mobile.Domino.Managers
         public TService GetService<TService>()
             where TService : class
         {
+            _logger.LogMethodCall(nameof(GetService),
+                                  typeof(TService).Name);
+
             try
             {
                 TService service = _serviceProvider.GetService<TService>();

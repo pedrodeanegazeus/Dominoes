@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddadfc532dbc18d47a5515aee27191b1, type: 3}
-  m_Name: DebugLogConfiguration
+  m_Name: DevLogConfiguration
   m_EditorClassIdentifier: 
   _minimumLogLevel: 0
   _eventOnly: 0

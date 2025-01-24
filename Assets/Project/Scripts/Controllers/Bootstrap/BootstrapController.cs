@@ -54,6 +54,12 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
         [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Unity Start method")]
         private async Awaitable Start()
         {
+            _hatView.gameObject.SetActive(true);
+            _logoView.gameObject.SetActive(true);
+            _shadowsView.gameObject.SetActive(true);
+            _loadingView.gameObject.SetActive(true);
+
+
             StartAnimations();
 
             GzLogger.Initialize(_logConfiguration);

@@ -1,5 +1,3 @@
-using Gazeus.CoreMobile.SDK.Core.Extensions;
-using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.Mobile.Domino.Core.Models;
 using Gazeus.Mobile.Domino.Infrastructure.Repositories;
 using Gazeus.Mobile.Domino.Managers;
@@ -7,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Gazeus.Mobile.Domino.AudioTheme;
 
-namespace Gazeus.Mobile.Domino
+namespace Gazeus.Mobile.Domino.Controllers.Components
 {
     [RequireComponent(typeof(Button))]
     public class ButtonAudioController : MonoBehaviour
@@ -16,7 +14,6 @@ namespace Gazeus.Mobile.Domino
 
         private Button _button;
 
-        private IGzLogger<ButtonAudioController> _logger;
         private GameConfigRepository _gameConfigRepository;
 
         #region Unity
@@ -24,7 +21,6 @@ namespace Gazeus.Mobile.Domino
         {
             _button = GetComponent<Button>();
 
-            _logger = GameManager.ServiceProviderManager.GetService<IGzLogger<ButtonAudioController>>();
             _gameConfigRepository = GameManager.ServiceProviderManager.GetService<GameConfigRepository>();
         }
 
@@ -42,8 +38,6 @@ namespace Gazeus.Mobile.Domino
         #region Events
         private void OnButtonClick()
         {
-            _logger.LogMethodCall(nameof(OnButtonClick));
-
             GameConfig gameConfig = _gameConfigRepository.GetGameConfig();
             if (gameConfig.IsAudioOn)
             {
