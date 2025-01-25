@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddadfc532dbc18d47a5515aee27191b1, type: 3}
   m_Name: DevLogConfiguration
   m_EditorClassIdentifier: 
-  _minimumLogLevel: 0
+  _minimumLogLevel: 1
   _eventOnly: 0
