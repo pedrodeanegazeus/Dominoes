@@ -1,8 +1,10 @@
 ﻿using System;
+using DG.Tweening;
 using Gazeus.CoreMobile.SDK.Core.Extensions;
 using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.Mobile.Domino.Controllers.Components;
 using Gazeus.Mobile.Domino.Managers;
+using Gazeus.Mobile.Domino.Views.Prefabs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +12,17 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 {
     public class SettingsView : MonoBehaviour
     {
-        [SerializeField] private SlideController _slideController;
-
         [Header("UI")]
+        [SerializeField] private Image _overlayImage;
         [SerializeField] private Button _closeButton;
+
+        [Header("Views")]
+        [SerializeField] private AvatarView _avatarView;
+
+        [Space]
+        [SerializeField] private SlideController _slideController;
+        [SerializeField] private float _overlayAlpha;
+        [SerializeField] private float _overlayFadeDuration;
 
         public event Action CloseButtonClicked;
 
@@ -46,12 +55,32 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         {
             _logger.LogMethodCall(nameof(Hide));
 
+            Color imageOverlayColor = _overlayImage.color;
+            imageOverlayColor.a = _overlayAlpha;
+            _overlayImage.color = imageOverlayColor;
+
+            _overlayImage.DOFade(0, _overlayFadeDuration);
+
             _slideController.SlideOut();
+        }
+
+        public void SetVIP(bool isVIP)
+        {
+            _logger?.LogMethodCall(nameof(SetVIP),
+                                   isVIP);
+
+            _avatarView.SetVIP(isVIP);
         }
 
         public void Show()
         {
             _logger.LogMethodCall(nameof(Show));
+
+            Color imageOverlayColor = _overlayImage.color;
+            imageOverlayColor.a = 0;
+            _overlayImage.color = imageOverlayColor;
+
+            _overlayImage.DOFade(_overlayAlpha, _overlayFadeDuration);
 
             _slideController.SlideIn();
         }

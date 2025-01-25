@@ -42,6 +42,8 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
         #region Events
         private void HeaderView_SettingsButtonClicked()
         {
+            _settingsView.SetVIP(false); // get from profile
+
             _settingsView.gameObject.SetActive(true);
             _settingsView.Show();
         }
