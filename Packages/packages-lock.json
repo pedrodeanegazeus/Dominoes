@@ -9,6 +9,16 @@
       },
       "url": "https://nexus.gazeus.com:9443/nexus/repository/gazeus-unity"
     },
+    "com.gazeus.coremobile.sdk.services": {
+      "version": "4.1.0-pre.24",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.gazeus.coremobile.sdk.core": "2.5.0-pre.1",
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "url": "https://nexus.gazeus.com:9443/nexus/repository/gazeus-unity"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,

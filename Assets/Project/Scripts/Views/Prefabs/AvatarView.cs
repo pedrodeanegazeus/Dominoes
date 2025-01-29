@@ -8,6 +8,7 @@ namespace Gazeus.Mobile.Domino.Views.Prefabs
 {
     public class AvatarView : MonoBehaviour
     {
+        [SerializeField] private Image _avatarImage;
         [SerializeField] private Image _vipBorderImage;
 
         private IGzLogger<AvatarView> _logger;
@@ -19,12 +20,20 @@ namespace Gazeus.Mobile.Domino.Views.Prefabs
         }
         #endregion
 
-        public void SetVIP(bool isVIP)
+        public void SetAvatarSprite(Sprite sprite)
         {
-            _logger.LogMethodCall(nameof(SetVIP),
-                                  isVIP);
+            _logger.LogMethodCall(nameof(SetAvatarSprite),
+                                  sprite);
 
-            _vipBorderImage.gameObject.SetActive(isVIP);
+            _avatarImage.sprite = sprite;
+        }
+
+        public void SetAvatarVip(bool isVip)
+        {
+            _logger.LogMethodCall(nameof(SetAvatarVip),
+                                  isVip);
+
+            _vipBorderImage.gameObject.SetActive(isVip);
         }
     }
 }

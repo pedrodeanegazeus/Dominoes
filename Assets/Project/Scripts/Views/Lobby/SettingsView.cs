@@ -24,8 +24,6 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         [SerializeField] private float _overlayAlpha;
         [SerializeField] private float _overlayFadeDuration;
 
-        public event Action CloseButtonClicked;
-
         public event Action SlideOutCompleted
         {
             add => _slideController.SlideOutCompleted += value;
@@ -51,25 +49,20 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         }
         #endregion
 
-        public void Hide()
+        public void SetAvatarSprite(Sprite sprite)
         {
-            _logger.LogMethodCall(nameof(Hide));
+            _logger.LogMethodCall(nameof(SetAvatarSprite),
+                                  sprite);
 
-            Color imageOverlayColor = _overlayImage.color;
-            imageOverlayColor.a = _overlayAlpha;
-            _overlayImage.color = imageOverlayColor;
-
-            _overlayImage.DOFade(0, _overlayFadeDuration);
-
-            _slideController.SlideOut();
+            _avatarView.SetAvatarSprite(sprite);
         }
 
-        public void SetVIP(bool isVIP)
+        public void SetAvatarVip(bool isVip)
         {
-            _logger?.LogMethodCall(nameof(SetVIP),
-                                   isVIP);
+            _logger.LogMethodCall(nameof(SetAvatarVip),
+                                  isVip);
 
-            _avatarView.SetVIP(isVIP);
+            _avatarView.SetAvatarVip(isVip);
         }
 
         public void Show()
@@ -77,7 +70,7 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
             _logger.LogMethodCall(nameof(Show));
 
             Color imageOverlayColor = _overlayImage.color;
-            imageOverlayColor.a = 0;
+            imageOverlayColor.a = 0f;
             _overlayImage.color = imageOverlayColor;
 
             _overlayImage.DOFade(_overlayAlpha, _overlayFadeDuration);
@@ -88,8 +81,19 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         #region Events
         private void OnCloseButtonClick()
         {
-            CloseButtonClicked?.Invoke();
+            Hide();
         }
         #endregion
+
+        private void Hide()
+        {
+            Color imageOverlayColor = _overlayImage.color;
+            imageOverlayColor.a = _overlayAlpha;
+            _overlayImage.color = imageOverlayColor;
+
+            _overlayImage.DOFade(0, _overlayFadeDuration);
+
+            _slideController.SlideOut();
+        }
     }
 }

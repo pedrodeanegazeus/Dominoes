@@ -14,14 +14,14 @@ namespace Gazeus.Mobile.Domino.Controllers.Components
 
         private Button _button;
 
-        private GameConfigRepository _gameConfigRepository;
+        private GameStateRepository _gameStateRepository;
 
         #region Unity
         private void Awake()
         {
             _button = GetComponent<Button>();
 
-            _gameConfigRepository = GameManager.ServiceProviderManager.GetService<GameConfigRepository>();
+            _gameStateRepository = GameManager.ServiceProviderManager.GetService<GameStateRepository>();
         }
 
         private void OnDisable()
@@ -38,8 +38,8 @@ namespace Gazeus.Mobile.Domino.Controllers.Components
         #region Events
         private void OnButtonClick()
         {
-            GameConfig gameConfig = _gameConfigRepository.GetGameConfig();
-            if (gameConfig.IsAudioOn)
+            GameState gameState = _gameStateRepository.GetGameState();
+            if (gameState.IsAudioOn)
             {
                 GameManager.AudioManager.PlayAudio(_audio);
             }
