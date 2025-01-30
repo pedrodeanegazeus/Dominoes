@@ -200,4 +200,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63ebf06d430a534bb57b8f8a08fe636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _avatarImage: {fileID: 6679064772798396616}
   _vipBorderImage: {fileID: 3523016627846133187}

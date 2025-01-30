@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Gazeus.CoreMobile.SDK.Core.Extensions;
 using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.CoreMobile.SDK.Services.Core.Interfaces;
@@ -10,11 +11,17 @@ namespace Gazeus.Mobile.Domino.Services
 {
     public class ProfileService
     {
+        public event Action ProfileUpdated;
+
         private readonly IGzLogger<ProfileService> _logger;
         private readonly IGzServices _gzServices;
         private readonly GenericClient _genericClient;
 
         private Sprite _avatarSprite;
+        private AuthenticationData _authenticationData;
+
+        public bool IsLoggedIn => _authenticationData.IsLoggedIn;
+        public string Name => _authenticationData.Name;
 
         public ProfileService(IGzLogger<ProfileService> logger,
                               IGzServices gzServices,
@@ -41,21 +48,15 @@ namespace Gazeus.Mobile.Domino.Services
             return _avatarSprite;
         }
 
-        public bool IsLoggedIn()
-        {
-            _logger.LogMethodCall(nameof(IsLoggedIn));
-
-            AuthenticationData authenticationData = _gzServices.AuthenticationService.GetAuthenticationData();
-
-            return authenticationData.IsLoggedIn;
-        }
-
         #region Events
         private async void AuthenticationService_AuthenticationDataChanged(AuthenticationData authenticationData)
         {
             Sprite avatarSprite = await CreateAvatarSpriteAsync(authenticationData.AvatarUrl);
 
             _avatarSprite = avatarSprite;
+            _authenticationData = authenticationData;
+
+            ProfileUpdated?.Invoke();
         }
         #endregion
 

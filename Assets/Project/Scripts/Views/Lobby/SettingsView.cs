@@ -2,9 +2,10 @@
 using DG.Tweening;
 using Gazeus.CoreMobile.SDK.Core.Extensions;
 using Gazeus.CoreMobile.SDK.Core.Interfaces;
-using Gazeus.Mobile.Domino.Controllers.Components;
+using Gazeus.Mobile.Domino.Components;
 using Gazeus.Mobile.Domino.Managers;
 using Gazeus.Mobile.Domino.Views.Prefabs;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,16 +19,17 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
         [Header("Views")]
         [SerializeField] private AvatarView _avatarView;
+        [SerializeField] private TextMeshProUGUI _profileNameText;
 
         [Space]
-        [SerializeField] private SlideController _slideController;
+        [SerializeField] private SlideComponent _slideComponent;
         [SerializeField] private float _overlayAlpha;
         [SerializeField] private float _overlayFadeDuration;
 
         public event Action SlideOutCompleted
         {
-            add => _slideController.SlideOutCompleted += value;
-            remove => _slideController.SlideOutCompleted -= value;
+            add => _slideComponent.SlideOutCompleted += value;
+            remove => _slideComponent.SlideOutCompleted -= value;
         }
 
         private IGzLogger<SettingsView> _logger;
@@ -65,6 +67,14 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
             _avatarView.SetAvatarVip(isVip);
         }
 
+        public void SetProfileName(string profileName)
+        {
+            _logger.LogMethodCall(nameof(SetProfileName),
+                                  profileName);
+
+            _profileNameText.text = profileName;
+        }
+
         public void Show()
         {
             _logger.LogMethodCall(nameof(Show));
@@ -75,7 +85,7 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
             _overlayImage.DOFade(_overlayAlpha, _overlayFadeDuration);
 
-            _slideController.SlideIn();
+            _slideComponent.SlideIn();
         }
 
         #region Events
@@ -93,7 +103,7 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
             _overlayImage.DOFade(0, _overlayFadeDuration);
 
-            _slideController.SlideOut();
+            _slideComponent.SlideOut();
         }
     }
 }
