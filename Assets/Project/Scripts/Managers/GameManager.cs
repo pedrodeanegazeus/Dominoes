@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gazeus.CoreMobile.SDK.Core.Interfaces;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Gazeus.Mobile.Domino.Managers
@@ -9,7 +10,7 @@ namespace Gazeus.Mobile.Domino.Managers
         [SerializeField] private GameSceneManager _gameSceneManager;
         [SerializeField] private ServiceProviderManager _serviceProviderManager;
 
-        private static bool s_isInitialized;
+        private IGzLogger<GameManager> _logger;
 
         public static AudioManager AudioManager { get; private set; }
         public static GameSceneManager GameSceneManager { get; private set; }
@@ -26,25 +27,14 @@ namespace Gazeus.Mobile.Domino.Managers
         }
         #endregion
 
-        /// <summary>
-        /// Load bootstrap if now loaded
-        /// </summary>
-        public static void EditorGoToBootstrap()
-        {
-            if (!s_isInitialized &&
-                Application.platform is RuntimePlatform.OSXEditor or RuntimePlatform.WindowsEditor)
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
-
-        public static void Initialize()
+        public void Initialize()
         {
             ServiceProviderManager.Initialize();
             AudioManager.Initialize();
             GameSceneManager.Initialize();
 
-            s_isInitialized = true;
+            _logger = ServiceProviderManager.GetService<IGzLogger<GameManager>>();
+            _logger.Info("Initialized");
         }
     }
 }

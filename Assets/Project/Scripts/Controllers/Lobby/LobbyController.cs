@@ -25,8 +25,6 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
         #region Unity
         private void Awake()
         {
-            GameManager.EditorGoToBootstrap();
-
             _profileService = GameManager.ServiceProviderManager.GetService<ProfileService>();
             _settingsController = GameManager.ServiceProviderManager.GetService<SettingsController>();
             _vipService = GameManager.ServiceProviderManager.GetService<VipService>();

@@ -46,8 +46,7 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
         public void SetAvatarSprite(Sprite avatarSprite)
         {
-            _logger.LogMethodCall(nameof(SetAvatarSprite),
-                                  avatarSprite);
+            _logger.LogMethodCall(nameof(SetAvatarSprite));
 
             _avatarView.SetAvatarSprite(avatarSprite);
         }

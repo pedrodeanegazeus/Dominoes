@@ -3,6 +3,7 @@ using DG.Tweening;
 using Gazeus.CoreMobile.SDK.Core.Extensions;
 using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.Mobile.Domino.Components;
+using Gazeus.Mobile.Domino.Core.Enum;
 using Gazeus.Mobile.Domino.Managers;
 using Gazeus.Mobile.Domino.Views.Prefabs;
 using TMPro;
@@ -16,6 +17,10 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         [Header("UI")]
         [SerializeField] private Image _overlayImage;
         [SerializeField] private Button _closeButton;
+
+        [Space]
+        [SerializeField] private Button _profileButton;
+        [SerializeField] private Button _loginButton;
 
         [Header("Views")]
         [SerializeField] private AvatarView _avatarView;
@@ -43,18 +48,19 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         private void OnDisable()
         {
             _closeButton.onClick.RemoveAllListeners();
+            _profileButton.onClick.RemoveAllListeners();
         }
 
         private void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
+            _profileButton.onClick.AddListener(OnProfileButtonClick);
         }
         #endregion
 
         public void SetAvatarSprite(Sprite sprite)
         {
-            _logger.LogMethodCall(nameof(SetAvatarSprite),
-                                  sprite);
+            _logger.LogMethodCall(nameof(SetAvatarSprite));
 
             _avatarView.SetAvatarSprite(sprite);
         }
@@ -65,6 +71,26 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
                                   isVip);
 
             _avatarView.SetAvatarVip(isVip);
+        }
+
+        public void SetLoggedIn(bool isLoggedIn)
+        {
+            _logger.LogMethodCall(nameof(SetLoggedIn),
+                                  isLoggedIn);
+
+            _loginButton.gameObject.SetActive(!isLoggedIn);
+
+            RectTransform profileButtonTransform = _profileButton.transform as RectTransform;
+            if (isLoggedIn)
+            {
+                profileButtonTransform.anchorMax = Vector2.one;
+                profileButtonTransform.offsetMax = new Vector2(-10f, -50f);
+            }
+            else
+            {
+                profileButtonTransform.anchorMax = Vector2.up;
+                profileButtonTransform.offsetMax = new Vector2(97.5f, -50f);
+            }
         }
 
         public void SetProfileName(string profileName)
@@ -92,6 +118,11 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
         private void OnCloseButtonClick()
         {
             Hide();
+        }
+
+        private static void OnProfileButtonClick()
+        {
+            GameManager.GameSceneManager.LoadScene(GameScene.Profile);
         }
         #endregion
 

@@ -22,8 +22,7 @@ namespace Gazeus.Mobile.Domino.Views.Prefabs
 
         public void SetAvatarSprite(Sprite sprite)
         {
-            _logger.LogMethodCall(nameof(SetAvatarSprite),
-                                  sprite);
+            _logger.LogMethodCall(nameof(SetAvatarSprite));
 
             _avatarImage.sprite = sprite;
         }

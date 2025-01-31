@@ -4,5 +4,6 @@
     {
         Bootstrap = 0,
         Lobby = 1,
+        Profile = 2,
     }
 }

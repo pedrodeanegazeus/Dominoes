@@ -20,6 +20,9 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
         [SerializeField] private ShadowsView _shadowsView;
         [SerializeField] private LoadingView _loadingView;
 
+        [Header("Managers")]
+        [SerializeField] private GameManager _gameManager;
+
         [Header("Scriptable Objects")]
         [SerializeField] private LogConfiguration _logConfiguration;
 
@@ -59,18 +62,17 @@ namespace Gazeus.Mobile.Domino.Controllers.Bootstrap
             _shadowsView.gameObject.SetActive(true);
             _loadingView.gameObject.SetActive(true);
 
-
             StartAnimations();
 
             GzLogger.Initialize(_logConfiguration);
 
-            GameManager.Initialize();
+            _gameManager.Initialize();
 
             await Task.WhenAll(_hatViewAnimationTask.Task,
                                _logoViewAnimationTask.Task,
                                _shadowsViewAnimationTask.Task);
 
-            GameManager.GameSceneManager.LoadScene(GameScene.Lobby);
+            GameManager.GameSceneManager.LoadScene(GameScene.Lobby, false);
         }
         #endregion
 

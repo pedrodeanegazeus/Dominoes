@@ -30,9 +30,7 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
 
         public void Initialize(LocalizedString guestProfileKey, SettingsView settingsView)
         {
-            _logger.LogMethodCall(nameof(Initialize),
-                                  guestProfileKey,
-                                  settingsView);
+            _logger.LogMethodCall(nameof(Initialize));
 
             _guestProfileKey = guestProfileKey;
             _guestProfileKey.StringChanged += GuestProfileKey_StringChanged;
@@ -55,6 +53,7 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
             }
 
             _settingsView.SetAvatarVip(_vipService.IsVip);
+            _settingsView.SetLoggedIn(_profileService.IsLoggedIn);
             _settingsView.gameObject.SetActive(true);
 
             _settingsView.Show();
@@ -83,6 +82,8 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
                 _settingsView.SetAvatarSprite(null);
                 _settingsView.SetProfileName(guestText);
             }
+
+            _settingsView.SetLoggedIn(_profileService.IsLoggedIn);
         }
 
         private void SettingsView_SlideOutCompleted()

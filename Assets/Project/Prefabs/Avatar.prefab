@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2511130147720184621}
   - component: {fileID: 3523016627846133187}
   m_Layer: 0
-  m_Name: Image VIP Border
+  m_Name: Image Vip Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
