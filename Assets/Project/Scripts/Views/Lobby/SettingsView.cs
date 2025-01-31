@@ -1,7 +1,5 @@
 ﻿using System;
 using DG.Tweening;
-using Gazeus.CoreMobile.SDK.Core.Extensions;
-using Gazeus.CoreMobile.SDK.Core.Interfaces;
 using Gazeus.Mobile.Domino.Components;
 using Gazeus.Mobile.Domino.Core.Enum;
 using Gazeus.Mobile.Domino.Managers;
@@ -37,14 +35,7 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
             remove => _slideComponent.SlideOutCompleted -= value;
         }
 
-        private IGzLogger<SettingsView> _logger;
-
         #region Unity
-        private void Awake()
-        {
-            _logger = GameManager.ServiceProviderManager.GetService<IGzLogger<SettingsView>>();
-        }
-
         private void OnDisable()
         {
             _closeButton.onClick.RemoveAllListeners();
@@ -60,24 +51,16 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
         public void SetAvatarSprite(Sprite sprite)
         {
-            _logger.LogMethodCall(nameof(SetAvatarSprite));
-
             _avatarView.SetAvatarSprite(sprite);
         }
 
         public void SetAvatarVip(bool isVip)
         {
-            _logger.LogMethodCall(nameof(SetAvatarVip),
-                                  isVip);
-
             _avatarView.SetAvatarVip(isVip);
         }
 
         public void SetLoggedIn(bool isLoggedIn)
         {
-            _logger.LogMethodCall(nameof(SetLoggedIn),
-                                  isLoggedIn);
-
             _loginButton.gameObject.SetActive(!isLoggedIn);
 
             RectTransform profileButtonTransform = _profileButton.transform as RectTransform;
@@ -95,16 +78,11 @@ namespace Gazeus.Mobile.Domino.Views.Lobby
 
         public void SetProfileName(string profileName)
         {
-            _logger.LogMethodCall(nameof(SetProfileName),
-                                  profileName);
-
             _profileNameText.text = profileName;
         }
 
         public void Show()
         {
-            _logger.LogMethodCall(nameof(Show));
-
             Color imageOverlayColor = _overlayImage.color;
             imageOverlayColor.a = 0f;
             _overlayImage.color = imageOverlayColor;

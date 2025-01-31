@@ -1,8 +1,5 @@
 using System;
 using DG.Tweening;
-using Gazeus.CoreMobile.SDK.Core.Extensions;
-using Gazeus.CoreMobile.SDK.Core.Interfaces;
-using Gazeus.Mobile.Domino.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +26,8 @@ namespace Gazeus.Mobile.Domino.Views
         private const int _steps = 7;
         private const string _materialTilingAttribute = "_Tiling";
 
-        private IGzLogger<TransitionView> _logger;
-
         public void AnimateIn()
         {
-            _logger.LogMethodCall(nameof(AnimateIn));
-
             Color transitionTilesColor = _transitionTiles.color;
             transitionTilesColor.a = _initialAlpha;
             _transitionTiles.color = transitionTilesColor;
@@ -57,8 +50,6 @@ namespace Gazeus.Mobile.Domino.Views
 
         public void AnimateOut()
         {
-            _logger.LogMethodCall(nameof(AnimateOut));
-
             Color transitionTilesColor = _transitionTiles.color;
             transitionTilesColor.a = _finalAlpha;
             _transitionTiles.color = transitionTilesColor;
@@ -79,11 +70,6 @@ namespace Gazeus.Mobile.Domino.Views
                     _transitionCanvas.gameObject.SetActive(false);
                     OutAnimationCompleted?.Invoke();
                 });
-        }
-
-        public void Initialize()
-        {
-            _logger = GameManager.ServiceProviderManager.GetService<IGzLogger<TransitionView>>();
         }
     }
 }

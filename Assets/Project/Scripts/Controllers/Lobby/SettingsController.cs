@@ -25,19 +25,31 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
             _vipService = vipService;
             _profileService = profileService;
 
-            _profileService.ProfileUpdated += ProfileService_ProfileUpdated;
         }
 
-        public void Initialize(LocalizedString guestProfileKey, SettingsView settingsView)
+        public void Awake(LocalizedString guestProfileKey, SettingsView settingsView)
         {
-            _logger.LogMethodCall(nameof(Initialize));
+            _logger.LogMethodCall(nameof(Awake));
 
             _guestProfileKey = guestProfileKey;
-            _guestProfileKey.StringChanged += GuestProfileKey_StringChanged;
-
             _settingsView = settingsView;
-            _settingsView.gameObject.SetActive(false);
+        }
 
+        public void OnDisable()
+        {
+            _logger.LogMethodCall(nameof(OnDisable));
+
+            _profileService.ProfileUpdated -= ProfileService_ProfileUpdated;
+            _guestProfileKey.StringChanged -= GuestProfileKey_StringChanged;
+            _settingsView.SlideOutCompleted -= SettingsView_SlideOutCompleted;
+        }
+
+        public void OnEnable()
+        {
+            _logger.LogMethodCall(nameof(OnEnable));
+
+            _profileService.ProfileUpdated += ProfileService_ProfileUpdated;
+            _guestProfileKey.StringChanged += GuestProfileKey_StringChanged;
             _settingsView.SlideOutCompleted += SettingsView_SlideOutCompleted;
         }
 
@@ -57,6 +69,13 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
             _settingsView.gameObject.SetActive(true);
 
             _settingsView.Show();
+        }
+
+        public void Start()
+        {
+            _logger.LogMethodCall(nameof(Start));
+
+            _settingsView.gameObject.SetActive(false);
         }
 
         #region Events

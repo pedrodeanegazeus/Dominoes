@@ -44,8 +44,6 @@ namespace Gazeus.Mobile.Domino.Managers
 
         public void Initialize()
         {
-            _transitionView.Initialize();
-
             _parameters = new Dictionary<GameScene, object>();
             _targetScene = GameScene.Bootstrap;
 

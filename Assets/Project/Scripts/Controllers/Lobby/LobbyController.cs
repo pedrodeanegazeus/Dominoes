@@ -29,18 +29,25 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
             _settingsController = GameManager.ServiceProviderManager.GetService<SettingsController>();
             _vipService = GameManager.ServiceProviderManager.GetService<VipService>();
 
-            _guestProfileKey.StringChanged += GuestProfileKey_StringChanged;
-            _profileService.ProfileUpdated += ProfileService_ProfileUpdated;
+            _settingsController.Awake(_guestProfileKey, _settingsView);
         }
 
         private void OnDisable()
         {
             _headerView.SettingsButtonClicked -= HeaderView_SettingsButtonClicked;
+            _guestProfileKey.StringChanged -= GuestProfileKey_StringChanged;
+            _profileService.ProfileUpdated -= ProfileService_ProfileUpdated;
+
+            _settingsController.OnDisable();
         }
 
         private void OnEnable()
         {
             _headerView.SettingsButtonClicked += HeaderView_SettingsButtonClicked;
+            _guestProfileKey.StringChanged += GuestProfileKey_StringChanged;
+            _profileService.ProfileUpdated += ProfileService_ProfileUpdated;
+
+            _settingsController.OnEnable();
         }
 
         [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Unity Start method")]
@@ -55,7 +62,7 @@ namespace Gazeus.Mobile.Domino.Controllers.Lobby
 
             _headerView.SetAvatarVip(_vipService.IsVip);
 
-            _settingsController.Initialize(_guestProfileKey, _settingsView);
+            _settingsController.Start();
         }
         #endregion
 
